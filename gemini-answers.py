@@ -28,7 +28,7 @@ ANSWERS_ROOT_DIR = Path("answers_gemini")
 
 LOGS_DIR = Path("gemini_logs")
 
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "gemini-2.5-pro"
 
 # Every question file should contain exactly 30 questions.
 EXPECTED_QUESTION_COUNT = 30
@@ -259,9 +259,7 @@ def build_prompt(
     questions: list[str],
     analysis_date: str,
 ) -> str:
-    """
-    Build one prompt containing all 30 questions for one company.
-    """
+    
     question_block = format_numbered_questions(questions)
 
     return f"""
@@ -459,9 +457,7 @@ def save_failure(
     company_name: str,
     error: Exception | str,
 ) -> None:
-    """
-    Save failure details without stopping the entire experiment.
-    """
+   
     failure_directory.mkdir(
         parents=True,
         exist_ok=True,
@@ -643,12 +639,11 @@ def answer_company(
                     max_output_tokens=MAX_OUTPUT_TOKENS,
                     response_mime_type="text/plain",
 
-                    # Enable Google Search grounding.
-                    tools=[
-                        types.Tool(
-                            google_search=types.GoogleSearch()
-                        )
-                    ],
+                    # tools=[
+                    #     types.Tool(
+                    #         google_search=types.GoogleSearch()
+                    #     )
+                    # ],
                 ),
             )
 
