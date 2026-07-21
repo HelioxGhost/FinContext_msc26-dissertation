@@ -8,73 +8,188 @@ import random
 import re
 import time
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import date, datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal
 
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from pydantic import BaseModel, Field, ValidationError, field_validator
 
 
 # ============================================================
 # CONFIGURATION
 # ============================================================
 
+# Input:
+# questions/<company_name>.txt
 QUESTIONS_DIR = Path("questions")
 
-# Output files:
+# Output:
+# answers_gemini/<YYYY-MM-DD>/<company_name>_answers_gemini.txt
 ANSWERS_ROOT_DIR = Path("answers_gemini")
 
+# Logs:
+# gemini_logs/gemini_usage_<YYYY-MM-DD>.csv
 LOGS_DIR = Path("gemini_logs")
 
-MODEL_NAME = "gemini-2.5-pro"
+# Raw JSON responses are retained for reproducibility/debugging.
+SAVE_RAW_JSON_RESPONSES = True
 
-# Every question file should contain exactly 30 questions.
+# Stable, lower-cost Gemini model.
+MODEL_NAME = "gemini-3.1-flash-lite"
+
 EXPECTED_QUESTION_COUNT = 30
 
-# Maximum input prompt size for one company.
-MAX_INPUT_TOKENS = 10_000
+# The visible response should normally be around 3,000–4,500 tokens.
+# Thinking tokens also count toward output usage, so this provides headroom.
+MAX_OUTPUT_TOKENS = 7_000
 
-# Maximum output size for all 30 answers from one company.
-MAX_OUTPUT_TOKENS = 12_000
+# Gemini 3.1 Flash-Lite supports configurable thinking.
+# "low" reduces thinking cost while retaining some reasoning capability.
+THINKING_LEVEL = "low"
 
-MAX_GENERATION_REQUESTS_PER_RUN = 150
-
-# Total attempts includes failed attempts and retries.
-MAX_TOTAL_API_ATTEMPTS_PER_RUN = 150
-
-# Wait between companies to reduce requests-per-minute errors.
-SECONDS_BETWEEN_COMPANIES = 7
-
-# Number of retries after the first failed attempt.
-MAX_RETRIES = 3
-
-# Low temperature produces more consistent daily answers.
+# Lower temperature improves consistency between daily runs.
 TEMPERATURE = 0.2
 
-# Skip a company when its existing output appears complete.
+# Delay between companies to avoid request-per-minute pressure.
+SECONDS_BETWEEN_COMPANIES = 8
+
+# The first request plus this many retries.
+MAX_RETRIES = 3
+
+# Safety limit for one execution.
+# A normal 100-company run makes 100 generation requests.
+MAX_GENERATION_ATTEMPTS_PER_RUN = 140
+
+# Skip a company when a complete output already exists for the date.
 SKIP_COMPLETED_FILES = True
 
-# Number of answer headings required for a complete output.
-MINIMUM_ACCEPTABLE_ANSWERS = 30
+# Stop rather than retry all 100 companies when the project has zero quota.
+STOP_ON_PERMANENT_QUOTA_ERROR = True
 
 
 # ============================================================
-# RUNNING TOTALS
+# STRUCTURED GEMINI RESPONSE
+# ============================================================
+
+class AnswerItem(BaseModel):
+    """
+    One Gemini-generated answer.
+
+    The question itself is deliberately excluded. It will be inserted
+    locally from the original question file.
+    """
+
+    question_number: int = Field(
+        ge=1,
+        le=EXPECTED_QUESTION_COUNT,
+        description=(
+            "The number of the question being answered. "
+            "Use each number from 1 through 30 exactly once."
+        ),
+    )
+
+    answer: str = Field(
+        min_length=20,
+        description=(
+            "A current, evidence-based answer of approximately 60-100 words. "
+            "Do not repeat the question."
+        ),
+    )
+
+    confidence: Literal["High", "Medium", "Low"] = Field(
+        description=(
+            "Confidence in the answer based on the quality, recency and "
+            "agreement of the evidence found."
+        )
+    )
+
+    evidence_date: str = Field(
+        description=(
+            "The most relevant evidence date in YYYY-MM-DD format where "
+            "possible, or 'Unknown' if no reliable date is available."
+        )
+    )
+
+    outlook: Literal[
+        "Positive",
+        "Negative",
+        "Mixed",
+        "Neutral",
+        "Insufficient evidence",
+    ] = Field(
+        description=(
+            "The implication of the evidence for the company's outlook."
+        )
+    )
+
+    @field_validator("answer")
+    @classmethod
+    def clean_answer(cls, value: str) -> str:
+        value = re.sub(r"\s+", " ", value).strip()
+
+        if not value:
+            raise ValueError("Answer cannot be empty.")
+
+        return value
+
+    @field_validator("evidence_date")
+    @classmethod
+    def clean_evidence_date(cls, value: str) -> str:
+        value = value.strip()
+
+        return value or "Unknown"
+
+
+class CompanyResearchResponse(BaseModel):
+    answers: list[AnswerItem] = Field(
+        description=(
+            "Exactly 30 answers, ordered by question_number from 1 to 30."
+        )
+    )
+
+    overall_company_outlook: str = Field(
+        min_length=20,
+        description=(
+            "A concise overall company outlook of no more than 120 words."
+        ),
+    )
+
+    @field_validator("overall_company_outlook")
+    @classmethod
+    def clean_outlook(cls, value: str) -> str:
+        return re.sub(r"\s+", " ", value).strip()
+
+
+# ============================================================
+# RUN TOTALS
 # ============================================================
 
 @dataclass
 class UsageTotals:
-    generation_requests: int = 0
-    total_api_attempts: int = 0
-    successful_companies: int = 0
+    generation_attempts: int = 0
+    completed_companies: int = 0
     skipped_companies: int = 0
     incomplete_companies: int = 0
     failed_companies: int = 0
     input_tokens: int = 0
     output_tokens: int = 0
+    thinking_tokens: int = 0
     total_tokens: int = 0
+
+
+# ============================================================
+# CUSTOM ERRORS
+# ============================================================
+
+class PermanentQuotaError(RuntimeError):
+    """Raised when the selected project/model has no usable quota."""
+
+
+class IncompleteResponseError(RuntimeError):
+    """Raised when Gemini does not return one valid answer per question."""
 
 
 # ============================================================
@@ -82,7 +197,9 @@ class UsageTotals:
 # ============================================================
 
 def safe_filename(name: str) -> str:
-   
+    """
+    Convert a company name into a Windows/macOS/Linux-safe filename.
+    """
     cleaned = re.sub(r'[<>:"/\\|?*]', "_", name)
     cleaned = re.sub(r"\s+", " ", cleaned).strip()
 
@@ -90,24 +207,20 @@ def safe_filename(name: str) -> str:
 
 
 def natural_sort_key(path: Path) -> list[Any]:
-   
     return [
-        int(part) if part.isdigit() else part.lower()
+        int(part) if part.isdigit() else part.casefold()
         for part in re.split(r"(\d+)", path.name)
     ]
 
 
 def company_name_from_path(question_file: Path) -> str:
-   
     return question_file.stem.strip()
 
 
 def find_question_files() -> list[Path]:
-    
     if not QUESTIONS_DIR.exists():
         raise FileNotFoundError(
-            f"Questions directory not found:\n"
-            f"{QUESTIONS_DIR.resolve()}"
+            f"Questions directory not found:\n{QUESTIONS_DIR.resolve()}"
         )
 
     question_files = sorted(
@@ -117,7 +230,7 @@ def find_question_files() -> list[Path]:
 
     if not question_files:
         raise FileNotFoundError(
-            f"No .txt files were found in:\n"
+            f"No .txt question files were found in:\n"
             f"{QUESTIONS_DIR.resolve()}"
         )
 
@@ -129,7 +242,18 @@ def find_question_files() -> list[Path]:
 # ============================================================
 
 def parse_questions(question_text: str) -> list[str]:
-    
+    """
+    Parse numbered questions while preserving complete multi-line text.
+
+    Supported formats include:
+
+        1. Question text
+        2) Question text
+        3: Question text
+        Question 4: Question text
+        Q5. Question text
+        **Question 6:** Question text
+    """
     text = (
         question_text
         .replace("\r\n", "\n")
@@ -140,6 +264,8 @@ def parse_questions(question_text: str) -> list[str]:
     if not text:
         return []
 
+    # Flags are passed separately to avoid the previous:
+    # "global flags not at the start" regex error.
     numbered_question_pattern = re.compile(
         r"""
         ^\s*
@@ -155,10 +281,16 @@ def parse_questions(question_text: str) -> list[str]:
         \s*
         (?:\*\*)?
         """,
-        flags=re.IGNORECASE | re.MULTILINE | re.VERBOSE,
+        flags=(
+            re.IGNORECASE
+            | re.MULTILINE
+            | re.VERBOSE
+        ),
     )
 
-    matches = list(numbered_question_pattern.finditer(text))
+    matches = list(
+        numbered_question_pattern.finditer(text)
+    )
 
     questions: list[str] = []
 
@@ -171,12 +303,11 @@ def parse_questions(question_text: str) -> list[str]:
             else:
                 question_end = len(text)
 
-            question = text[question_start:question_end].strip()
+            question = text[
+                question_start:question_end
+            ].strip()
 
-            # Remove markdown formatting around the question.
             question = question.strip("* \t\n")
-
-            # Join multi-line questions into one complete line.
             question = re.sub(r"\s+", " ", question).strip()
 
             if question:
@@ -184,7 +315,7 @@ def parse_questions(question_text: str) -> list[str]:
 
         return questions
 
-    # Fallback: questions separated by blank lines.
+    # Fallback: blank-line-separated questions.
     paragraphs = [
         re.sub(r"\s+", " ", paragraph).strip()
         for paragraph in re.split(r"\n\s*\n", text)
@@ -194,7 +325,7 @@ def parse_questions(question_text: str) -> list[str]:
     if len(paragraphs) > 1:
         return paragraphs
 
-    # Final fallback: one question per non-empty line.
+    # Final fallback: one question per line.
     return [
         re.sub(r"\s+", " ", line).strip()
         for line in text.splitlines()
@@ -202,55 +333,64 @@ def parse_questions(question_text: str) -> list[str]:
     ]
 
 
-def format_numbered_questions(questions: list[str]) -> str:
-   
+def format_questions_for_prompt(
+    questions: list[str],
+) -> str:
+    """
+    Number the original questions for the input prompt.
+
+    Gemini sees the question text but is explicitly instructed not to
+    repeat it in its output.
+    """
     return "\n\n".join(
-        f"QUESTION {number}\n{question}"
-        for number, question in enumerate(questions, start=1)
+        f"{number}. {question}"
+        for number, question in enumerate(
+            questions,
+            start=1,
+        )
     )
 
 
 # ============================================================
-# PROMPT
+# PROMPTS
 # ============================================================
 
 SYSTEM_INSTRUCTION = """
-You are a financial research assistant conducting a repeated daily study of
-publicly traded companies.
+You are an expert financial research analyst conducting a longitudinal
+study of publicly traded companies.
 
-Your task is to answer every supplied question using current and verifiable
-public web information available on or before the analysis date.
+Use Google Search to research current, publicly available evidence and
+answer every supplied question accurately and consistently.
 
-Use Google Search grounding whenever current information is required.
+Your output will be compared with outputs produced by a local language
+model using a separate Finnhub and retrieval-augmented generation
+pipeline. Therefore, factual grounding, consistency and coverage of all
+questions are essential.
 
-Follow these rules:
+Research rules:
 
-1. Answer every supplied question.
-2. Answer the questions in their original order.
-3. Repeat the complete original question before each answer.
-4. Never shorten, rename, merge, omit or reorder a question.
-5. Use company-specific evidence rather than generic financial commentary.
-6. Prioritise recent information that may affect future stock performance.
-7. Use older information only when it provides necessary context.
-8. Prefer authoritative sources, including:
-   - company investor-relations pages;
+1. Use Google Search for current information relevant to each question.
+2. Prioritise authoritative sources:
+   - official company investor-relations pages;
    - regulatory filings;
+   - earnings releases and presentations;
+   - recognised exchanges and regulators;
    - official company announcements;
-   - earnings releases;
-   - earnings-call transcripts;
-   - regulators and recognised exchanges;
-   - reliable financial news organisations.
-9. Clearly distinguish confirmed facts from analysis or interpretation.
-10. Do not invent numbers, events, dates, quotations or sources.
-11. When reliable current evidence is unavailable, say:
-    "Insufficient current evidence was found."
-12. Include relevant dates for recent developments.
-13. Keep each answer concise but analytically useful.
-14. Label the outlook for each answer as:
-    POSITIVE, NEGATIVE, MIXED, NEUTRAL or INSUFFICIENT EVIDENCE.
-15. Do not provide personalised investment advice.
-16. Do not tell the reader to buy, sell or hold the stock.
-17. Return plain text only.
+   - reputable financial news organisations.
+3. Give greater weight to recent evidence, while using older information
+   only when it provides necessary context.
+4. Distinguish confirmed facts from reasonable interpretation.
+5. Never invent figures, dates, events, quotations or sources.
+6. If reliable current evidence cannot be found, state:
+   "Insufficient current evidence was found."
+7. Focus on information potentially relevant to business performance,
+   risk, investor sentiment or future stock performance.
+8. Do not provide personalised investment advice.
+9. Do not recommend buying, selling or holding a security.
+10. Avoid generic financial explanations and unnecessary background.
+11. Avoid repeating the same evidence unless it is directly necessary
+    for answering another question.
+12. Return only the structured response requested by the supplied schema.
 """.strip()
 
 
@@ -259,58 +399,53 @@ def build_prompt(
     questions: list[str],
     analysis_date: str,
 ) -> str:
-    
-    question_block = format_numbered_questions(questions)
+    """
+    Build one grounded request containing all questions for one company.
+    """
+    question_block = format_questions_for_prompt(
+        questions
+    )
 
     return f"""
-COMPANY: {company_name}
-ANALYSIS DATE: {analysis_date}
-TOTAL QUESTIONS: {len(questions)}
+COMPANY
+{company_name}
+
+ANALYSIS DATE
+{analysis_date}
+
+NUMBER OF QUESTIONS
+{len(questions)}
 
 TASK
 
-Use current Google Search-grounded information to answer all questions below
-about {company_name}.
+Use Google Search to answer all {len(questions)} questions about
+{company_name}.
 
-This response is part of a repeated daily stock-performance research
-experiment. Answers may be compared against answers generated on future dates.
+The answers form part of a repeated daily research experiment. Use only
+information publicly available on or before {analysis_date}. Do not refer
+to information published after this date.
 
-Only use information that was publicly available on or before
-{analysis_date}.
+ANSWER REQUIREMENTS
 
-Prioritise information that may influence the company's future business
-performance, investor sentiment, risk profile or stock performance.
-
-You must answer all {len(questions)} questions. Do not stop after answering
-only part of the list.
-
-REQUIRED FORMAT
-
-COMPANY: {company_name}
-ANALYSIS DATE: {analysis_date}
-
-QUESTION 1
-[Repeat the complete original question exactly.]
-
-ANSWER
-[Provide a concise, evidence-based answer of approximately 80-180 words.]
-
-OUTLOOK
-[POSITIVE, NEGATIVE, MIXED, NEUTRAL or INSUFFICIENT EVIDENCE]
-
-Continue using exactly the same structure through QUESTION {len(questions)}.
-
-After answering every question, include:
-
-OVERALL DAILY SUMMARY
-[Summarise the most material current factors affecting the company.]
-
-MOST IMPORTANT CURRENT SIGNALS
-1. [Signal]
-2. [Signal]
-3. [Signal]
-4. [Signal]
-5. [Signal]
+- Return exactly one answer for every question.
+- Use question numbers 1 through {len(questions)} exactly once.
+- Preserve the original order.
+- Do not omit, merge or combine questions.
+- Do not repeat the question text in the answer.
+- Keep each answer approximately 60-100 words.
+- Include enough concrete detail to explain:
+  1. what happened or what the current evidence shows;
+  2. why it may matter to the company;
+  3. the potential implication for the outlook.
+- Include material dates, figures and named developments when reliable.
+- Remain concise and avoid repeated background information.
+- Set confidence to High, Medium or Low.
+- Set evidence_date to the most relevant evidence date in YYYY-MM-DD
+  format where possible. Use "Unknown" if no defensible date exists.
+- Set outlook to Positive, Negative, Mixed, Neutral or
+  Insufficient evidence.
+- Keep the final overall company outlook to no more than 120 words.
+- Do not place the original question text in any response field.
 
 QUESTIONS
 
@@ -319,20 +454,19 @@ QUESTIONS
 
 
 # ============================================================
-# RESPONSE AND TOKEN UTILITIES
+# RESPONSE USAGE AND VALIDATION
 # ============================================================
 
-def get_usage_value(
-    usage_metadata: Any,
-    *possible_attribute_names: str,
+def get_integer_attribute(
+    source: Any,
+    *attribute_names: str,
 ) -> int:
-    
-    if usage_metadata is None:
+    if source is None:
         return 0
 
-    for attribute_name in possible_attribute_names:
+    for attribute_name in attribute_names:
         value = getattr(
-            usage_metadata,
+            source,
             attribute_name,
             None,
         )
@@ -343,94 +477,136 @@ def get_usage_value(
     return 0
 
 
-def extract_usage(response: Any) -> dict[str, int]:
-    
-    usage_metadata = getattr(
+def extract_usage(
+    response: Any,
+) -> dict[str, int]:
+    """
+    Extract usage metadata while tolerating SDK field-name changes.
+    """
+    usage = getattr(
         response,
         "usage_metadata",
         None,
     )
 
-    input_tokens = get_usage_value(
-        usage_metadata,
+    input_tokens = get_integer_attribute(
+        usage,
         "prompt_token_count",
         "input_token_count",
         "total_input_tokens",
     )
 
-    output_tokens = get_usage_value(
-        usage_metadata,
+    output_tokens = get_integer_attribute(
+        usage,
         "candidates_token_count",
         "output_token_count",
         "total_output_tokens",
     )
 
-    total_tokens = get_usage_value(
-        usage_metadata,
+    thinking_tokens = get_integer_attribute(
+        usage,
+        "thoughts_token_count",
+        "thinking_token_count",
+    )
+
+    total_tokens = get_integer_attribute(
+        usage,
         "total_token_count",
         "total_tokens",
     )
 
     if total_tokens == 0:
-        total_tokens = input_tokens + output_tokens
+        total_tokens = (
+            input_tokens
+            + output_tokens
+            + thinking_tokens
+        )
 
     return {
         "input_tokens": input_tokens,
         "output_tokens": output_tokens,
+        "thinking_tokens": thinking_tokens,
         "total_tokens": total_tokens,
     }
 
 
-def count_answer_sections(answer_text: str) -> int:
-    
-    matches = re.findall(
-        r"(?im)^\s*QUESTION\s+(\d{1,3})\s*$",
-        answer_text,
-    )
-
-    return len(set(matches))
-
-
-def response_is_complete(answer_text: str) -> bool:
-    
-    answer_count = count_answer_sections(answer_text)
-
-    has_summary = (
-        "OVERALL DAILY SUMMARY" in answer_text.upper()
-    )
-
-    return (
-        answer_count >= MINIMUM_ACCEPTABLE_ANSWERS
-        and has_summary
-    )
-
-
-def existing_output_is_complete(output_file: Path) -> bool:
-   
-    if not output_file.exists():
-        return False
-
-    try:
-        existing_text = output_file.read_text(
-            encoding="utf-8",
-            errors="replace",
+def validate_company_response(
+    parsed_response: CompanyResearchResponse,
+    expected_count: int,
+) -> CompanyResearchResponse:
+    """
+    Verify that Gemini returned exactly one answer for every question.
+    """
+    if len(parsed_response.answers) != expected_count:
+        raise IncompleteResponseError(
+            f"Expected {expected_count} answer objects but received "
+            f"{len(parsed_response.answers)}."
         )
 
-        return response_is_complete(existing_text)
+    question_numbers = [
+        item.question_number
+        for item in parsed_response.answers
+    ]
 
-    except OSError:
-        return False
+    expected_numbers = list(
+        range(1, expected_count + 1)
+    )
+
+    if sorted(question_numbers) != expected_numbers:
+        missing = sorted(
+            set(expected_numbers)
+            - set(question_numbers)
+        )
+
+        duplicates = sorted({
+            number
+            for number in question_numbers
+            if question_numbers.count(number) > 1
+        })
+
+        raise IncompleteResponseError(
+            "Invalid question-number coverage. "
+            f"Missing: {missing or 'none'}; "
+            f"duplicates: {duplicates or 'none'}."
+        )
+
+    # Enforce deterministic order for final-file generation.
+    parsed_response.answers.sort(
+        key=lambda item: item.question_number
+    )
+
+    return parsed_response
 
 
 # ============================================================
 # ERROR HANDLING
 # ============================================================
 
-def is_retryable_error(error: Exception) -> bool:
-  
+def is_permanent_quota_error(
+    error: Exception,
+) -> bool:
     error_text = str(error).lower()
 
-    retryable_terms = (
+    permanent_indicators = (
+        "limit: 0",
+        "quota limit is 0",
+        "billing account",
+        "billing is not enabled",
+        "grounding with google search is not available",
+    )
+
+    return any(
+        indicator in error_text
+        for indicator in permanent_indicators
+    )
+
+
+def is_retryable_error(
+    error: Exception,
+) -> bool:
+    error_text = str(error).lower()
+
+    retryable_indicators = (
         "429",
         "resource_exhausted",
         "too many requests",
@@ -444,11 +620,47 @@ def is_retryable_error(error: Exception) -> bool:
         "deadline",
         "timeout",
         "connection",
+        "temporarily",
     )
 
     return any(
-        term in error_text
-        for term in retryable_terms
+        indicator in error_text
+        for indicator in retryable_indicators
+    )
+
+
+def get_retry_delay(
+    error: Exception,
+    retry_number: int,
+) -> float:
+    """
+    Honour Google's stated retry delay where it can be extracted.
+    Otherwise, use exponential backoff with jitter.
+    """
+    error_text = str(error)
+
+    retry_match = re.search(
+        r"retry(?:ing)?\s+in\s+([\d.]+)s",
+        error_text,
+        flags=re.IGNORECASE,
+    )
+
+    if retry_match:
+        return float(retry_match.group(1)) + 2
+
+    delay_match = re.search(
+        r"retryDelay['\":\s]+(\d+)s",
+        error_text,
+        flags=re.IGNORECASE,
+    )
+
+    if delay_match:
+        return float(delay_match.group(1)) + 2
+
+    return min(
+        180,
+        15 * (2 ** retry_number)
+        + random.uniform(1, 5),
     )
 
 
@@ -457,67 +669,178 @@ def save_failure(
     company_name: str,
     error: Exception | str,
 ) -> None:
-   
     failure_directory.mkdir(
         parents=True,
         exist_ok=True,
     )
 
     failure_file = failure_directory / (
-        f"{safe_filename(company_name)}_gemini_failure.txt"
+        f"{safe_filename(company_name)}"
+        f"_gemini_failure.txt"
     )
 
     failure_file.write_text(
-        f"Company: {company_name}\n"
-        f"Time: {datetime.now().isoformat(timespec='seconds')}\n"
-        f"Error: {error}\n",
+        (
+            f"COMPANY: {company_name}\n"
+            f"TIME: "
+            f"{datetime.now().isoformat(timespec='seconds')}\n"
+            f"ERROR:\n{error}\n"
+        ),
         encoding="utf-8",
     )
 
 
 # ============================================================
-# LOGGING
+# OUTPUT CONSTRUCTION
 # ============================================================
+
+def build_final_output(
+    company_name: str,
+    analysis_date: str,
+    questions: list[str],
+    result: CompanyResearchResponse,
+    usage: dict[str, int],
+    generated_at: str,
+) -> str:
+    """
+    Construct the final text file locally.
+
+    The original questions come directly from the question file.
+    Gemini does not spend output tokens repeating them.
+    """
+    answer_by_number = {
+        item.question_number: item
+        for item in result.answers
+    }
+
+    lines: list[str] = [
+        "PIPELINE STATUS: COMPLETE",
+        f"COMPANY: {company_name}",
+        f"ANALYSIS DATE: {analysis_date}",
+        f"MODEL: {MODEL_NAME}",
+        "GOOGLE SEARCH GROUNDING: ENABLED",
+        f"GENERATED AT: {generated_at}",
+        f"QUESTIONS EXPECTED: {len(questions)}",
+        f"ANSWERS RECEIVED: {len(result.answers)}",
+        f"INPUT TOKENS: {usage['input_tokens']}",
+        f"VISIBLE OUTPUT TOKENS: {usage['output_tokens']}",
+        f"THINKING TOKENS: {usage['thinking_tokens']}",
+        f"TOTAL TOKENS: {usage['total_tokens']}",
+        "=" * 76,
+        "",
+    ]
+
+    for question_number, question in enumerate(
+        questions,
+        start=1,
+    ):
+        answer_item = answer_by_number[
+            question_number
+        ]
+
+        lines.extend([
+            f"QUESTION {question_number}",
+            question,
+            "",
+            "ANSWER",
+            answer_item.answer,
+            "",
+            "CONFIDENCE",
+            answer_item.confidence,
+            "",
+            "EVIDENCE DATE",
+            answer_item.evidence_date,
+            "",
+            "OUTLOOK",
+            answer_item.outlook,
+            "",
+            "-" * 76,
+            "",
+        ])
+
+    lines.extend([
+        "OVERALL COMPANY OUTLOOK",
+        result.overall_company_outlook,
+        "",
+    ])
+
+    return "\n".join(lines)
+
+
+def existing_output_is_complete(
+    output_file: Path,
+) -> bool:
+    if not output_file.exists():
+        return False
+
+    try:
+        text = output_file.read_text(
+            encoding="utf-8",
+            errors="replace",
+        )
+    except OSError:
+        return False
+
+    if "PIPELINE STATUS: COMPLETE" not in text:
+        return False
+
+    question_headings = re.findall(
+        r"(?m)^QUESTION\s+(\d+)\s*$",
+        text,
+    )
+
+    return (
+        len(set(question_headings))
+        == EXPECTED_QUESTION_COUNT
+        and "OVERALL COMPANY OUTLOOK" in text
+    )
+
+
+# ============================================================
+# CSV AND JSON LOGGING
+# ============================================================
+
+CSV_FIELDNAMES = [
+    "timestamp",
+    "company",
+    "question_file",
+    "output_file",
+    "status",
+    "question_count",
+    "answer_count",
+    "input_tokens",
+    "output_tokens",
+    "thinking_tokens",
+    "total_tokens",
+    "api_attempts_for_company",
+    "generation_attempt_number",
+    "duration_seconds",
+    "error",
+]
+
 
 def append_csv_log(
     log_file: Path,
     row: dict[str, Any],
 ) -> None:
-    
     log_file.parent.mkdir(
         parents=True,
         exist_ok=True,
     )
 
-    fieldnames = [
-        "timestamp",
-        "company",
-        "question_file",
-        "output_file",
-        "status",
-        "question_count",
-        "answer_sections_detected",
-        "input_tokens",
-        "output_tokens",
-        "total_tokens",
-        "generation_request_number",
-        "api_attempts_for_company",
-        "error",
-    ]
-
-    file_already_exists = log_file.exists()
+    exists = log_file.exists()
 
     with log_file.open(
         "a",
         encoding="utf-8",
         newline="",
-    ) as file_handle:
+    ) as handle:
         writer = csv.DictWriter(
-            file_handle,
-            fieldnames=fieldnames,
+            handle,
+            fieldnames=CSV_FIELDNAMES,
         )
 
-        if not file_already_exists:
+        if not exists:
             writer.writeheader()
 
         writer.writerow(row)
@@ -528,21 +851,22 @@ def save_run_summary(
     selected_files: list[Path],
     totals: UsageTotals,
 ) -> None:
-  
     summary = {
         "last_updated_at": datetime.now().isoformat(
             timespec="seconds"
         ),
         "model": MODEL_NAME,
+        "google_search_grounding": True,
+        "thinking_level": THINKING_LEVEL,
         "companies_selected": len(selected_files),
-        "generation_requests": totals.generation_requests,
-        "total_api_attempts": totals.total_api_attempts,
-        "successful_companies": totals.successful_companies,
+        "generation_attempts": totals.generation_attempts,
+        "completed_companies": totals.completed_companies,
         "skipped_companies": totals.skipped_companies,
         "incomplete_companies": totals.incomplete_companies,
         "failed_companies": totals.failed_companies,
         "input_tokens": totals.input_tokens,
-        "output_tokens": totals.output_tokens,
+        "visible_output_tokens": totals.output_tokens,
+        "thinking_tokens": totals.thinking_tokens,
         "total_tokens": totals.total_tokens,
     }
 
@@ -564,70 +888,48 @@ def save_run_summary(
 # GEMINI REQUEST
 # ============================================================
 
-def answer_company(
+def request_company_answers(
     client: genai.Client,
     company_name: str,
     questions: list[str],
     analysis_date: str,
     totals: UsageTotals,
-) -> tuple[str, dict[str, int], int]:
-    
+) -> tuple[
+    CompanyResearchResponse,
+    dict[str, int],
+    str,
+    int,
+]:
+    """
+    Send all 30 questions in one grounded request.
+
+    Returns:
+        parsed response
+        usage information
+        raw JSON response
+        API attempts used for the company
+    """
     prompt = build_prompt(
         company_name=company_name,
         questions=questions,
         analysis_date=analysis_date,
     )
 
-    # Count the prompt before generating the answer.
-    token_count_response = client.models.count_tokens(
-        model=MODEL_NAME,
-        contents=prompt,
-    )
-
-    estimated_input_tokens = getattr(
-        token_count_response,
-        "total_tokens",
-        0,
-    )
-
-    print(
-        f"  Input tokens: "
-        f"{estimated_input_tokens:,}"
-    )
-
-    if estimated_input_tokens > MAX_INPUT_TOKENS:
-        raise ValueError(
-            f"The prompt contains approximately "
-            f"{estimated_input_tokens:,} input tokens. "
-            f"The configured maximum is "
-            f"{MAX_INPUT_TOKENS:,}."
-        )
-
-    attempts_for_company = 0
     last_error: Exception | None = None
+    attempts_for_company = 0
 
     for retry_number in range(MAX_RETRIES + 1):
         if (
-            totals.generation_requests
-            >= MAX_GENERATION_REQUESTS_PER_RUN
+            totals.generation_attempts
+            >= MAX_GENERATION_ATTEMPTS_PER_RUN
         ):
             raise RuntimeError(
-                "The maximum grounded generation request "
-                "limit for this run has been reached."
-            )
-
-        if (
-            totals.total_api_attempts
-            >= MAX_TOTAL_API_ATTEMPTS_PER_RUN
-        ):
-            raise RuntimeError(
-                "The maximum total API-attempt limit "
-                "for this run has been reached."
+                "The run-level API-attempt safety limit "
+                "has been reached."
             )
 
         attempts_for_company += 1
-        totals.total_api_attempts += 1
-        totals.generation_requests += 1
+        totals.generation_attempts += 1
 
         try:
             response = client.models.generate_content(
@@ -637,65 +939,100 @@ def answer_company(
                     system_instruction=SYSTEM_INSTRUCTION,
                     temperature=TEMPERATURE,
                     max_output_tokens=MAX_OUTPUT_TOKENS,
-                    response_mime_type="text/plain",
 
-                    # tools=[
-                    #     types.Tool(
-                    #         google_search=types.GoogleSearch()
-                    #     )
-                    # ],
+                    # Keep reasoning cost controlled.
+                    thinking_config=types.ThinkingConfig(
+                        thinking_level=THINKING_LEVEL,
+                    ),
+
+                    # Native Gemini Google Search.
+                    tools=[
+                        types.Tool(
+                            google_search=types.GoogleSearch()
+                        )
+                    ],
+
+                    # Structured output avoids fragile regex parsing.
+                    response_mime_type="application/json",
+                    response_json_schema=(
+                        CompanyResearchResponse
+                        .model_json_schema()
+                    ),
                 ),
             )
 
-            answer_text = getattr(
+            raw_json = getattr(
                 response,
                 "text",
                 None,
             )
 
-            if not answer_text or not answer_text.strip():
-                raise RuntimeError(
+            if not raw_json or not raw_json.strip():
+                raise IncompleteResponseError(
                     "Gemini returned an empty response."
                 )
 
+            try:
+                parsed_response = (
+                    CompanyResearchResponse
+                    .model_validate_json(raw_json)
+                )
+            except ValidationError as validation_error:
+                raise IncompleteResponseError(
+                    "Gemini returned JSON that did not match "
+                    f"the required schema:\n{validation_error}"
+                ) from validation_error
+
+            parsed_response = validate_company_response(
+                parsed_response=parsed_response,
+                expected_count=len(questions),
+            )
+
             usage = extract_usage(response)
 
-            # Use the count_tokens result when response metadata
-            # does not contain an input-token count.
-            if usage["input_tokens"] == 0:
-                usage["input_tokens"] = (
-                    estimated_input_tokens
-                )
-
-            if usage["total_tokens"] == 0:
-                usage["total_tokens"] = (
-                    usage["input_tokens"]
-                    + usage["output_tokens"]
-                )
-
             return (
-                answer_text.strip(),
+                parsed_response,
                 usage,
+                raw_json,
                 attempts_for_company,
             )
 
         except Exception as error:
             last_error = error
 
-            if not is_retryable_error(error):
+            if (
+                STOP_ON_PERMANENT_QUOTA_ERROR
+                and is_permanent_quota_error(error)
+            ):
+                raise PermanentQuotaError(
+                    "The selected project or model has no usable "
+                    "quota for this request. Check that billing is "
+                    "active and that Google Search grounding is "
+                    "available to the project.\n\n"
+                    f"Original error:\n{error}"
+                ) from error
+
+            retryable = (
+                is_retryable_error(error)
+                or isinstance(
+                    error,
+                    IncompleteResponseError,
+                )
+            )
+
+            if not retryable:
                 raise
 
             if retry_number >= MAX_RETRIES:
                 break
 
-            delay = min(
-                120,
-                15 * (2 ** retry_number)
-                + random.uniform(0, 5),
+            delay = get_retry_delay(
+                error=error,
+                retry_number=retry_number,
             )
 
             print(
-                f"  Temporary Gemini error:\n"
+                f"  Attempt {attempts_for_company} failed:\n"
                 f"  {error}\n"
                 f"  Retrying in {delay:.1f} seconds..."
             )
@@ -703,39 +1040,95 @@ def answer_company(
             time.sleep(delay)
 
     raise RuntimeError(
-        f"Gemini failed after "
-        f"{attempts_for_company} attempts. "
+        f"Gemini failed after {attempts_for_company} attempts.\n"
         f"Last error: {last_error}"
     )
+
+
+# ============================================================
+# MODEL VALIDATION
+# ============================================================
+
+def validate_model_access(
+    client: genai.Client,
+) -> None:
+    """
+    Confirm that the configured model is visible to the API key.
+
+    This does not consume a generation request.
+    """
+    try:
+        model = client.models.get(
+            model=MODEL_NAME
+        )
+
+        model_name = getattr(
+            model,
+            "name",
+            MODEL_NAME,
+        )
+
+        print(f"Model available: {model_name}")
+
+    except Exception as error:
+        raise RuntimeError(
+            f"The configured model '{MODEL_NAME}' could not be "
+            f"accessed by this API key.\n\n{error}"
+        ) from error
 
 
 # ============================================================
 # MAIN PIPELINE
 # ============================================================
 
-def run_pipeline(dry_run: bool = False) -> None:
-    
-    load_dotenv()
+def run_pipeline(
+    dry_run: bool = False,
+    limit: int | None = None,
+    start_at: int = 1,
+) -> None:
+    load_dotenv(override=True)
 
     api_key = os.getenv("GEMINI_API_KEY")
 
     if not api_key:
         raise EnvironmentError(
             "GEMINI_API_KEY was not found.\n\n"
-            "Create a .env file in the project directory:\n\n"
-            "GEMINI_API_KEY=your_api_key_here"
+            "Create a .env file containing:\n"
+            "GEMINI_API_KEY=your_actual_api_key"
         )
 
-    selected_files = find_question_files()
+    all_question_files = find_question_files()
 
-    current_date = datetime.now().date().isoformat()
+    if start_at < 1:
+        raise ValueError("--start-at must be 1 or greater.")
+
+    selected_files = all_question_files[
+        start_at - 1:
+    ]
+
+    if limit is not None:
+        if limit < 1:
+            raise ValueError("--limit must be 1 or greater.")
+
+        selected_files = selected_files[:limit]
+
+    if not selected_files:
+        raise ValueError(
+            "No question files were selected."
+        )
+
+    analysis_date = date.today().isoformat()
 
     output_directory = (
-        ANSWERS_ROOT_DIR / current_date
+        ANSWERS_ROOT_DIR / analysis_date
     )
 
     failure_directory = (
         output_directory / "_failures"
+    )
+
+    raw_response_directory = (
+        output_directory / "_raw_json"
     )
 
     output_directory.mkdir(
@@ -748,56 +1141,60 @@ def run_pipeline(dry_run: bool = False) -> None:
         exist_ok=True,
     )
 
+    if SAVE_RAW_JSON_RESPONSES:
+        raw_response_directory.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+
     log_file = LOGS_DIR / (
-        f"gemini_usage_{current_date}.csv"
+        f"gemini_usage_{analysis_date}.csv"
     )
 
     summary_file = LOGS_DIR / (
-        f"gemini_summary_{current_date}.json"
+        f"gemini_summary_{analysis_date}.json"
     )
 
-    print("=" * 72)
-    print("GEMINI COMPANY QUESTION PIPELINE")
-    print("=" * 72)
-    print(f"Model:                  {MODEL_NAME}")
-    print(f"Analysis date:          {current_date}")
-    print(f"Companies detected:     {len(selected_files)}")
-    print(f"Questions expected:     {EXPECTED_QUESTION_COUNT}")
-    print(f"Max input tokens:       {MAX_INPUT_TOKENS:,}")
-    print(f"Max output tokens:      {MAX_OUTPUT_TOKENS:,}")
-    print(
-        f"Max generation calls:   "
-        f"{MAX_GENERATION_REQUESTS_PER_RUN}"
-    )
-    print(f"Output directory:       {output_directory.resolve()}")
-    print(f"Dry run:                {dry_run}")
-    print("=" * 72)
+    print("=" * 76)
+    print("GEMINI GROUNDED COMPANY QUESTION PIPELINE")
+    print("=" * 76)
+    print(f"Model:                   {MODEL_NAME}")
+    print(f"Google Search:           Enabled")
+    print(f"Thinking level:          {THINKING_LEVEL}")
+    print(f"Analysis date:           {analysis_date}")
+    print(f"All question files:      {len(all_question_files)}")
+    print(f"Files selected:          {len(selected_files)}")
+    print(f"Expected questions/file: {EXPECTED_QUESTION_COUNT}")
+    print(f"Max output tokens:       {MAX_OUTPUT_TOKENS:,}")
+    print(f"Output directory:        {output_directory.resolve()}")
+    print(f"Dry run:                 {dry_run}")
+    print("=" * 76)
 
-    print("\nCompanies selected:")
+    print("\nSelected companies:")
 
     for number, question_file in enumerate(
         selected_files,
-        start=1,
+        start=start_at,
     ):
-        company_name = company_name_from_path(
-            question_file
-        )
-
         print(
-            f"{number:03d}. {company_name}"
+            f"{number:03d}. "
+            f"{company_name_from_path(question_file)}"
         )
 
     if dry_run:
         print(
             "\nDry run complete. "
-            "No Gemini API requests were made."
+            "No API generation requests were made."
         )
         return
 
     client = genai.Client(api_key=api_key)
+
+    validate_model_access(client)
+
     totals = UsageTotals()
 
-    for company_index, question_file in enumerate(
+    for run_index, question_file in enumerate(
         selected_files,
         start=1,
     ):
@@ -810,23 +1207,26 @@ def run_pipeline(dry_run: bool = False) -> None:
             f"_answers_gemini.txt"
         )
 
-        print("\n" + "-" * 72)
+        raw_json_file = raw_response_directory / (
+            f"{safe_filename(company_name)}"
+            f"_response.json"
+        )
+
+        print("\n" + "-" * 76)
         print(
-            f"[{company_index}/{len(selected_files)}] "
+            f"[{run_index}/{len(selected_files)}] "
             f"{company_name}"
         )
 
-        # Skip companies already completed successfully.
         if (
             SKIP_COMPLETED_FILES
             and existing_output_is_complete(output_file)
         ):
-            print(
-                "  Skipped: a complete output file "
-                "already exists."
-            )
-
             totals.skipped_companies += 1
+
+            print(
+                "  Skipped: complete output already exists."
+            )
 
             append_csv_log(
                 log_file,
@@ -839,19 +1239,24 @@ def run_pipeline(dry_run: bool = False) -> None:
                     "output_file": str(output_file),
                     "status": "skipped_complete",
                     "question_count": EXPECTED_QUESTION_COUNT,
-                    "answer_sections_detected":
-                        EXPECTED_QUESTION_COUNT,
+                    "answer_count": EXPECTED_QUESTION_COUNT,
                     "input_tokens": 0,
                     "output_tokens": 0,
+                    "thinking_tokens": 0,
                     "total_tokens": 0,
-                    "generation_request_number":
-                        totals.generation_requests,
                     "api_attempts_for_company": 0,
+                    "generation_attempt_number":
+                        totals.generation_attempts,
+                    "duration_seconds": 0,
                     "error": "",
                 },
             )
 
             continue
+
+        started_at = time.monotonic()
+
+        questions: list[str] = []
 
         try:
             raw_question_text = question_file.read_text(
@@ -869,104 +1274,139 @@ def run_pipeline(dry_run: bool = False) -> None:
 
             if len(questions) != EXPECTED_QUESTION_COUNT:
                 raise ValueError(
-                    f"Expected exactly "
-                    f"{EXPECTED_QUESTION_COUNT} questions, "
-                    f"but detected {len(questions)} in "
+                    f"Expected exactly {EXPECTED_QUESTION_COUNT} "
+                    f"questions, but detected {len(questions)} in "
                     f"{question_file.name}."
                 )
 
             (
-                answer_text,
+                parsed_result,
                 usage,
+                raw_json,
                 attempts_for_company,
-            ) = answer_company(
+            ) = request_company_answers(
                 client=client,
                 company_name=company_name,
                 questions=questions,
-                analysis_date=current_date,
+                analysis_date=analysis_date,
                 totals=totals,
             )
 
-            detected_answer_sections = (
-                count_answer_sections(answer_text)
+            generated_at = datetime.now().isoformat(
+                timespec="seconds"
             )
 
-            complete = response_is_complete(
-                answer_text
+            final_output = build_final_output(
+                company_name=company_name,
+                analysis_date=analysis_date,
+                questions=questions,
+                result=parsed_result,
+                usage=usage,
+                generated_at=generated_at,
             )
 
-            pipeline_status = (
-                "COMPLETE"
-                if complete
-                else "INCOMPLETE"
+            # Write to a temporary file first to reduce the chance of
+            # leaving a partially written "complete" output.
+            temporary_output = output_file.with_suffix(
+                ".tmp"
             )
 
-            output_contents = (
-                f"PIPELINE STATUS: {pipeline_status}\n"
-                f"MODEL: {MODEL_NAME}\n"
-                f"GENERATED AT: "
-                f"{datetime.now().isoformat(timespec='seconds')}\n"
-                f"QUESTIONS EXPECTED: "
-                f"{EXPECTED_QUESTION_COUNT}\n"
-                f"ANSWER SECTIONS DETECTED: "
-                f"{detected_answer_sections}\n"
-                f"INPUT TOKENS: "
-                f"{usage['input_tokens']}\n"
-                f"OUTPUT TOKENS: "
-                f"{usage['output_tokens']}\n"
-                f"TOTAL TOKENS: "
-                f"{usage['total_tokens']}\n"
-                f"{'=' * 72}\n\n"
-                f"{answer_text}\n"
-            )
-
-            output_file.write_text(
-                output_contents,
+            temporary_output.write_text(
+                final_output,
                 encoding="utf-8",
             )
 
-            totals.input_tokens += (
-                usage["input_tokens"]
-            )
+            temporary_output.replace(output_file)
 
-            totals.output_tokens += (
-                usage["output_tokens"]
-            )
-
-            totals.total_tokens += (
-                usage["total_tokens"]
-            )
-
-            if complete:
-                totals.successful_companies += 1
-                log_status = "complete"
-
-                print(
-                    f"  Complete output saved:\n"
-                    f"  {output_file}"
+            if SAVE_RAW_JSON_RESPONSES:
+                raw_json_file.write_text(
+                    raw_json,
+                    encoding="utf-8",
                 )
 
-            else:
-                totals.incomplete_companies += 1
-                log_status = "incomplete"
+            totals.completed_companies += 1
+            totals.input_tokens += usage["input_tokens"]
+            totals.output_tokens += usage["output_tokens"]
+            totals.thinking_tokens += usage["thinking_tokens"]
+            totals.total_tokens += usage["total_tokens"]
 
-                print(
-                    f"  Warning: Gemini returned only "
-                    f"{detected_answer_sections} detectable "
-                    f"answer sections."
-                )
-
-                print(
-                    "  The response was saved as incomplete. "
-                    "It will be attempted again when the "
-                    "script is rerun."
-                )
+            duration = (
+                time.monotonic()
+                - started_at
+            )
 
             print(
-                f"  Token usage: "
-                f"{usage['input_tokens']:,} input, "
-                f"{usage['output_tokens']:,} output, "
+                f"  Complete: {len(parsed_result.answers)} "
+                f"answers saved."
+            )
+
+            print(
+                f"  Tokens: {usage['input_tokens']:,} input, "
+                f"{usage['output_tokens']:,} visible output, "
+                f"{usage['thinking_tokens']:,} thinking, "
                 f"{usage['total_tokens']:,} total"
+            )
+
+            print(
+                f"  Duration: {duration:.1f} seconds"
+            )
+
+            print(
+                f"  File: {output_file}"
+            )
+
+            append_csv_log(
+                log_file,
+                {
+                    "timestamp": generated_at,
+                    "company": company_name,
+                    "question_file": str(question_file),
+                    "output_file": str(output_file),
+                    "status": "complete",
+                    "question_count": len(questions),
+                    "answer_count":
+                        len(parsed_result.answers),
+                    "input_tokens":
+                        usage["input_tokens"],
+                    "output_tokens":
+                        usage["output_tokens"],
+                    "thinking_tokens":
+                        usage["thinking_tokens"],
+                    "total_tokens":
+                        usage["total_tokens"],
+                    "api_attempts_for_company":
+                        attempts_for_company,
+                    "generation_attempt_number":
+                        totals.generation_attempts,
+                    "duration_seconds":
+                        round(duration, 2),
+                    "error": "",
+                },
+            )
+
+        except PermanentQuotaError as error:
+            duration = (
+                time.monotonic()
+                - started_at
+            )
+
+            totals.failed_companies += 1
+
+            print("\n" + "=" * 76)
+            print("PERMANENT QUOTA OR BILLING ERROR")
+            print("=" * 76)
+            print(error)
+            print(
+                "\nThe pipeline has stopped. Completed company files "
+                "have been preserved. After resolving the project or "
+                "billing issue, rerun the same command; complete files "
+                "will be skipped."
+            )
+
+            save_failure(
+                failure_directory=failure_directory,
+                company_name=company_name,
+                error=error,
             )
 
             append_csv_log(
@@ -978,25 +1418,79 @@ def run_pipeline(dry_run: bool = False) -> None:
                     "company": company_name,
                     "question_file": str(question_file),
                     "output_file": str(output_file),
-                    "status": log_status,
+                    "status": "quota_failure",
                     "question_count": len(questions),
-                    "answer_sections_detected":
-                        detected_answer_sections,
-                    "input_tokens":
-                        usage["input_tokens"],
-                    "output_tokens":
-                        usage["output_tokens"],
-                    "total_tokens":
-                        usage["total_tokens"],
-                    "generation_request_number":
-                        totals.generation_requests,
-                    "api_attempts_for_company":
-                        attempts_for_company,
-                    "error": "",
+                    "answer_count": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 0,
+                    "thinking_tokens": 0,
+                    "total_tokens": 0,
+                    "api_attempts_for_company": 0,
+                    "generation_attempt_number":
+                        totals.generation_attempts,
+                    "duration_seconds":
+                        round(duration, 2),
+                    "error": str(error),
+                },
+            )
+
+            save_run_summary(
+                summary_file=summary_file,
+                selected_files=selected_files,
+                totals=totals,
+            )
+
+            break
+
+        except IncompleteResponseError as error:
+            duration = (
+                time.monotonic()
+                - started_at
+            )
+
+            totals.incomplete_companies += 1
+
+            print(
+                f"  Incomplete response: {error}"
+            )
+
+            save_failure(
+                failure_directory=failure_directory,
+                company_name=company_name,
+                error=error,
+            )
+
+            append_csv_log(
+                log_file,
+                {
+                    "timestamp": datetime.now().isoformat(
+                        timespec="seconds"
+                    ),
+                    "company": company_name,
+                    "question_file": str(question_file),
+                    "output_file": str(output_file),
+                    "status": "incomplete",
+                    "question_count": len(questions),
+                    "answer_count": 0,
+                    "input_tokens": 0,
+                    "output_tokens": 0,
+                    "thinking_tokens": 0,
+                    "total_tokens": 0,
+                    "api_attempts_for_company": 0,
+                    "generation_attempt_number":
+                        totals.generation_attempts,
+                    "duration_seconds":
+                        round(duration, 2),
+                    "error": str(error),
                 },
             )
 
         except Exception as error:
+            duration = (
+                time.monotonic()
+                - started_at
+            )
+
             totals.failed_companies += 1
 
             print(f"  Failed: {error}")
@@ -1017,28 +1511,28 @@ def run_pipeline(dry_run: bool = False) -> None:
                     "question_file": str(question_file),
                     "output_file": str(output_file),
                     "status": "failed",
-                    "question_count": 0,
-                    "answer_sections_detected": 0,
+                    "question_count": len(questions),
+                    "answer_count": 0,
                     "input_tokens": 0,
                     "output_tokens": 0,
+                    "thinking_tokens": 0,
                     "total_tokens": 0,
-                    "generation_request_number":
-                        totals.generation_requests,
                     "api_attempts_for_company": 0,
+                    "generation_attempt_number":
+                        totals.generation_attempts,
+                    "duration_seconds":
+                        round(duration, 2),
                     "error": str(error),
                 },
             )
 
-        # Save the summary after every company in case the
-        # script is interrupted.
         save_run_summary(
             summary_file=summary_file,
             selected_files=selected_files,
             totals=totals,
         )
 
-        # Wait unless this was the final company.
-        if company_index < len(selected_files):
+        if run_index < len(selected_files):
             print(
                 f"  Waiting "
                 f"{SECONDS_BETWEEN_COMPANIES} seconds..."
@@ -1054,73 +1548,73 @@ def run_pipeline(dry_run: bool = False) -> None:
         totals=totals,
     )
 
-    print("\n" + "=" * 72)
+    print("\n" + "=" * 76)
     print("FINAL RUN SUMMARY")
-    print("=" * 72)
+    print("=" * 76)
     print(
-        f"Companies selected:     "
+        f"Companies selected:       "
         f"{len(selected_files)}"
     )
     print(
-        f"Successfully completed: "
-        f"{totals.successful_companies}"
+        f"Completed:                "
+        f"{totals.completed_companies}"
     )
     print(
-        f"Already complete:       "
+        f"Skipped as complete:      "
         f"{totals.skipped_companies}"
     )
     print(
-        f"Incomplete responses:   "
+        f"Incomplete:               "
         f"{totals.incomplete_companies}"
     )
     print(
-        f"Failed companies:       "
+        f"Failed:                   "
         f"{totals.failed_companies}"
     )
     print(
-        f"Generation requests:    "
-        f"{totals.generation_requests}"
+        f"Generation attempts:      "
+        f"{totals.generation_attempts}"
     )
     print(
-        f"Total API attempts:     "
-        f"{totals.total_api_attempts}"
-    )
-    print(
-        f"Input tokens:           "
+        f"Input tokens:             "
         f"{totals.input_tokens:,}"
     )
     print(
-        f"Output tokens:          "
+        f"Visible output tokens:    "
         f"{totals.output_tokens:,}"
     )
     print(
-        f"Total tokens:           "
+        f"Thinking tokens:          "
+        f"{totals.thinking_tokens:,}"
+    )
+    print(
+        f"Total tokens:             "
         f"{totals.total_tokens:,}"
     )
     print(
-        f"Answer directory:       "
+        f"Answer directory:         "
         f"{output_directory.resolve()}"
     )
     print(
-        f"Usage log:              "
+        f"Usage log:                "
         f"{log_file.resolve()}"
     )
     print(
-        f"Summary file:           "
+        f"Summary file:             "
         f"{summary_file.resolve()}"
     )
-    print("=" * 72)
+    print("=" * 76)
 
 
 # ============================================================
-# COMMAND-LINE ENTRY POINT
+# COMMAND-LINE ARGUMENTS
 # ============================================================
 
 def parse_arguments() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description=(
             "Answer all company question files using "
-            "Gemini 2.5 Flash and Google Search grounding."
+            "Gemini 3.1 Flash-Lite with native Google Search."
         )
     )
 
@@ -1128,8 +1622,28 @@ def parse_arguments() -> argparse.Namespace:
         "--dry-run",
         action="store_true",
         help=(
-            "Show all detected companies without "
-            "making Gemini API requests."
+            "Display selected companies without making "
+            "generation requests."
+        ),
+    )
+
+    parser.add_argument(
+        "--limit",
+        type=int,
+        default=None,
+        help=(
+            "Process only the first N selected companies. "
+            "Useful for pilot testing."
+        ),
+    )
+
+    parser.add_argument(
+        "--start-at",
+        type=int,
+        default=1,
+        help=(
+            "Start from this 1-based position in the sorted "
+            "question-file list."
         ),
     )
 
@@ -1141,4 +1655,6 @@ if __name__ == "__main__":
 
     run_pipeline(
         dry_run=arguments.dry_run,
+        limit=arguments.limit,
+        start_at=arguments.start_at,
     )
