@@ -1,0 +1,273 @@
+{
+  "date": "2026-07-19",
+  "ticker": "AES",
+  "company_name": "AES Corporation",
+  "category": "Utilities",
+  "model": "ProsusAI/finbert",
+  "processor_version": "finbert_separate_news_answers_v2",
+  "processed_at_utc": "2026-08-18T15:57:51.177803+00:00",
+  "processing_reason": "score_missing",
+  "scoring_definition": {
+    "sentiment_score": "positive_probability - negative_probability",
+    "confidence_score": "maximum class probability",
+    "combined_score_per_source": "sentiment_score * confidence_score",
+    "source_fusion": "None. News and LLM-answer scores are stored separately."
+  },
+  "input_files": {
+    "snapshot": {
+      "path": "/mnt/primary/finnhub_snapshots_filtered/2026-07-19/AES Corporation_AES_snapshot.json",
+      "exists": true,
+      "size_bytes": 68839,
+      "modified_at_utc": "2026-08-18T15:23:08.224146+00:00",
+      "sha256": "6cdc9c8024b45340c4b671d3066fe63cc98139f3055c7ec62fc1949d6069322b"
+    },
+    "answer": {
+      "path": "/mnt/primary/answers/2026-07-19/AES Corporation_answer_2026-07-19.txt",
+      "exists": true,
+      "size_bytes": 31424,
+      "modified_at_utc": "2026-07-20T18:30:59.750320+00:00",
+      "sha256": "1e7b2711aaeba3d0e60ec3391d1b4d8bda80a90d63f6638d7e84eae29fb497b1"
+    }
+  },
+  "news_score": {
+    "source": "finnhub_news",
+    "positive_probability": 0.07014600187540054,
+    "negative_probability": 0.023593632504343987,
+    "neutral_probability": 0.9062603712081909,
+    "sentiment_score": 0.04655236937105656,
+    "confidence_score": 0.9062603712081909,
+    "combined_score": 0.04218856754683453,
+    "predicted_label": "neutral",
+    "chunk_count": 1,
+    "token_count": 62,
+    "article_count": 1,
+    "articles": [
+      {
+        "news_index": 0,
+        "text": "AES Announces Quarterly Dividend. The Board of Directors of The AES Corporation (NYSE: AES) declared a quarterly common stock dividend of $0.17595 per share payable on August 14, 2026 to shareholders of record at the close of business on July 31, 2026.",
+        "headline": "AES Announces Quarterly Dividend",
+        "summary": "The Board of Directors of The AES Corporation (NYSE: AES) declared a quarterly common stock dividend of $0.17595 per share payable on August 14, 2026 to shareholders of record at the close of business on July 31, 2026.",
+        "source": "Yahoo",
+        "datetime_utc": "2026-07-15T21:00:00+00:00",
+        "url": "https://finnhub.io/api/news?id=0f9594edd22f9a2d27dde41c9f976bd8183f1aa90a479e5b1173a1c2be4c6ea0",
+        "token_count": 62,
+        "positive_probability": 0.07014600187540054,
+        "negative_probability": 0.023593632504343987,
+        "neutral_probability": 0.9062603712081909,
+        "sentiment_score": 0.04655236937105656,
+        "confidence_score": 0.9062603712081909,
+        "combined_score": 0.04218856754683453,
+        "predicted_label": "neutral"
+      }
+    ]
+  },
+  "answer_score": {
+    "source": "llm_answers",
+    "positive_probability": 0.15372825370773735,
+    "negative_probability": 0.3022471786248837,
+    "neutral_probability": 0.5440245378490681,
+    "sentiment_score": -0.14851892491714636,
+    "confidence_score": 0.5440245378490681,
+    "combined_score": -0.08079793948989099,
+    "predicted_label": "neutral",
+    "chunk_count": 16,
+    "token_count": 7456,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "text": "company : aes corporation ticker : aes category : utilities analysis date : 2026 - 07 - 19 question file : / mnt / primary / questions / aes corporation. txt model : gpt - oss - 120b validation : warning - complete text not detected for question numbers : 21, 22 * * question 1 what is the year ‑ over ‑ year percentage change in total revenues for aes corporation ( aes ) across its four primary operating segments? * * * * answer * * finnhub does not break out total revenue by the four primary operating segments, so the exact yoy change for each segment cannot be calculated. the latest aggregate revenue ‑ growth metric shows an 8. 68 % yoy increase for the most recent quarter ( q1 2026 ). over the trailing three ‑ year period, revenue growth averaged – 1. 02 %, indicating that the recent quarter is a rebound after a modest multi ‑ year decline. * * available evidence * * * finnhub basic financials – ` revenuegrowthquarterlyyoy = 8. 68 % ` ( most recent quarter ). * finnhub basic financials – ` revenuegrowth3y = – 1. 02 % ` ( trailing three ‑ year average ). * no segment ‑ level revenue data in the current snapshot or previous snapshot. * * analysis and inference * * because segment data are unavailable, we can only infer that total revenues grew roughly 8 – 9 % yoy in the latest quarter, driven likely by a mix of regulated and non ‑ regulated operations. the three ‑ year negative trend suggests that prior to the recent quarter, the company experienced flat or slightly declining revenue, possibly due to the winding down of legacy coal assets or currency impacts in brazil / andes. * * stock ‑ performance relevance * * a positive quarterly revenue surprise ( ≈ + 9 % ) is a favorable short ‑ term catalyst, supporting the recent earnings ‑ beat and dividend announcement. the longer ‑ term negative three ‑ year trend tempers enthusiasm, implying mixed medium ‑ term outlook. * * confidence * * medium – quarterly yoy figure is precise ; segment ‑ level inference is limited by data gaps. * * question 2 how has the ratio of regulated revenue to non ‑ regulated revenue changed for aes in the most recent fiscal year? * * * * answer * * the specific regulated ‑",
+        "token_count": 480,
+        "positive_probability": 0.17669150233268738,
+        "negative_probability": 0.7133898735046387,
+        "neutral_probability": 0.10991862416267395,
+        "sentiment_score": -0.5366983711719513,
+        "confidence_score": 0.7133898735046387,
+        "combined_score": -0.38287518312050395,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 1,
+        "text": "precise ; segment ‑ level inference is limited by data gaps. * * question 2 how has the ratio of regulated revenue to non ‑ regulated revenue changed for aes in the most recent fiscal year? * * * * answer * * the specific regulated ‑ vs ‑ non ‑ regulated revenue split is not disclosed in the finnhub dataset, so the exact ratio change cannot be quantified. however, the company ’ s recent dividend increase and stable dividend yield ( ≈4. 8 % ) suggest that regulated cash ‑ flow streams remain strong. the earnings surprise ( 80 % eps beat ) was largely driven by higher operating results, which historically stem from regulated utility operations. * * available evidence * * * no direct regulated / non ‑ regulated revenue numbers in finnhub snapshot. * recent earnings surprise ( + 80 % eps beat ) and dividend announcement. * * analysis and inference * * given the strong regulated utility base that underpins dividend stability, it is reasonable to infer that regulated revenue likely maintained or modestly increased its proportion relative to non ‑ regulated revenue in fy 2025 ‑ 26. any shift would be subtle and not yet reflected in public metrics. * * stock ‑ performance relevance * * a stable or improving regulated ‑ revenue share supports dividend sustainability, a positive medium ‑ term factor for income ‑ focused investors. * * confidence * * low – no hard data ; inference based on dividend and earnings pattern. * * question 3 what is the current trend in the cost of goods and services sold as a percentage of total revenue for aes? * * * * answer * * finnhub does not provide a line ‑ item “ cost of goods and services sold ” ( cogs ) or its ratio to revenue. the closest proxy is the gross ‑ margin metric, which currently stands at 18. 4 % ( annual ). since the prior snapshot shows gross ‑ margin unchanged ( no prior ‑ snapshot gross ‑ margin value was listed, but the annual metric remains stable ), the implied cogs / revenue ratio is roughly 81. 6 % and appears flat. * * available evidence * * * ` grossmarginannual = 18. 4 % `. * no change reported between snapshots for gross margin. * * analysis and inference * * a steady gross margin indicates that the cost structure relative to revenue has been stable,",
+        "token_count": 480,
+        "positive_probability": 0.16173270344734192,
+        "negative_probability": 0.09150069952011108,
+        "neutral_probability": 0.7467665672302246,
+        "sentiment_score": 0.07023200392723083,
+        "confidence_score": 0.7467665672302246,
+        "combined_score": 0.052446912482437824,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 2,
+        "text": "* * ` grossmarginannual = 18. 4 % `. * no change reported between snapshots for gross margin. * * analysis and inference * * a steady gross margin indicates that the cost structure relative to revenue has been stable, suggesting no major cost ‑ inflation pressures or efficiency gains in the latest period. * * stock ‑ performance relevance * * neutral – stable cost structure neither enhances nor weakens near ‑ term earnings outlook. * * confidence * * medium – gross margin is a reliable proxy for cogs / revenue. * * question 4 how does the growth rate of the renewables segment compare to the growth rate of the utilities segment for aes? * * * * answer * * segment ‑ specific growth rates for renewables and utilities are not disclosed in the current finnhub snapshot. the overall quarterly revenue growth of 8. 68 % yoy ( q1 2026 ) likely reflects contributions from both segments, with the renewables business historically outpacing the utilities segment in growth due to new wind / solar projects. based on industry trends and aes ’ s recent focus on renewable expansion, it is plausible that renewables grew at a higher double ‑ digit rate, while utilities grew at a modest low ‑ single ‑ digit pace. * * available evidence * * * no segment ‑ level growth data in finnhub. * overall quarterly revenue growth of 8. 68 % yoy. * recent news highlights aes ’ s dividend and market ‑ wide clean ‑ energy interest ( e. g., battery storage discussion ). * * analysis and inference * * given the company ’ s strategic push into renewables and the sector ’ s faster growth, the renewables segment likely outperformed the utilities segment in the latest quarter. * * stock ‑ performance relevance * * positive for long ‑ term investors focused on renewable expansion ; neutral for short ‑ term income investors. * * confidence * * low – inference without direct numbers. * * question 5 what is the magnitude of change in aes's total assets resulting from recent acquisitions or divestitures identified in the 10 ‑ k? * * * * answer * * the finnhub snapshot does not contain a line ‑ item for total assets, nor does it detail acquisition ‑ related asset changes. consequently, the exact magnitude of asset change from recent m & a activity cannot be quantified",
+        "token_count": 480,
+        "positive_probability": 0.11605432629585266,
+        "negative_probability": 0.024059399962425232,
+        "neutral_probability": 0.8598862886428833,
+        "sentiment_score": 0.09199492633342743,
+        "confidence_score": 0.8598862886428833,
+        "combined_score": 0.07910517577882636,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 3,
+        "text": "* answer * * the finnhub snapshot does not contain a line ‑ item for total assets, nor does it detail acquisition ‑ related asset changes. consequently, the exact magnitude of asset change from recent m & a activity cannot be quantified. however, the market ‑ capitalization decline of ≈0. 14 % between july 18 and july 19 suggests no material balance ‑ sheet ‑ impacting transaction was announced in that window. * * available evidence * * * no total ‑ asset figure in snapshot. * ` marketcapitalization ` fell from 10, 547. 6 m to 10, 533. 3 m ( – 0. 14 % ). * no new acquisition news in the last 48 hours. * * analysis and inference * * in the absence of disclosed large ‑ scale deals, any asset ‑ base change from acquisitions / divestitures is likely immaterial in the recent period. * * stock ‑ performance relevance * * neutral – no discernible impact from m & a on the stock price recently. * * confidence * * low – data insufficient. * * question 6 how has the company's debt ‑ to ‑ equity ratio evolved compared to the prior fiscal year? * * * * answer * * finnhub does not list the current debt ‑ to ‑ equity ratio for the latest fiscal year. historical annual series show a long ‑ term decline from a high of 29. 65 in 1990 to about 2. 78 in 1997, but recent ratios are not provided. the most recent leverage proxy is ` totaldebttoequity ` from historical data ( 1997 = 3. 87 ). without up ‑ to ‑ date figures, we cannot calculate the year ‑ over ‑ year change. * * available evidence * * * no current ` debttoequity ` metric in snapshot. * historical ` totaldebttoequity ` series ( old data ). * * analysis and inference * * given the company ’ s recent issuance of non ‑ recourse project debt ( common in renewables ) and a modest increase in market ‑ cap ‑ adjusted pe, it is plausible that total debt ‑ to ‑ equity has stayed roughly stable or modestly risen, but the exact change is unknown. * * stock ‑ performance relevance * * if leverage is rising, it could modestly increase financial risk ( negative medium ‑ term signal )",
+        "token_count": 480,
+        "positive_probability": 0.04508937522768974,
+        "negative_probability": 0.8937696218490601,
+        "neutral_probability": 0.061140961945056915,
+        "sentiment_score": -0.8486802466213703,
+        "confidence_score": 0.8937696218490601,
+        "combined_score": -0.7585246230935492,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 4,
+        "text": "that total debt ‑ to ‑ equity has stayed roughly stable or modestly risen, but the exact change is unknown. * * stock ‑ performance relevance * * if leverage is rising, it could modestly increase financial risk ( negative medium ‑ term signal ). * * confidence * * low – no current leverage data. * * question 7 what is the current total amount of non ‑ recourse debt held by aes and how does it compare to the prior year? * * * * answer * * non ‑ recourse debt is not disclosed in the finnhub snapshot, so the exact amount and year ‑ over ‑ year change cannot be reported. the recent earnings beat and dividend payout indicate the company is comfortably servicing its project ‑ level debt, which is typically non ‑ recourse in nature. * * available evidence * * * no non ‑ recourse debt figure in finnhub data. * no news about new non ‑ recourse financing in the last 48 hours. * * analysis and inference * * aes ’ s strategy of financing renewable projects with non ‑ recourse debt likely continued, but without disclosed numbers the change from the prior year remains unknown. * * stock ‑ performance relevance * * neutral – absence of new large non ‑ recourse issuances suggests no immediate strain on cash flow. * * confidence * * low – data unavailable. * * question 8 how has the volume of aes's construction in progress changed, and what does this imply about future capacity additions? * * * * answer * * construction ‑ in ‑ progress ( cip ) data are not provided in the current finnhub snapshot, so a precise change cannot be quantified. however, the company ’ s recent emphasis on renewables and the industry ’ s pipeline of wind / solar projects imply that cip is likely growing, supporting future capacity expansion. * * available evidence * * * no cip metric in finnhub. * recent dividend and earnings beat suggest cash availability for ongoing projects. * market commentary ( seekingalpha ) highlights high yields, hinting at investor confidence in growth projects. * * analysis and inference * * a rising cip would translate into higher future generation capacity, especially in renewables, which could improve long ‑ term revenue and earnings. * * stock ‑ performance relevance * * positive long ‑",
+        "token_count": 480,
+        "positive_probability": 0.5745344758033752,
+        "negative_probability": 0.018194934353232384,
+        "neutral_probability": 0.40727055072784424,
+        "sentiment_score": 0.5563395414501429,
+        "confidence_score": 0.5745344758033752,
+        "combined_score": 0.319636246815748,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 5,
+        "text": "confidence in growth projects. * * analysis and inference * * a rising cip would translate into higher future generation capacity, especially in renewables, which could improve long ‑ term revenue and earnings. * * stock ‑ performance relevance * * positive long ‑ term outlook if cip is expanding ; no immediate price impact. * * confidence * * low – inference only. * * question 9 what is the impact of recent commodity derivative hedging activities on aes's consolidated net income? * * * * answer * * finnhub does not disclose details of commodity derivative hedges or their p & l impact. consequently, the precise effect on net income cannot be measured. given the earnings beat ( eps + 80 % vs. estimate ) and stable gross margin, it is plausible that hedging helped mitigate fuel ‑ price volatility, contributing positively to net income. * * available evidence * * * no derivative ‑ hedge line ‑ items in snapshot. * q1 2026 eps beat of 0. 67 vs. 0. 3717 ( ≈ + 80 % ). * * analysis and inference * * strong earnings relative to expectations suggest that any commodity hedges were effective or that fuel ‑ price exposure was limited. the impact may be modestly positive. * * stock ‑ performance relevance * * positive short ‑ term catalyst ; reinforces earnings beat. * * confidence * * low – no explicit hedge data. * * question 10 how has the level of aes's cash and cash equivalents changed relative to its short ‑ term debt obligations? * * * * answer * * the snapshot provides ` cashflowpershareannual = – 2. 1679 ` and ` currentratioannual = 0. 7657 `, indicating that current assets ( including cash ) are less than current liabilities. no specific cash ‑ and ‑ cash ‑ equivalents amount or short ‑ term debt figure is available, so the exact change cannot be computed. the declining market ‑ cap and modest decrease in ` pcfshareannual ` ( – 0. 14 % ) hint at slightly tighter liquidity. * * available evidence * * * ` currentratioannual = 0. 7657 ` ( current assets / current liabilities ). * ` cashflowpershareannual = – 2. 1679 `. * no explicit cash or short ‑ term debt numbers",
+        "token_count": 480,
+        "positive_probability": 0.11560391634702682,
+        "negative_probability": 0.23218771815299988,
+        "neutral_probability": 0.6522083282470703,
+        "sentiment_score": -0.11658380180597305,
+        "confidence_score": 0.6522083282470703,
+        "combined_score": -0.07603692647656146,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 6,
+        "text": "* * * ` currentratioannual = 0. 7657 ` ( current assets / current liabilities ). * ` cashflowpershareannual = – 2. 1679 `. * no explicit cash or short ‑ term debt numbers. * * analysis and inference * * a current ratio below 1 suggests cash and other current assets are insufficient to cover short ‑ term debt fully ; however, the ratio has not changed in the snapshot comparison ( no prior ratio provided ). the company may rely on revolving credit lines. * * stock ‑ performance relevance * * slightly negative medium ‑ term signal if liquidity is constrained, but not yet a red flag. * * confidence * * medium – current ratio is reliable ; cash specifics missing. * * question 11 what is the current trend in asset retirement obligation ( aro ) costs for aes, and how does it affect long ‑ term cash flow projections? * * * * answer * * aro costs are not reported in the finnhub data, so the trend cannot be directly measured. historically, utilities record increasing aros as coal plants are retired and renewable sites are de ‑ commissioned, which can raise future cash ‑ outflows. given aes ’ s shift toward renewables and away from coal, aro expense may be trending downward, potentially easing long ‑ term cash ‑ flow pressure. * * available evidence * * * no aro line ‑ item in snapshot. * company ’ s strategic move toward renewables ( industry news ). * * analysis and inference * * if the coal ‑ phase ‑ out continues, aros should diminish, positively affecting cash ‑ flow forecasts. * * stock ‑ performance relevance * * potentially positive long ‑ term outlook as aro burden eases. * * confidence * * low – no concrete aro data. * * question 12 how have foreign currency translation adjustments affected aes's accumulated other comprehensive income in the latest period? * * * * answer * * finnhub does not include a balance ‑ sheet item for accumulated other comprehensive income ( aoci ) or its components. therefore, the effect of foreign currency translation adjustments cannot be quantified. aes ’ s exposure to brazil and andes markets suggests that translation adjustments could be material, but no specific figure is available. * * available evidence * * * no aoci or translation adjustment",
+        "token_count": 480,
+        "positive_probability": 0.06251440197229385,
+        "negative_probability": 0.8034705519676208,
+        "neutral_probability": 0.13401497900485992,
+        "sentiment_score": -0.740956149995327,
+        "confidence_score": 0.8034705519676208,
+        "combined_score": -0.5953364468205486,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 7,
+        "text": "effect of foreign currency translation adjustments cannot be quantified. aes ’ s exposure to brazil and andes markets suggests that translation adjustments could be material, but no specific figure is available. * * available evidence * * * no aoci or translation adjustment data. * geographic exposure to brazil and andes ( question 13 ). * * analysis and inference * * currency volatility ( e. g., brazilian real weakening ) could negatively affect aoci, but the impact is unknown. * * stock ‑ performance relevance * * neutral – uncertain effect ; unlikely to drive price movement without disclosed magnitude. * * confidence * * low – data missing. * * question 13 what is the current concentration of revenue within the aes brasil and aes andes geographic segments? * * * * answer * * the snapshot does not break out revenue by geography, so the precise concentration percentages cannot be provided. historically, aes brasil has been a major contributor, accounting for roughly 30 ‑ 35 % of total revenue, while aes andes contributed around 10 ‑ 15 %. without updated figures, we can only note that the two regions remain significant revenue sources. * * available evidence * * * no geographic revenue split in finnhub. * no recent news indicating major changes in brazil or andes operations. * * analysis and inference * * assuming stable operations, the concentration likely remains similar to prior years, with brazil being the largest single market. * * stock ‑ performance relevance * * geopolitical or currency risks in brazil / andes could impact earnings ; investors should monitor for any news of operational changes. * * confidence * * low – based on historical patterns, not current data. * * question 14 how has the fair value of aes's level 3 derivative instruments changed, and what does this indicate about valuation uncertainty? * * * * answer * * level 3 derivative fair ‑ value information is not disclosed in the finnhub snapshot. therefore, the change cannot be measured. absence of reported level 3 changes suggests that any valuation uncertainty related to complex derivatives is either minimal or not highlighted in recent filings. * * available evidence * * * no level 3 derivative fair ‑ value data. * * analysis and inference * * if the company had significant level 3 exposures, they would likely be noted in earnings releases or md & a. lack of mention may indicate limited exposure, reducing valuation uncertainty",
+        "token_count": 480,
+        "positive_probability": 0.06009270250797272,
+        "negative_probability": 0.14928796887397766,
+        "neutral_probability": 0.7906193137168884,
+        "sentiment_score": -0.08919526636600494,
+        "confidence_score": 0.7906193137168884,
+        "combined_score": -0.07051950028108589,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 8,
+        "text": "no level 3 derivative fair ‑ value data. * * analysis and inference * * if the company had significant level 3 exposures, they would likely be noted in earnings releases or md & a. lack of mention may indicate limited exposure, reducing valuation uncertainty. * * stock ‑ performance relevance * * neutral – no apparent risk from obscure derivatives. * * confidence * * low – data unavailable. * * question 15 what is the trajectory of aes's capital expenditures relative to its operating cash flow? * * * * answer * * the snapshot provides ` cashflowpershareannual = – 2. 1679 ` ( negative ) and a declining ` pcfshareannual ` ( – 0. 14 % ). no explicit capital ‑ expenditure ( capex ) figure is present, so a direct capex ‑ to ‑ operating ‑ cash ‑ flow ratio cannot be calculated. the negative cash ‑ flow per share suggests that operating cash flow is currently insufficient to cover all outflows, implying capital spending may be funded partly by financing activities. * * available evidence * * * negative ` cashflowpershareannual `. * no capex amount disclosed. * * analysis and inference * * operating cash flow pressure combined with ongoing renewable project construction suggests capex may be flat ‑ to ‑ slightly rising, relying on external financing ( debt, equity ). * * stock ‑ performance relevance * * potentially negative medium ‑ term impact if capex outpaces cash generation, affecting leverage. * * confidence * * medium – cash flow direction known ; capex magnitude unknown. * * question 16 how do the interest expense levels for aes's fixed ‑ rate debt compare to those of its variable ‑ rate debt? * * * * answer * * finnhub does not separate interest expense by debt type, so a direct comparison is unavailable. the company ’ s recent earnings beat and modest pe ( ~ 11. 6 ) indicate overall interest expense is manageable. given the utility industry ’ s trend toward fixed ‑ rate project financing to lock in low rates, it is likely that a larger portion of aes ’ s debt is fixed ‑ rate, resulting in more predictable interest costs. * * available evidence * * * no breakdown of interest expense. * no recent news on refinancing or rate ‑ swap activity. * * analysis and inference * * assuming a predom",
+        "token_count": 480,
+        "positive_probability": 0.07707260549068451,
+        "negative_probability": 0.2995438575744629,
+        "neutral_probability": 0.6233835220336914,
+        "sentiment_score": -0.22247125208377838,
+        "confidence_score": 0.6233835220336914,
+        "combined_score": -0.13868491267523098,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 9,
+        "text": "fixed ‑ rate, resulting in more predictable interest costs. * * available evidence * * * no breakdown of interest expense. * no recent news on refinancing or rate ‑ swap activity. * * analysis and inference * * assuming a predominance of fixed ‑ rate project debt, interest expense volatility is limited, which is favorable for earnings stability. * * stock ‑ performance relevance * * positive for income stability ; neutral for price. * * confidence * * low – inference without explicit data. * * question 17 what is the impact of recent asset impairment charges on aes's total equity and earnings per share? * * * * answer * * no asset ‑ impairment charges are reported in the current finnhub snapshot, nor are they mentioned in recent news. therefore, any impact on total equity or eps cannot be quantified. the strong eps beat ( 0. 67 vs. 0. 3717 ) suggests that no significant impairment dragged earnings down in q1 2026. * * available evidence * * * no impairment line items. * eps beat in q1 2026. * * analysis and inference * * absence of reported impairments indicates that equity and eps have not been materially reduced by such charges recently. * * stock ‑ performance relevance * * neutral to positive – no impairment drag supports earnings momentum. * * confidence * * medium – based on lack of disclosed impairments. * * question 18 how has the trend in accounts receivable turnover for aes changed, and does it suggest shifts in customer credit risk? * * * * answer * * the latest annual ` receivablesturnoverannual = 7. 3494 ` ( from basic financials ) is slightly lower than the historic 1999 ‑ 2000 levels ( ≈13 ‑ 14 ) but comparable to recent decades ( ~ 7 ‑ 8 ). no prior ‑ snapshot turnover figure is available, so a short ‑ term trend cannot be measured. a stable turnover around 7 ‑ 8 suggests steady collection practices with no evident increase in credit risk. * * available evidence * * * ` receivablesturnoverannual = 7. 3494 `. * no change data between snapshots. * * analysis and inference * * steady turnover implies that customers ( largely utilities and large corporate off ‑ takers ) are paying on schedule ; no emerging credit concerns are",
+        "token_count": 480,
+        "positive_probability": 0.13417001068592072,
+        "negative_probability": 0.42094695568084717,
+        "neutral_probability": 0.4448830485343933,
+        "sentiment_score": -0.28677694499492645,
+        "confidence_score": 0.4448830485343933,
+        "combined_score": -0.1275822015387229,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 10,
+        "text": "= 7. 3494 `. * no change data between snapshots. * * analysis and inference * * steady turnover implies that customers ( largely utilities and large corporate off ‑ takers ) are paying on schedule ; no emerging credit concerns are apparent. * * stock ‑ performance relevance * * neutral – stable credit risk supports consistent cash flow. * * confidence * * medium – turnover metric reliable ; trend unknown. * * question 19 what is the current magnitude of aes's contingent liabilities related to environmental remediation? * * * * answer * * finnhub does not disclose the amount of environmental remediation contingent liabilities. no recent news indicates new remediation claims. historically, utility companies carry such liabilities, but the magnitude for aes is not available in the snapshot. * * available evidence * * * no contingent ‑ liability figure in snapshot. * no recent remediation announcements. * * analysis and inference * * given the company ’ s shift away from coal, future remediation liabilities may be decreasing, but the exact current magnitude remains unknown. * * stock ‑ performance relevance * * potentially positive if liabilities are shrinking ; otherwise neutral. * * confidence * * low – data missing. * * question 20 how does the growth in aes's energy infrastructure segment compare to the growth in its new energy technologies segment? * * * * answer * * segment ‑ level growth figures for “ energy infrastructure ” and “ new energy technologies ” are not provided. the overall quarterly revenue growth of 8. 68 % yoy likely includes contributions from both. industry trends suggest the new energy technologies ( e. g., storage, digital grid ) are expanding faster than traditional infrastructure, but without data we cannot quantify the relative rates. * * available evidence * * * no segment ‑ specific growth data. * overall revenue growth 8. 68 % yoy ( q1 2026 ). * * analysis and inference * * it is reasonable to infer that the new energy technologies segment grew at a higher rate ( double ‑ digit ), while the energy infrastructure segment grew modestly ( low ‑ single ‑ digit ). * * stock ‑ performance relevance * * positive for investors betting on technology ‑ driven growth ; neutral for pure ‑ utility income focus. * * confidence * * low – inference only. * * question 21 what is",
+        "token_count": 480,
+        "positive_probability": 0.16142329573631287,
+        "negative_probability": 0.028352105990052223,
+        "neutral_probability": 0.8102245330810547,
+        "sentiment_score": 0.13307118974626064,
+        "confidence_score": 0.8102245330810547,
+        "combined_score": 0.10781754257870446,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 11,
+        "text": "( low ‑ single ‑ digit ). * * stock ‑ performance relevance * * positive for investors betting on technology ‑ driven growth ; neutral for pure ‑ utility income focus. * * confidence * * low – inference only. * * question 21 what is the change in the fair value of aes's investment in equity ‑ method affiliates compared to the previous year? * * * * answer * * the snapshot does not list the fair value of equity ‑ method investments, so the change cannot be calculated. no news mentions any adjustment to such holdings. * * available evidence * * * no equity ‑ method fair ‑ value data. * * analysis and inference * * without disclosed changes, we assume the fair value remained roughly stable, indicating no major gains or losses from affiliates in the recent period. * * stock ‑ performance relevance * * neutral – no material effect on earnings or valuation. * * confidence * * low – data absent. * * question 22 how have changes in interest rates specifically affected the valuation of aes's interest ‑ rate swap contracts? * * * * answer * * finnhub does not provide details on interest ‑ rate swap valuations. no recent commentary on swap re ‑ measurements is present. given the recent modest rise in market cap and stable pe, any swap ‑ related gains or losses appear immaterial to the current earnings picture. * * available evidence * * * no swap ‑ valuation data. * no news about rate ‑ swap adjustments. * * analysis and inference * * if aes holds swaps to hedge variable ‑ rate debt, a rising rate environment could increase the fair value of receive ‑ fixed swaps ( gain ) or decrease pay ‑ fixed swaps ( loss ). the net effect is unknown but likely modest. * * stock ‑ performance relevance * * neutral – no disclosed impact. * * confidence * * low – inference. * * question 23 what is the direction of change in aes's regulated asset base ( rab ) across its different utility jurisdictions? * * * * answer * * the snapshot does not contain rab figures by jurisdiction. no recent filings or news items discuss rab adjustments. historically, regulated utilities tend to grow their rab slowly through rate ‑ base approvals. in the absence of specific data, we can only note that the overall regulated revenue appears stable, implying rab is likely flat",
+        "token_count": 480,
+        "positive_probability": 0.07110105454921722,
+        "negative_probability": 0.07657979428768158,
+        "neutral_probability": 0.852319061756134,
+        "sentiment_score": -0.0054787397384643555,
+        "confidence_score": 0.852319061756134,
+        "combined_score": -0.004669634313493987,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 12,
+        "text": "news items discuss rab adjustments. historically, regulated utilities tend to grow their rab slowly through rate ‑ base approvals. in the absence of specific data, we can only note that the overall regulated revenue appears stable, implying rab is likely flat ‑ to ‑ slightly increasing. * * available evidence * * * no rab data. * no news on rate ‑ base changes. * * analysis and inference * * stability in regulated revenue and dividend sustainability suggests rab is not contracting ; modest growth is plausible. * * stock ‑ performance relevance * * positive if rab is expanding ( supports future earnings ) ; unknown impact currently. * * confidence * * low – data unavailable. * * question 24 how does the current level of aes's restricted cash compare to its immediate liquidity requirements for debt service? * * * * answer * * restricted ‑ cash amount is not disclosed in the finnhub snapshot, and short ‑ term debt obligations are also absent. however, the annual ` currentratioannual = 0. 7657 ` indicates that total current assets ( including cash and restricted cash ) fall short of current liabilities, suggesting that restricted cash alone may not fully cover immediate debt service without additional liquidity sources. * * available evidence * * * ` currentratioannual = 0. 7657 `. * no explicit restricted ‑ cash figure. * * analysis and inference * * a current ratio below 1 signals that the company relies on revolving credit or cash ‑ flow generation to meet short ‑ term obligations. restricted cash likely represents a modest portion of total current assets and may not be sufficient alone. * * stock ‑ performance relevance * * slightly negative medium ‑ term liquidity perception ; however, strong earnings and dividend suggest cash ‑ flow generation is adequate. * * confidence * * medium – current ratio is reliable ; restricted ‑ cash specifics missing. * * question 25 what is the impact of the disposal of held ‑ for ‑ sale assets, such as the mong duong subsidiary, on aes's consolidated balance sheet? * * * * answer * * the snapshot does not mention the mong duong disposal or any held ‑ for ‑ sale asset sales. consequently, the balance ‑ sheet impact ( e. g., reduction in total assets, gain / loss recognition ) cannot be measured. no recent news reports the transaction, implying",
+        "token_count": 480,
+        "positive_probability": 0.0995127484202385,
+        "negative_probability": 0.3733217418193817,
+        "neutral_probability": 0.5271654725074768,
+        "sentiment_score": -0.2738089933991432,
+        "confidence_score": 0.5271654725074768,
+        "combined_score": -0.14434264738205593,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 13,
+        "text": "mong duong disposal or any held ‑ for ‑ sale asset sales. consequently, the balance ‑ sheet impact ( e. g., reduction in total assets, gain / loss recognition ) cannot be measured. no recent news reports the transaction, implying it either has not occurred yet or was not material enough to be highlighted. * * available evidence * * * no mention of mong duong or held ‑ for ‑ sale assets. * * analysis and inference * * if the disposal proceeds were modest, the effect on total assets and equity would be limited. any realized gain would boost net income, while the removal of the asset would lower total assets. * * stock ‑ performance relevance * * neutral – no discernible impact without disclosed numbers. * * confidence * * low – data missing. * * question 26 how has the percentage of aes's total revenue derived from unregulated operations changed over the last three fiscal years? * * * * answer * * the snapshot does not provide a split between regulated and unregulated revenue, so the percentage change cannot be calculated. however, the overall quarterly revenue growth ( 8. 68 % yoy ) and the company ’ s ongoing dividend payout ( ≈4. 8 % yield ) suggest that unregulated ( renewables, new energy ) contributions may be rising, helping offset slower growth in regulated segments. * * available evidence * * * no regulated / unregulated revenue split. * quarterly revenue growth of 8. 68 % yoy. * * analysis and inference * * given aes ’ s strategic shift toward renewables and the higher growth rates typical of unregulated businesses, it is plausible that the share of unregulated revenue has increased modestly over the past three years. * * stock ‑ performance relevance * * positive for growth ‑ oriented investors ; neutral for pure income investors. * * confidence * * low – inference only. * * question 27 what is the trend in pension costs for aes, and how does it impact long ‑ term operating margins? * * * * answer * * pension expense data are not included in the finnhub snapshot. no recent filings highlight pension cost changes. the stable operating margin ( 11. 34 % annual ) suggests that pension costs have not risen sharply enough to erode margins. * * available evidence * *",
+        "token_count": 480,
+        "positive_probability": 0.2521141767501831,
+        "negative_probability": 0.055061571300029755,
+        "neutral_probability": 0.6928242444992065,
+        "sentiment_score": 0.19705260545015335,
+        "confidence_score": 0.6928242444992065,
+        "combined_score": 0.13652282249760272,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 14,
+        "text": "not included in the finnhub snapshot. no recent filings highlight pension cost changes. the stable operating margin ( 11. 34 % annual ) suggests that pension costs have not risen sharply enough to erode margins. * * available evidence * * * ` operatingmarginannual = 11. 34 % `. * no pension cost figures. * * analysis and inference * * if pension costs were increasing significantly, operating margin would likely have shown a downward trend, which is not evident. therefore, pension cost pressure appears modest. * * stock ‑ performance relevance * * neutral – no evident margin compression from pensions. * * confidence * * medium – operating margin stability is a reasonable proxy. * * question 28 how has the level of aes's unamortized discounts on debt changed, and what does this signal about future interest expense? * * * * answer * * the snapshot does not report unamortized debt discounts. consequently, we cannot assess the change or its forward impact. generally, a larger unamortized discount leads to higher effective interest expense over the debt ’ s life. without data, no conclusion can be drawn. * * available evidence * * * no unamortized ‑ discount figures. * * analysis and inference * * if aes has recently issued higher ‑ coupon debt ( to fund renewables ), the discount may have decreased, implying lower future interest expense. conversely, if older lower ‑ coupon debt remains, discounts could be higher. * * stock ‑ performance relevance * * potentially positive if discounts are declining, reducing interest burden. * * confidence * * low – data unavailable. * * question 29 what is the current ratio of aes's total non ‑ controlling interests to total equity? * * * * answer * * non ‑ controlling interests and total equity amounts are not presented in the finnhub snapshot, so the ratio cannot be calculated. no recent disclosures indicate a material change in non ‑ controlling interest levels. * * available evidence * * * no non ‑ controlling interest or equity figures. * * analysis and inference * * historically, aes has modest non ‑ controlling stakes ; the ratio is likely low ( < 5 % ). * * stock ‑ performance relevance * * neutral – small non ‑ controlling interest share has limited impact on shareholder value. * * confidence * *",
+        "token_count": 480,
+        "positive_probability": 0.14002901315689087,
+        "negative_probability": 0.49164313077926636,
+        "neutral_probability": 0.368327796459198,
+        "sentiment_score": -0.3516141176223755,
+        "confidence_score": 0.49164313077926636,
+        "combined_score": -0.1728686656140539,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 15,
+        "text": "historically, aes has modest non ‑ controlling stakes ; the ratio is likely low ( < 5 % ). * * stock ‑ performance relevance * * neutral – small non ‑ controlling interest share has limited impact on shareholder value. * * confidence * * low – no current numbers. * * question 30 how has the magnitude of aes's electricity purchase contract obligations changed in response to market price volatility? * * * * answer * * the snapshot does not disclose electricity purchase contract ( epc ) obligations or any recent adjustments due to price volatility. no news items discuss changes to epc volumes or pricing. however, aes ’ s strong earnings beat suggests that any exposure to spot ‑ price volatility was managed, possibly via contract renegotiations or hedging. * * available evidence * * * no epc data. * q1 2026 eps beat ( + 80 % ). * * analysis and inference * * effective management of price risk ( through contracts or hedges ) likely limited adverse impacts from market volatility, keeping epc obligations stable or even improving terms. * * stock ‑ performance relevance * * positive short ‑ term signal ; demonstrates risk ‑ management competence. * * confidence * * low – no direct evidence.",
+        "token_count": 256,
+        "positive_probability": 0.26282981038093567,
+        "negative_probability": 0.044242966920137405,
+        "neutral_probability": 0.6929272413253784,
+        "sentiment_score": 0.21858684346079826,
+        "confidence_score": 0.6929272413253784,
+        "combined_score": 0.15146477842931327,
+        "predicted_label": "neutral"
+      }
+    ],
+    "answer_path": "/mnt/primary/answers/2026-07-19/AES Corporation_answer_2026-07-19.txt"
+  },
+  "snapshot_path": "/mnt/primary/finnhub_snapshots_filtered/2026-07-19/AES Corporation_AES_snapshot.json",
+  "answer_path": "/mnt/primary/answers/2026-07-19/AES Corporation_answer_2026-07-19.txt"
+}

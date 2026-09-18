@@ -1,0 +1,242 @@
+{
+  "date": "2026-07-15",
+  "ticker": "ED",
+  "company_name": "Consolidated Edison",
+  "category": "Utilities",
+  "model": "ProsusAI/finbert",
+  "processor_version": "finbert_separate_news_answers_v2",
+  "processed_at_utc": "2026-08-18T15:45:28.596127+00:00",
+  "processing_reason": "score_missing",
+  "scoring_definition": {
+    "sentiment_score": "positive_probability - negative_probability",
+    "confidence_score": "maximum class probability",
+    "combined_score_per_source": "sentiment_score * confidence_score",
+    "source_fusion": "None. News and LLM-answer scores are stored separately."
+  },
+  "input_files": {
+    "snapshot": {
+      "path": "/mnt/primary/finnhub_snapshots_filtered/2026-07-15/Consolidated Edison_ED_snapshot.json",
+      "exists": true,
+      "size_bytes": 65235,
+      "modified_at_utc": "2026-08-18T15:23:01.514965+00:00",
+      "sha256": "49c18d3fed57742fcf737896f70ade453e7b6a016ff9de7191b0dd27551f8566"
+    },
+    "answer": {
+      "path": "/mnt/primary/answers/2026-07-15/Consolidated Edison_answer_2026-07-15.txt",
+      "exists": true,
+      "size_bytes": 31317,
+      "modified_at_utc": "2026-07-15T11:58:07.665556+00:00",
+      "sha256": "0d8aee75c06c333ddb19bfc578287c72e4f6e6de99811df914de97dd5d10c3ab"
+    }
+  },
+  "news_score": null,
+  "answer_score": {
+    "source": "llm_answers",
+    "positive_probability": 0.5542625360186835,
+    "negative_probability": 0.08942177962324202,
+    "neutral_probability": 0.356315684959123,
+    "sentiment_score": 0.4648407563954414,
+    "confidence_score": 0.5542625360186835,
+    "combined_score": 0.2576438164845804,
+    "predicted_label": "positive",
+    "chunk_count": 16,
+    "token_count": 7388,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "text": "company : consolidated edison ticker : ed category : utilities analysis date : 2026 - 07 - 15 question file : / mnt / primary / questions / consolidated edison. txt model : gpt - oss - 120b validation : warning - complete text not detected for question numbers : 15, 18 * * question 1 * * how has the revenue from the clean energy businesses segment changed compared to the previous fiscal year? * * answer * * finnhub does not break out revenue for the clean energy businesses segment, so the exact change cannot be measured. the company ’ s total revenue grew 6. 17 % yoy ( quarterly ) and 5. 63 % annualized over the past three years, driven in part by expanding renewable ‑ energy projects and data ‑ center demand highlighted in recent news. management ’ s recent statements emphasize accelerating clean ‑ energy sales, which suggests the segment ’ s revenue likely rose at a rate at least in line with overall revenue growth, if not higher. * * available evidence * * * basic financials show revenuegrowthquarterlyyoy = 6. 17 % ( current fy ) and revenuegrowth3y = 5. 63 % ( snapshot ). * recent news ( seekingalpha, 2026 ‑ 07 ‑ 11 ) notes rising data ‑ center demand, a driver for clean ‑ energy sales. * * analysis and inference * * because segment ‑ level data are unavailable, we infer the clean energy segment contributed positively to total revenue growth. the company ’ s strategic focus on renewable projects and external demand signals a likely increase of 5 ‑ 10 % yoy. a precise figure would require the segment ‑ level revenue disclosed in the 10 ‑ k. * * stock ‑ performance relevance * * positive – an expanding clean ‑ energy revenue stream supports long ‑ term growth and aligns with esg ‑ focused investor demand, which could be modestly bullish in the medium term. * * confidence * * medium – the inference is logical but lacks hard segment numbers. * * question 2 * * what is the current trend in electricity purchased costs for consolidated edison ( ed ) compared to historical averages? * * answer * * specific electricity ‑ purchase cost data are not supplied in the finnhub snapshot, so a direct trend cannot be calculated. however, the company ’ s operating margin remains strong at 17. 33 % ( annual ) and net profit",
+        "token_count": 480,
+        "positive_probability": 0.7312504053115845,
+        "negative_probability": 0.022027183324098587,
+        "neutral_probability": 0.24672240018844604,
+        "sentiment_score": 0.7092232219874859,
+        "confidence_score": 0.7312504053115845,
+        "combined_score": 0.5186197685347369,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 1,
+        "text": "* answer * * specific electricity ‑ purchase cost data are not supplied in the finnhub snapshot, so a direct trend cannot be calculated. however, the company ’ s operating margin remains strong at 17. 33 % ( annual ) and net profit margin at 11. 96 %, indicating that purchase costs have been managed effectively relative to sales. historical stability in margins over the past several years suggests electricity ‑ purchase costs have not deviated dramatically from historical averages, even as market price volatility has increased. * * available evidence * * * operatingmarginannual = 17. 33 % ; netprofitmarginannual = 11. 96 %. * no explicit electricity ‑ purchase cost metric in the snapshot. * * analysis and inference * * margins staying in the mid ‑ teens imply that any increase in wholesale electricity prices has been offset by rate adjustments or hedging. given the recent data ‑ center demand spike, utilities often secure long ‑ term contracts that smooth cost fluctuations, so the trend is likely flat to modestly upward. * * stock ‑ performance relevance * * neutral to slightly positive – stable cost ‑ management supports earnings consistency, a valued trait for utility investors. * * confidence * * medium – inference based on margin stability, not on direct cost figures. * * question 3 * * to what extent have recent regulatory decisions by the new york state public service commission impacted the rate plans for the electric transmission segment? * * answer * * the snapshot does not list specific psc orders, but recent public filings ( outside finnhub ) show the ny psc approved a modest rate increase for the electric transmission segment in early 2026, primarily to fund undergrounding and system hardening projects. the impact on earnings is expected to be incremental, adding roughly 0. 5 ‑ 1 % to the segment ’ s revenue over the next 12 months. * * available evidence * * * no direct psc decision data in finnhub. * general knowledge : ny psc regularly reviews transmission rates ; recent 2026 order is public record. * * analysis and inference * * the rate increase is modest relative to the segment ’ s size, providing a small revenue boost without significantly altering the cost base. it also helps fund capital projects that may improve reliability. * * stock ‑ performance relevance * * slightly positive – incremental revenue and improved infrastructure can",
+        "token_count": 480,
+        "positive_probability": 0.8985394835472107,
+        "negative_probability": 0.016189489513635635,
+        "neutral_probability": 0.08527109026908875,
+        "sentiment_score": 0.8823499940335751,
+        "confidence_score": 0.8985394835472107,
+        "combined_score": 0.792826307946813,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 2,
+        "text": "relative to the segment ’ s size, providing a small revenue boost without significantly altering the cost base. it also helps fund capital projects that may improve reliability. * * stock ‑ performance relevance * * slightly positive – incremental revenue and improved infrastructure can support a stable earnings outlook. * * confidence * * low – based on external public ‑ filing knowledge, not on snapshot data. * * question 4 * * how is the volatility in natural gas prices affecting the operational and maintenance expenses for the gas transmission segment of ed? * * answer * * direct o & m expense data are not disclosed, but natural ‑ gas price volatility typically influences fuel ‑ cost hedging and maintenance budgeting. the company ’ s overall operating margin remains high ( 17. 33 % ), suggesting that gas ‑ price swings have not materially eroded profitability. management ’ s quarterly commentary ( not in finnhub ) has indicated higher hedging costs in 2025 ‑ 26, which modestly increase o & m expenses but are offset by rate adjustments. * * available evidence * * * operatingmarginannual = 17. 33 %. * no segment ‑ level o & m cost data. * * analysis and inference * * higher gas price volatility likely raises variable o & m costs and hedging costs, but the effect appears limited given stable margins. a plausible increase of 1 ‑ 2 % in o & m expense yoy is possible. * * stock ‑ performance relevance * * neutral – modest cost pressure is typical for gas ‑ transmission utilities and is already priced in. * * confidence * * medium – inference aligns with industry practice and observed margins. * * question 5 * * what is the current status of the capital expenditure program for infrastructure improvements within the consolidated edison company of new york, inc. ( cecony ) segment? * * answer * * the snapshot does not provide a segment ‑ specific capex figure. the company ’ s recent earnings calls ( publicly released ) outlined a $ 2. 5 bn five ‑ year capital plan for cecony, with $ 650 m already allocated to grid modernization and undergrounding in 2025 ‑ 26. current spending is on schedule, with about 55 % of the 2026 ‑ 27 budget already committed. * * available evidence * * * no capex numbers in the finnhub data. * general",
+        "token_count": 480,
+        "positive_probability": 0.4509546756744385,
+        "negative_probability": 0.035592857748270035,
+        "neutral_probability": 0.513452410697937,
+        "sentiment_score": 0.41536181792616844,
+        "confidence_score": 0.513452410697937,
+        "combined_score": 0.21326852672606877,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 3,
+        "text": "modernization and undergrounding in 2025 ‑ 26. current spending is on schedule, with about 55 % of the 2026 ‑ 27 budget already committed. * * available evidence * * * no capex numbers in the finnhub data. * general corporate guidance ( public filings ) mentions a multi ‑ year $ 2. 5 bn plan. * * analysis and inference * * given the ongoing rate cases and recent regulatory approvals, cecony is likely maintaining its planned level of investment, which supports reliability and long ‑ term revenue. * * stock ‑ performance relevance * * positive – continued infrastructure investment underpins future rate ‑ base growth. * * confidence * * low – based on external guidance, not on snapshot figures. * * question 6 * * how has the debt ‑ to ‑ equity ratio of consolidated edison, inc. evolved in response to recent new debenture issuances? * * answer * * the snapshot lacks a current debt ‑ to ‑ equity metric. the most recent historical totaldebttoequity was 0. 6709 ( 2006 ). recent debenture issuances in 2025 ‑ 26 to fund capital projects likely raised total debt modestly, but the company ’ s strong cash flow ( cashflowpershare = 0. 0997 ) and dividend coverage suggest the ratio remains below 1. 0, probably around 0. 75 ‑ 0. 80. * * available evidence * * * historical totaldebttoequity ≈ 0. 67 ( 2006 ). * current cash flow per share and dividend payout ( 57. 6 % ). * * analysis and inference * * new debentures increase debt, but earnings and cash generation keep equity growth steady, limiting leverage rise. a modest uptick in the debt ‑ to ‑ equity ratio is plausible. * * stock ‑ performance relevance * * neutral – a slight leverage increase is typical for utilities expanding the rate base ; not likely to affect credit rating materially. * * confidence * * medium – inference based on historic ratio and recent debt issuance trends. * * question 7 * * what is the magnitude of change in the fair value of derivative financial instruments held for hedging purposes compared to the prior period? * * answer * * fair ‑ value of derivatives is not disclosed in finnhub. the company ’ s earnings call highlighted a $",
+        "token_count": 480,
+        "positive_probability": 0.5818088054656982,
+        "negative_probability": 0.09173750132322311,
+        "neutral_probability": 0.32645365595817566,
+        "sentiment_score": 0.49007130414247513,
+        "confidence_score": 0.5818088054656982,
+        "combined_score": 0.28512780005615035,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 4,
+        "text": "magnitude of change in the fair value of derivative financial instruments held for hedging purposes compared to the prior period? * * answer * * fair ‑ value of derivatives is not disclosed in finnhub. the company ’ s earnings call highlighted a $ 120 m increase in the fair value of natural ‑ gas hedges in q1 2026 due to higher spot prices, offset by a $ 30 m decline in electricity ‑ hedge values. overall, the net fair ‑ value change was a positive $ 90 m versus q4 2025. * * available evidence * * * no derivative fair ‑ value data in the snapshot. * * analysis and inference * * given the recent gas ‑ price spike and the company ’ s hedging policy, the net increase is a reasonable estimate. the change improves earnings by reducing exposure to price volatility. * * stock ‑ performance relevance * * slightly positive – higher hedge gains support earnings stability. * * confidence * * low – derived from typical hedging behavior, not from disclosed numbers. * * question 8 * * how do the current liquidity levels and revolving credit facility availability compare to the management's stated requirements for operational stability? * * answer * * current liquidity metrics : currentratioannual = 1. 0206 and quickratioannual = 0. 8828, indicating just enough short ‑ term assets to meet current liabilities. management historically targets a current ratio above 1. 0 and a revolving credit line of at least $ 1 bn ( public filing ). the existing ratios meet the minimal threshold, and the company ’ s revolving facility remains fully undrawn, providing ample backup. * * available evidence * * * currentratioannual = 1. 0206 ; quickratioannual = 0. 8828. * management ’ s typical liquidity target ( public statements ) – current ratio > 1. 0, credit line ≥ $ 1 bn. * * analysis and inference * * liquidity is just sufficient ; the unused credit line adds a safety cushion. no immediate liquidity risk is evident. * * stock ‑ performance relevance * * neutral – sufficient liquidity supports operational continuity but does not add upside. * * confidence * * high – based on concrete ratio data and known credit facilities. * * question 9 * * what impact are the environmental restoration costs and superfund site lia",
+        "token_count": 480,
+        "positive_probability": 0.9049612283706665,
+        "negative_probability": 0.015628380700945854,
+        "neutral_probability": 0.07941044867038727,
+        "sentiment_score": 0.8893328476697206,
+        "confidence_score": 0.9049612283706665,
+        "combined_score": 0.8048117462575732,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 5,
+        "text": "neutral – sufficient liquidity supports operational continuity but does not add upside. * * confidence * * high – based on concrete ratio data and known credit facilities. * * question 9 * * what impact are the environmental restoration costs and superfund site liabilities having on the long ‑ term cash flow projections for ed? * * answer * * the snapshot does not list specific restoration or superfund expense figures. historically, consolidated edison has allocated roughly $ 150 m ‑ $ 200 m annually for environmental remediation, funded from operating cash flow. given current cash ‑ flow ‑ per ‑ share of $ 0. 0997 and strong free ‑ cash ‑ flow generation, these liabilities are covered comfortably and are unlikely to materially depress long ‑ term cash flow projections. * * available evidence * * * cashflowpershareannual = 0. 0997. * no explicit environmental cost data. * * analysis and inference * * assuming typical remediation spend, the cost represents < 1 % of total cash flow, hence a minimal impact on long ‑ term cash generation. * * stock ‑ performance relevance * * neutral – costs are managed and already priced in. * * confidence * * medium – based on industry averages and cash ‑ flow strength. * * question 10 * * how has the growth in energy storage assets within the company's portfolio contributed to diversified revenue streams? * * answer * * finnhub does not disclose energy ‑ storage asset numbers or revenue. the company announced in early 2026 the commissioning of a 150 mw battery system in new york, expected to generate $ 12 m ‑ $ 15 m annually from ancillary services. this is a modest but growing share of total revenue ( ≈0. 1 % ). the asset diversification aligns with utility trends toward grid flexibility. * * available evidence * * * no storage ‑ specific data in snapshot. * public press release ( 2026 ) on 150 mw battery installation. * * analysis and inference * * revenue contribution is small but adds a new, high ‑ margin stream that can grow as more storage is deployed. * * stock ‑ performance relevance * * positive – diversification and potential for higher margin ancillary income. * * confidence * * low – based on limited public disclosure. * * question 11 * * what is the direction of change in the deferred storm costs",
+        "token_count": 480,
+        "positive_probability": 0.49483707547187805,
+        "negative_probability": 0.010930894874036312,
+        "neutral_probability": 0.4942319989204407,
+        "sentiment_score": 0.48390618059784174,
+        "confidence_score": 0.49483707547187805,
+        "combined_score": 0.23945471920980246,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 6,
+        "text": "performance relevance * * positive – diversification and potential for higher margin ancillary income. * * confidence * * low – based on limited public disclosure. * * question 11 * * what is the direction of change in the deferred storm costs and how might this affect upcoming quarterly earnings for ed? * * answer * * deferred storm costs are not itemized in the snapshot. the company ’ s recent sec filing disclosed an increase of $ 85 m in storm ‑ cost accruals for the 2025 hurricane season, reflecting higher frequency of severe weather events. this increase will be amortized over the next 5 ‑ 10 years, reducing earnings by roughly $ 8 m ‑ $ 10 m per quarter until fully recognized. * * available evidence * * * no storm ‑ cost data in finnhub. * sec filing ( 2025 ) noted $ 85 m incremental accrual. * * analysis and inference * * higher deferred costs translate into higher future expense amortization, modestly depressing quarterly eps. * * stock ‑ performance relevance * * negative ( short ‑ term ) – slight eps drag until costs are fully recognized. * * confidence * * low – dependent on external filing details. * * question 12 * * how are the pension and post ‑ retirement benefit obligations trending relative to the company's funded status? * * answer * * the snapshot lacks pension ‑ funded status metrics. consolidated edison ’ s latest pension report ( 2025 ) showed a funded ratio of 88 % ( up from 86 % in 2024 ), reflecting higher investment returns and modest benefit accruals. the trend is improving, reducing the net liability on the balance sheet. * * available evidence * * * no pension data in finnhub. * pension funded ‑ ratio from 2025 public report ( 88 % ). * * analysis and inference * * an upward trend in funding improves balance ‑ sheet strength and may lower future cash ‑ outflows for contributions. * * stock ‑ performance relevance * * positive – stronger funding reduces long ‑ term liability risk. * * confidence * * low – derived from external pension report. * * question 13 * * what is the potential impact of changing regulatory asset balances on the overall profitability of the utility segments? * * answer * * regulatory assets ( e. g., deferred costs ) are",
+        "token_count": 480,
+        "positive_probability": 0.9421867728233337,
+        "negative_probability": 0.031070897355675697,
+        "neutral_probability": 0.02674235962331295,
+        "sentiment_score": 0.911115875467658,
+        "confidence_score": 0.9421867728233337,
+        "combined_score": 0.8584413263749792,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 7,
+        "text": "external pension report. * * question 13 * * what is the potential impact of changing regulatory asset balances on the overall profitability of the utility segments? * * answer * * regulatory assets ( e. g., deferred costs ) are not detailed in finnhub. historically, regulatory assets have added roughly 0. 5 ‑ 1 % to net income through amortization. recent rate cases approved modest asset recoveries, suggesting a neutral to slightly positive impact on profitability. * * available evidence * * * no regulatory ‑ asset data in snapshot. * * analysis and inference * * assuming a $ 100 m regulatory ‑ asset balance amortized over 10 years, the incremental earnings contribution would be ~ $ 10 m annually, or ~ 0. 1 % of total earnings – marginal but supportive. * * stock ‑ performance relevance * * neutral – effect is small relative to overall earnings. * * confidence * * low – based on typical utility accounting practice. * * question 14 * * how does the current yield on consolidated edison's outstanding debentures compare to the broader utility sector benchmarks? * * answer * * exact debenture yields are not listed. the company ’ s aaa ‑ rated senior notes, issued in 2024 at 3. 35 % coupon, trade close to parity with the bloomberg us utility index ( average yield ≈ 3. 4 % ). thus, the yield is essentially in line with sector benchmarks. * * available evidence * * * no yield data in snapshot. * public bond issuance data ( 2024 3. 35 % coupon ). * * analysis and inference * * given the aaa rating and current market rates, the debenture yield aligns with peers, indicating no pricing premium or discount. * * stock ‑ performance relevance * * neutral – bond pricing does not affect equity valuation directly. * * confidence * * medium – based on known coupon and market rates. * * question 15 * * what are the implications of the current'unrecognized pension and other post ‑ retirement costs'on the company's long ‑ term balance ‑ sheet strength? * * answer * * unrecognized pension costs are not disclosed in finnhub. the company ’ s 2025 financial statements reported $ 1. 2 bn of unrecognized post ‑ retirement obligations, partially",
+        "token_count": 480,
+        "positive_probability": 0.06285286694765091,
+        "negative_probability": 0.03501543775200844,
+        "neutral_probability": 0.9021317362785339,
+        "sentiment_score": 0.02783742919564247,
+        "confidence_score": 0.9021317362785339,
+        "combined_score": 0.025113028333795695,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 8,
+        "text": "‑ sheet strength? * * answer * * unrecognized pension costs are not disclosed in finnhub. the company ’ s 2025 financial statements reported $ 1. 2 bn of unrecognized post ‑ retirement obligations, partially offset by a funded ‑ status of 88 %. while the absolute figure is sizable, the high funded ratio and incremental contribution schedule limit balance ‑ sheet strain. over the long term, continued investment returns are needed to keep the ratio stable. * * available evidence * * * no unrecognized cost data in snapshot. * 2025 pension report cites $ 1. 2 bn unrecognized obligation ; funded ‑ ratio = 88 %. * * analysis and inference * * the liability is manageable but requires ongoing monitoring ; a deteriorating funded status would raise concerns. * * stock ‑ performance relevance * * neutral to slightly negative – modest long ‑ term liability, already priced in. * * confidence * * low – external data reliance. * * question 16 * * how has the volume of electricity and gas transmission demand changed in the new york and new jersey service territories? * * answer * * finnhub does not provide territory ‑ specific demand volumes. company ‑ wide revenue grew 6. 17 % yoy, and the ny ‑ psc rate filings indicate electricity demand up 3. 2 % in new york and 2. 8 % in new jersey for 2025 ‑ 26. gas transmission volumes rose roughly 4 % yoy, reflecting modest industrial growth. * * available evidence * * * revenuegrowthquarterlyyoy = 6. 17 %. * no territory ‑ level data in snapshot. * * analysis and inference * * demand growth in both states is modest but positive, supporting stable rate ‑ base expansion. * * stock ‑ performance relevance * * positive – growing demand underpins future revenue. * * confidence * * medium – based on aggregate revenue and public demand filings. * * question 17 * * what is the trend in the accuracy and magnitude of management's guidance regarding capital allocation for renewable energy projects? * * answer * * guidance accuracy is not quantified in finnhub. historically, ed ’ s capital ‑ allocation forecasts for renewables have been within ±5 % of actual spend. in 2025, management projected $ 250 m for renewable upgrades and spent $ 242 m",
+        "token_count": 480,
+        "positive_probability": 0.34328392148017883,
+        "negative_probability": 0.04356389492750168,
+        "neutral_probability": 0.6131521463394165,
+        "sentiment_score": 0.29972002655267715,
+        "confidence_score": 0.6131521463394165,
+        "combined_score": 0.1837739775816809,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 9,
+        "text": "is not quantified in finnhub. historically, ed ’ s capital ‑ allocation forecasts for renewables have been within ±5 % of actual spend. in 2025, management projected $ 250 m for renewable upgrades and spent $ 242 m, a 3 % variance, indicating improving accuracy. * * available evidence * * * no direct guidance ‑ vs ‑ actual data in snapshot. * * analysis and inference * * the close alignment suggests management ’ s forecasts are reliable, reducing uncertainty for investors. * * stock ‑ performance relevance * * positive – reliable guidance improves market confidence. * * confidence * * low – based on a single year ’ s public data. * * question 18 * * how are the current interest ‑ rate environments affecting the cost of servicing the long ‑ term debentures issued by ed? * * answer * * the snapshot does not detail interest expense. however, with the federal funds rate currently near 5. 25 % ( 2026 ), the weighted ‑ average interest cost on existing fixed ‑ rate senior notes ( average coupon ≈ 3. 35 % ) remains lower than market rates, creating a modest net ‑ interest ‑ expense advantage. new issuances will likely carry higher coupons ( ≈ 4. 0 ‑ 4. 5 % ), increasing future debt ‑ service costs. * * available evidence * * * no interest ‑ expense data in snapshot. * knowledge of current fed rate and existing coupon rates. * * analysis and inference * * existing fixed ‑ rate debt is cheap relative to market, but upcoming refinancing will be costlier, modestly raising interest expense over the next few years. * * stock ‑ performance relevance * * neutral to slightly negative – higher future interest costs could compress margins marginally. * * confidence * * medium – based on known rate environment and debt structure. * * question 19 * * what is the current level of risk exposure regarding the company's steam plant operations in terms of regulatory compliance and fuel costs? * * answer * * steam ‑ plant specifics are not disclosed in finnhub. the company operates a single steam ‑ generation plant in the bronx, subject to ny psc compliance. recent inspections flagged minor emissions adjustments, estimated to cost $ 10 m ‑ $ 12 m annually. fuel ( natural gas ) price volatility adds an additional cost exposure of roughly $",
+        "token_count": 480,
+        "positive_probability": 0.35894203186035156,
+        "negative_probability": 0.0315982811152935,
+        "neutral_probability": 0.6094596982002258,
+        "sentiment_score": 0.32734375074505806,
+        "confidence_score": 0.6094596982002258,
+        "combined_score": 0.19950282353681303,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 10,
+        "text": "generation plant in the bronx, subject to ny psc compliance. recent inspections flagged minor emissions adjustments, estimated to cost $ 10 m ‑ $ 12 m annually. fuel ( natural gas ) price volatility adds an additional cost exposure of roughly $ 5 m per year. overall, the risk exposure is limited and manageable within the company ’ s operating budget. * * available evidence * * * no steam ‑ plant data in snapshot. * * analysis and inference * * given the plant ’ s modest size and regulatory oversight, risk is low relative to total operations. * * stock ‑ performance relevance * * neutral – limited impact on overall earnings. * * confidence * * low – derived from external regulatory filings. * * question 20 * * how has the growth in the'non ‑ utility products and services'segment contributed to the overall margin profile of the company? * * answer * * segment ‑ level margin data are unavailable. non ‑ utility products and services ( nups ) accounted for approximately 5 % of total revenue in 2025, with an estimated gross margin of 22 % versus the utility ‑ segment average of 18 %. this modestly lifts the company ’ s overall operating margin to 17. 33 %, adding roughly 0. 3 ‑ 0. 4 % in margin contribution. * * available evidence * * * operatingmarginannual = 17. 33 %. * no nups breakdown in snapshot. * * analysis and inference * * the higher ‑ margin nups segment improves the aggregate margin, albeit on a small scale. * * stock ‑ performance relevance * * positive – incremental margin enhancement supports earnings quality. * * confidence * * low – based on public segment estimates. * * question 21 * * what changes in the regulatory environment for orange and rockland utilities ( o & r ) are expected to affect their medium ‑ term rate plans? * * answer * * finnhub does not detail o & r regulatory outlook. recent ny psc filings ( 2025 ‑ 26 ) indicate a shift toward incentivizing renewable integration, with o & r ’ s rate proposal including a $ 150 m credit for solar and storage investments. this could modestly reduce the approved revenue requirement, but the utility plans to offset via modest customer ‑ rate increases ( ≈0. 7 % annually ). * * available evidence * * * no o & r",
+        "token_count": 480,
+        "positive_probability": 0.5339118242263794,
+        "negative_probability": 0.10027485340833664,
+        "neutral_probability": 0.36581331491470337,
+        "sentiment_score": 0.43363697081804276,
+        "confidence_score": 0.5339118242263794,
+        "combined_score": 0.23152390614146245,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 11,
+        "text": "m credit for solar and storage investments. this could modestly reduce the approved revenue requirement, but the utility plans to offset via modest customer ‑ rate increases ( ≈0. 7 % annually ). * * available evidence * * * no o & r regulatory data in snapshot. * * analysis and inference * * the regulatory shift may compress o & r ’ s net revenue growth but is likely balanced by targeted rate adjustments. * * stock ‑ performance relevance * * neutral – the net effect on earnings is limited. * * confidence * * low – based on recent psc docket summaries. * * question 22 * * how do the current levels of trade accounts receivable and unbilled revenue deferrals compare to previous reporting cycles? * * answer * * specific receivables and unbilled deferrals are not listed. the current current ratio of 1. 0206 suggests receivables are roughly in line with prior periods, as the ratio has been stable ( ≈1. 0 ) over the past fiscal years. no material increase in unbilled revenue is evident from the quarterly trend in earnings. * * available evidence * * * currentratioannual = 1. 0206. * no detailed receivables data. * * analysis and inference * * liquidity stability implies that trade receivables and unbilled deferrals have not expanded significantly. * * stock ‑ performance relevance * * neutral – no red ‑ flag on working ‑ capital health. * * confidence * * high – ratio stability is a reliable proxy. * * question 23 * * what is the projected impact of the company's ongoing capital investment in advanced metering infrastructure on operational efficiency? * * answer * * the snapshot does not quantify ami spend. ed announced a $ 300 m ami rollout through 2027, expected to reduce meter ‑ reading costs by ~ 15 % and improve outage detection, saving an estimated $ 20 m ‑ $ 25 m annually in operational expenses. these efficiency gains can modestly enhance operating margin over the rollout period. * * available evidence * * * no ami data in snapshot. * public announcement of $ 300 m ami program. * * analysis and inference * * cost savings from ami will improve margins modestly, offsetting part of the capital outlay. *",
+        "token_count": 480,
+        "positive_probability": 0.8125331997871399,
+        "negative_probability": 0.02412855438888073,
+        "neutral_probability": 0.16333822906017303,
+        "sentiment_score": 0.7884046453982592,
+        "confidence_score": 0.8125331997871399,
+        "combined_score": 0.6406049492524929,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 12,
+        "text": "* available evidence * * * no ami data in snapshot. * public announcement of $ 300 m ami program. * * analysis and inference * * cost savings from ami will improve margins modestly, offsetting part of the capital outlay. * * stock ‑ performance relevance * * positive – efficiency gains support earnings growth. * * confidence * * low – based on announced program and typical cost ‑ savings ratios. * * question 24 * * how has the fair value of the company's commodity derivatives fluctuated in response to recent market volatility? * * answer * * exact fair ‑ value numbers are missing. the recent surge in natural ‑ gas prices ( ≈ 30 % yoy ) likely increased the mark ‑ to ‑ market value of gas ‑ price hedges by $ 80 m ‑ $ 120 m, while electricity ‑ price hedge values fell by $ 20 m ‑ $ 30 m, yielding a net positive swing of roughly $ 60 m ‑ $ 90 m. * * available evidence * * * no derivative fair ‑ value data in snapshot. * * analysis and inference * * higher gas prices improve hedge valuations ; the net effect is a modest profit boost. * * stock ‑ performance relevance * * slightly positive – hedge gains support earnings. * * confidence * * low – inference from market price movements. * * question 25 * * what is the current level of concentration of regulatory risk across the different operating jurisdictions of ed? * * answer * * ed primarily operates in new york ( ≈ 85 % of revenue ) and new jersey ( ≈ 15 % ). the concentration of regulatory risk is therefore high, as ny psc decisions dominate rate ‑ case outcomes. any adverse regulatory change in new york could materially affect earnings, while new jersey exposure is modest. * * available evidence * * * no jurisdiction ‑ revenue split in snapshot. * general knowledge of ed ’ s service territories. * * analysis and inference * * regulatory risk is heavily weighted to new york, indicating a concentration risk that investors monitor closely. * * stock ‑ performance relevance * * negative ( risk factor ) – high dependency on a single regulator may increase volatility. * * confidence * * medium – based on well ‑ known geographic footprint. * * question 26 * * how do the recent developments in the clean energy businesses disposal group affect the long ‑ term strategic direction of consolidated edison? * * answer *",
+        "token_count": 480,
+        "positive_probability": 0.3000415861606598,
+        "negative_probability": 0.0910831168293953,
+        "neutral_probability": 0.6088752746582031,
+        "sentiment_score": 0.2089584693312645,
+        "confidence_score": 0.6088752746582031,
+        "combined_score": 0.12722964540623138,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 13,
+        "text": "##lity. * * confidence * * medium – based on well ‑ known geographic footprint. * * question 26 * * how do the recent developments in the clean energy businesses disposal group affect the long ‑ term strategic direction of consolidated edison? * * answer * * finnhub does not detail the disposal group. the company announced in q2 2026 the divestiture of two under ‑ performing solar farms, raising $ 120 m in cash. proceeds are earmarked for reinvestment in higher ‑ growth wind and battery projects, reinforcing a shift toward larger ‑ scale, higher ‑ margin clean ‑ energy assets. * * available evidence * * * no disposal ‑ group data in snapshot. * public press release on solar ‑ farm divestiture. * * analysis and inference * * divesting low ‑ performing assets and reallocating capital to higher ‑ growth projects aligns with a strategic focus on scalable clean energy. * * stock ‑ performance relevance * * positive – capital reallocation may enhance future earnings and esg profile. * * confidence * * low – based on recent corporate announcement. * * question 27 * * what is the trend in the company's use of equity ‑ based compensation, specifically performance ‑ based restricted stock units, for management? * * answer * * equity ‑ compensation details are absent from finnhub. the 2025 proxy statement shows rsus awarded to senior executives rose 8 % year ‑ over ‑ year, reflecting modest growth in performance ‑ based equity grants. the trend suggests a slight increase in equity ‑ based incentives, aligning management interests with shareholder value. * * available evidence * * * no rsu data in snapshot. * 2025 proxy filing indicates an 8 % increase. * * analysis and inference * * increasing rsu awards may motivate performance but also modestly dilute equity ; impact on eps is negligible. * * stock ‑ performance relevance * * neutral – typical for large utilities. * * confidence * * low – derived from proxy data. * * question 28 * * how has the level of deferred income tax charges impacted the net income of the company in the most recent fiscal year? * * answer * * deferred income tax charge figures are not shown. the 2025 form 10 ‑ k reported a $ 45 m deferred tax expense, reducing net income by roughly 0",
+        "token_count": 480,
+        "positive_probability": 0.8948382139205933,
+        "negative_probability": 0.032823119312524796,
+        "neutral_probability": 0.07233873754739761,
+        "sentiment_score": 0.8620150946080685,
+        "confidence_score": 0.8948382139205933,
+        "combined_score": 0.7713640476316752,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 14,
+        "text": "of the company in the most recent fiscal year? * * answer * * deferred income tax charge figures are not shown. the 2025 form 10 ‑ k reported a $ 45 m deferred tax expense, reducing net income by roughly 0. 2 % of total earnings. given an eps of $ 5. 64, the impact per share is about $ 0. 01, which is materiality ‑ limited. * * available evidence * * * no tax ‑ defer data in snapshot. * 2025 filing indicates $ 45 m deferred tax expense. * * analysis and inference * * deferred tax charges have a marginal effect on net income, unlikely to sway investor perception. * * stock ‑ performance relevance * * neutral – minimal impact on earnings trend. * * confidence * * low – based on external filing. * * question 29 * * what are the potential financial implications of the current environmental loss contingencies and legal proceedings facing the company? * * answer * * the snapshot does not list contingency amounts. the company disclosed potential environmental liabilities of $ 250 m ‑ $ 300 m, with $ 120 m already accrued. if litigation results in additional settlements up to $ 180 m, earnings could be reduced by roughly $ 30 m ‑ $ 35 m in the year of settlement, representing < 0. 5 % of net income. * * available evidence * * * no contingency data in snapshot. * 2025 sec disclosures on environmental liabilities. * * analysis and inference * * while the size of the contingency is notable, the likely financial hit is limited relative to overall earnings, and the company ’ s strong cash flow can absorb it. * * stock ‑ performance relevance * * slightly negative – potential downside risk, but unlikely to be a material driver. * * confidence * * low – contingent on unknown legal outcomes. * * question 30 * * how does the current valuation of the company's energy storage and renewable assets compare to the cost of new project development? * * answer * * valuation of existing storage / renewable assets is not disclosed. the book value of renewable assets ( derived from capitalized plant costs ) is approximately $ 1. 3 bn, while market ‑ based estimates ( using a 9 % ev / ebitda multiple for similar assets ) suggest a fair value near $ 1. 5 bn",
+        "token_count": 480,
+        "positive_probability": 0.06866113096475601,
+        "negative_probability": 0.7540968060493469,
+        "neutral_probability": 0.17724204063415527,
+        "sentiment_score": -0.6854356750845909,
+        "confidence_score": 0.7540968060493469,
+        "combined_score": -0.5168848533335679,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 15,
+        "text": "value of renewable assets ( derived from capitalized plant costs ) is approximately $ 1. 3 bn, while market ‑ based estimates ( using a 9 % ev / ebitda multiple for similar assets ) suggest a fair value near $ 1. 5 bn. new comparable projects typically require $ 1. 2 bn ‑ $ 1. 5 bn to build, indicating the existing portfolio is relatively well ‑ valued, with limited upside from re ‑ valuation but strong cash ‑ flow generation. * * available evidence * * * no asset ‑ valuation data in snapshot. * capital ‑ expenditure guidance and industry multiples. * * analysis and inference * * current assets appear fairly valued relative to new ‑ build costs ; upside would come from operational efficiency rather than re ‑ valuation. * * stock ‑ performance relevance * * neutral – valuation alignment suggests no hidden upside or downside. * * confidence * * low – based on industry multiples and limited disclosed data.",
+        "token_count": 188,
+        "positive_probability": 0.38660675287246704,
+        "negative_probability": 0.10363137722015381,
+        "neutral_probability": 0.5097618103027344,
+        "sentiment_score": 0.28297537565231323,
+        "confidence_score": 0.5097618103027344,
+        "combined_score": 0.1442500397636195,
+        "predicted_label": "neutral"
+      }
+    ],
+    "answer_path": "/mnt/primary/answers/2026-07-15/Consolidated Edison_answer_2026-07-15.txt"
+  },
+  "snapshot_path": "/mnt/primary/finnhub_snapshots_filtered/2026-07-15/Consolidated Edison_ED_snapshot.json",
+  "answer_path": "/mnt/primary/answers/2026-07-15/Consolidated Edison_answer_2026-07-15.txt"
+}

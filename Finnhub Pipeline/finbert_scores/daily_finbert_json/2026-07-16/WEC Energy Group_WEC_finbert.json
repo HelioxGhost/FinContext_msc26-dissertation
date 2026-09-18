@@ -1,0 +1,261 @@
+{
+  "date": "2026-07-16",
+  "ticker": "WEC",
+  "company_name": "WEC Energy Group",
+  "category": "Utilities",
+  "model": "ProsusAI/finbert",
+  "processor_version": "finbert_separate_news_answers_v2",
+  "processed_at_utc": "2026-08-18T15:50:28.500306+00:00",
+  "processing_reason": "score_missing",
+  "scoring_definition": {
+    "sentiment_score": "positive_probability - negative_probability",
+    "confidence_score": "maximum class probability",
+    "combined_score_per_source": "sentiment_score * confidence_score",
+    "source_fusion": "None. News and LLM-answer scores are stored separately."
+  },
+  "input_files": {
+    "snapshot": {
+      "path": "/mnt/primary/finnhub_snapshots_filtered/2026-07-16/WEC Energy Group_WEC_snapshot.json",
+      "exists": true,
+      "size_bytes": 65262,
+      "modified_at_utc": "2026-08-18T15:23:03.879029+00:00",
+      "sha256": "661066fa68e78c9d4d09130d35711de51b22cb1d69af71ccdbfdd8e0fa42423e"
+    },
+    "answer": {
+      "path": "/mnt/primary/answers/2026-07-16/WEC Energy Group_answer_2026-07-16.txt",
+      "exists": true,
+      "size_bytes": 31990,
+      "modified_at_utc": "2026-07-16T12:35:15.431051+00:00",
+      "sha256": "7eaa442e50479acd612e5663a81187231add3a0e648ea139e5d7e9e9e7976ec3"
+    }
+  },
+  "news_score": {
+    "source": "finnhub_news",
+    "positive_probability": 0.7959821820259094,
+    "negative_probability": 0.0376470610499382,
+    "neutral_probability": 0.16637074947357178,
+    "sentiment_score": 0.7583351209759712,
+    "confidence_score": 0.7959821820259094,
+    "combined_score": 0.6036212443013356,
+    "predicted_label": "positive",
+    "chunk_count": 1,
+    "token_count": 41,
+    "article_count": 1,
+    "articles": [
+      {
+        "news_index": 0,
+        "text": "What You Need To Know Ahead of WEC Energy Group’s Earnings Release. WEC Energy is expected to release its fiscal Q2 earnings this month, and analysts project a single-digit EPS growth.",
+        "headline": "What You Need To Know Ahead of WEC Energy Group’s Earnings Release",
+        "summary": "WEC Energy is expected to release its fiscal Q2 earnings this month, and analysts project a single-digit EPS growth.",
+        "source": "Yahoo",
+        "datetime_utc": "2026-07-14T06:31:47+00:00",
+        "url": "https://finnhub.io/api/news?id=4eff9910c1ec25f5208c1e49caa97c06f5211f644c013aaba5c3d3987a473d37",
+        "token_count": 41,
+        "positive_probability": 0.7959821820259094,
+        "negative_probability": 0.0376470610499382,
+        "neutral_probability": 0.16637074947357178,
+        "sentiment_score": 0.7583351209759712,
+        "confidence_score": 0.7959821820259094,
+        "combined_score": 0.6036212443013356,
+        "predicted_label": "positive"
+      }
+    ]
+  },
+  "answer_score": {
+    "source": "llm_answers",
+    "positive_probability": 0.3211508130790382,
+    "negative_probability": 0.395627903318234,
+    "neutral_probability": 0.2832212659960025,
+    "sentiment_score": -0.0744770902391958,
+    "confidence_score": 0.395627903318234,
+    "combined_score": -0.029465215056575945,
+    "predicted_label": "negative",
+    "chunk_count": 15,
+    "token_count": 6795,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "text": "company : wec energy group ticker : wec category : utilities analysis date : 2026 - 07 - 16 question file : / mnt / primary / questions / wec energy group. txt model : gpt - oss - 120b validation : warning - complete text not detected for question numbers : 13, 20 * * question 1 how has the growth in electricity utility revenues compared to natural gas utility revenues in the most recent fiscal period? * * answer finnhub does not break out electricity ‑ versus natural ‑ gas utility revenues for the latest quarter, so the exact growth rates cannot be calculated. however, the company ’ s overall revenue growth yoy ( 8. 34 % q / q yoy ) and a modest eps growth of 8. 03 % yoy suggest that utility ‑ segment earnings are expanding. historical filing patterns show electricity ‑ service revenue typically outpaces natural ‑ gas revenue because of larger customer bases and higher demand elasticity. given the recent eps beat and the modest dip in operating margin ( still strong at 23. 6 % annual ), it is plausible that electricity revenue grew at a slightly faster pace than natural ‑ gas revenue in the most recent period. available evidence * overall revenue growth = 8. 34 % yoy ( finnhub basic financials ). * eps growth = 8. 03 % yoy, eps beat in q1 2026. * no segment ‑ level data in snapshot. analysis and inference the lack of disclosed segment figures forces an inference : utilities typically generate the bulk of wec ’ s regulated revenue, and the recent earnings beat indicates that the higher ‑ margin electricity side likely contributed more to growth than the lower ‑ margin natural ‑ gas side. stock - performance relevance positive – faster electricity revenue growth would support earnings and cash flow, reinforcing dividend sustainability and could buoy the stock. confidence medium – based on typical segment mix and overall growth, but without direct data the conclusion is inferential. * * question 2 what is the current trend in wec energy group's non ‑ utility energy infrastructure segment revenue relative to its regulated utility segments? * * answer specific quarterly revenue for the non ‑ utility energy infrastructure segment is not disclosed in the finnhub snapshot, so a precise trend cannot be measured. nonetheless, the company ’ s recent strategic announcements ( see news on the upcoming q2 earnings release )",
+        "token_count": 480,
+        "positive_probability": 0.3103489577770233,
+        "negative_probability": 0.047602783888578415,
+        "neutral_probability": 0.6420482993125916,
+        "sentiment_score": 0.2627461738884449,
+        "confidence_score": 0.6420482993125916,
+        "combined_score": 0.1686957340959665,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 1,
+        "text": "specific quarterly revenue for the non ‑ utility energy infrastructure segment is not disclosed in the finnhub snapshot, so a precise trend cannot be measured. nonetheless, the company ’ s recent strategic announcements ( see news on the upcoming q2 earnings release ) highlight ongoing investments in renewable generation and transmission assets, indicating a push to expand the non ‑ utility side. the overall revenue growth of 8. 34 % yoy and a stable operating margin suggest the regulated utility portion still dominates, but the non ‑ utility segment is likely growing at a higher percentage rate given its smaller base. available evidence * overall revenue growth 8. 34 % yoy ( finnhub ). * recent earnings preview noting focus on renewables ( yahoo news, 2026 ‑ 07 ‑ 14 ). analysis and inference given the company ’ s stated strategic emphasis on renewable infrastructure and the typical pattern of a smaller but faster ‑ growing non ‑ utility segment, the trend is plausibly upward, narrowing the gap with regulated utilities. stock - performance relevance mixed to positive – higher non ‑ utility revenue diversification reduces reliance on regulated rates, but the segment ’ s scale remains modest. confidence medium – inference based on corporate strategy and overall growth, lacking hard segment numbers. * * question 3 how has the magnitude of wec energy group's capital expenditures for property, plant, and equipment changed compared to the prior year? * * answer the finnhub snapshot does not list the current pp & e capital ‑ expenditure amount, nor does the prior ‑ year figure appear. however, the company ’ s recent capital ‑ intensive projects ( renewable generation, transmission upgrades ) and a modest decline in cash ‑ flow ‑ per ‑ share ( −0. 7 % yoy ) hint that capex may have risen modestly year ‑ over ‑ year, consuming cash. the stable ppe base in the historical balance sheet ( tangible book value growing from $ 11. 73 bn in 2023 to $ 12. 19 bn in 2024 ) also suggests ongoing investment. available evidence * tangible book value : $ 11. 73 bn ( 2023 ‑ 12 ‑ 31 ) → $ 12. 19 bn ( 2024 ‑ 03 ‑ 31 ) ( finnhub ). * cash ‑ flow ‑ per ‑ share annual down 0. 7 % yoy ( finnhub ). analysis and inference incremental increases in tangible assets coupled with tighter cash flow",
+        "token_count": 480,
+        "positive_probability": 0.1153808981180191,
+        "negative_probability": 0.8595706224441528,
+        "neutral_probability": 0.025048483163118362,
+        "sentiment_score": -0.7441897243261337,
+        "confidence_score": 0.8595706224441528,
+        "combined_score": -0.6396836245555573,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 2,
+        "text": "2024 ‑ 03 ‑ 31 ) ( finnhub ). * cash ‑ flow ‑ per ‑ share annual down 0. 7 % yoy ( finnhub ). analysis and inference incremental increases in tangible assets coupled with tighter cash flow imply higher capex relative to the prior year. stock - performance relevance neutral to slightly negative – higher capex can pressure free cash flow in the short term but supports long ‑ term growth. confidence medium – based on asset base trends and cash ‑ flow indicators. * * question 4 to what extent have changes in energy costs, specifically regarding natural gas and fuel supply, impacted wec energy group's operating margins? * * answer direct data on natural ‑ gas price exposure is not provided. the operating margin remains strong at 23. 61 % annual, only a slight change from prior periods ( historical operating margin ≈ 22 ‑ 24 % ). the recent eps beat despite volatile gas markets suggests effective hedging or pass ‑ through of fuel costs to ratepayers. the modest dip in daily share price ( - 1. 81 % ) and earnings surprise ( + 6. 7 % eps ) imply that any cost pressure has not materially eroded margins. available evidence * operating margin annual = 23. 61 % ( finnhub ). * eps beat q1 2026 ( + 6. 74 % vs. estimate ). * no specific fuel ‑ cost data. analysis and inference given regulated rate structures and the company ’ s use of derivative contracts ( see later questions ), the impact of higher natural ‑ gas costs on margins appears limited at present. stock - performance relevance positive – stable margins despite fuel price volatility reinforce earnings reliability. confidence medium – inference from stable margin and earnings performance ; precise cost impact unknown. * * question 5 how do the current regulatory asset balances at wec energy group compare to the prior year, and what does this indicate about pending rate case recoveries? * * answer regulatory asset balances are not disclosed in the current finnhub data, so a numeric comparison cannot be made. nonetheless, a steady or growing regulatory asset balance would indicate that the company is accumulating costs to be recovered in future rate cases. the recent earnings beat and stable operating margin suggest that the company likely has a healthy pipeline of recoverable expenses, reinforced by ongoing transmission and renewable projects that typically generate regulatory assets. available",
+        "token_count": 480,
+        "positive_probability": 0.09115824848413467,
+        "negative_probability": 0.77684485912323,
+        "neutral_probability": 0.13199684023857117,
+        "sentiment_score": -0.6856866106390953,
+        "confidence_score": 0.77684485912323,
+        "combined_score": -0.532672118444613,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 3,
+        "text": "company is accumulating costs to be recovered in future rate cases. the recent earnings beat and stable operating margin suggest that the company likely has a healthy pipeline of recoverable expenses, reinforced by ongoing transmission and renewable projects that typically generate regulatory assets. available evidence * no regulatory asset figure in snapshot. * ongoing capital projects ( news ). analysis and inference given the company ’ s capital ‑ intensive growth agenda, it is reasonable to infer that regulatory asset balances have risen modestly, signaling future rate ‑ case recoveries. stock - performance relevance positive – higher regulatory assets improve future cash ‑ flow prospects. confidence low – no direct data ; inference based on typical utility practices. * * question 6 what is the direction of change in wec energy group's uncollectible expense trends relative to its total retail customer base? * * answer the snapshot does not contain specific uncollectible expense or retail ‑ customer ‑ count figures. however, the company ’ s current ratio ( 0. 59 annual ) and quick ratio ( 0. 40 annual ) are relatively low, reflecting modest liquidity but not necessarily credit ‑ risk trends. the stable operating margin and earnings beat imply that credit losses have not escalated dramatically. available evidence * current ratio = 0. 5872 ; quick ratio = 0. 3951 ( annual ). * no uncollectible expense data. analysis and inference absent explicit data, we infer that uncollectible expenses are likely flat or modestly increasing in line with modest growth in the retail base, but not at a rate that threatens profitability. stock - performance relevance neutral – no clear signal of deteriorating credit quality. confidence low – lack of direct metrics forces a broad inference. * * question 7 how has the company's debt ‑ to ‑ equity ratio evolved in response to recent long ‑ term debt issuances and capital allocation decisions? * * answer the snapshot does not provide a current debt ‑ to ‑ equity ratio. the historic long ‑ term ‑ debt ‑ to ‑ equity ( 1992 ) was 0. 7369, but recent capital ‑ structure data are missing. the market ‑ capitalization decreased slightly ( −0. 71 % yoy ) and cash ‑ flow ‑ per ‑ share fell modestly, hinting that total debt may have risen modestly to fund capex, potentially nudging the debt ‑ to ‑",
+        "token_count": 480,
+        "positive_probability": 0.04261399060487747,
+        "negative_probability": 0.9149349927902222,
+        "neutral_probability": 0.04245094954967499,
+        "sentiment_score": -0.8723210021853447,
+        "confidence_score": 0.9149349927902222,
+        "combined_score": -0.7981170098452077,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 4,
+        "text": "‑ capitalization decreased slightly ( −0. 71 % yoy ) and cash ‑ flow ‑ per ‑ share fell modestly, hinting that total debt may have risen modestly to fund capex, potentially nudging the debt ‑ to ‑ equity upward. available evidence * market cap down 0. 71 % yoy ( comparison ). * cash ‑ flow ‑ per ‑ share down 0. 7 % yoy. * no current debt ‑ to ‑ equity figure. analysis and inference given ongoing investment and modest cash ‑ flow pressure, the debt ‑ to ‑ equity ratio likely increased slightly relative to the prior year, but remains within typical utility ranges ( < 1. 0 ). stock - performance relevance mixed – higher leverage can raise returns on equity but may increase financial risk. confidence medium – inference based on cash ‑ flow trends and capital ‑ investment intensity. * * question 8 what is the current level of wec energy group's liquidity as measured by its revolving credit facility availability and commercial paper usage? * * answer specific revolving ‑ credit availability and commercial ‑ paper balances are not disclosed in the snapshot. the company ’ s current ratio ( 0. 59 ) and quick ratio ( 0. 40 ) are low, indicating limited short ‑ term liquidity relative to current liabilities. this suggests that the revolving credit facility may be near its limit or that the firm relies on cash ‑ flow generation rather than short ‑ term borrowing. available evidence * current ratio = 0. 5872 ; quick ratio = 0. 3951 ( annual ). analysis and inference low short ‑ term liquidity ratios imply that the company ’ s liquid resources ( including credit facilities ) are modest, possibly constrained by capital ‑ expenditure needs. stock - performance relevance negative to neutral – tighter liquidity could heighten funding risk if cash ‑ flow weakens. confidence low – no direct data on credit lines ; inference from ratios. * * question 9 how does the current rate of return on wec energy group's renewable generation facilities compare to its historical averages? * * answer the snapshot does not provide a specific return ‑ on ‑ renewables metric. historically, wec ’ s overall roe is around 11 ‑ 12 % and roi ≈ 4. 33 % annual, indicating solid returns on invested capital. renewable assets generally carry higher expected returns due to tax credits and lower operating costs, so it is reasonable to",
+        "token_count": 480,
+        "positive_probability": 0.03405989706516266,
+        "negative_probability": 0.9242000579833984,
+        "neutral_probability": 0.04174002259969711,
+        "sentiment_score": -0.8901401609182358,
+        "confidence_score": 0.9242000579833984,
+        "combined_score": -0.8226675883339851,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 5,
+        "text": ", wec ’ s overall roe is around 11 ‑ 12 % and roi ≈ 4. 33 % annual, indicating solid returns on invested capital. renewable assets generally carry higher expected returns due to tax credits and lower operating costs, so it is reasonable to assume the current renewable return is at least in line with, or modestly above, the historical overall roi. available evidence * roe = 11. 42 % ( annual ). * roi = 4. 33 % ( annual ). * no renewable ‑ specific return data. analysis and inference given the company ’ s investment in renewables and the favorable policy environment, the renewable ‑ asset return likely matches or exceeds the overall roi. stock - performance relevance positive – higher renewable returns improve long ‑ term earnings quality. confidence medium – inference from overall returns and strategic focus. * * question 10 what is the trend in wec energy group's asset retirement obligation ( aro ) costs, and how might they impact long ‑ term cash flows? * * answer aro costs are not listed in the finnhub data. utilities typically see aro expenses rise as aging infrastructure is retired. wec ’ s ongoing capital projects ( new generation, transmission ) suggest that while aro may increase for older fossil assets, newer clean ‑ energy assets have lower retirement burdens. consequently, aro cost growth is likely modest, with limited impact on long ‑ term cash flow, especially given strong operating margins. available evidence * no aro data. * ongoing renewable and transmission investments. analysis and inference aro costs probably rise gradually with older asset phase ‑ out but are offset by lower ‑ cost renewable retirements, limiting cash ‑ flow drag. stock - performance relevance neutral – modest aro growth unlikely to materially affect cash flow. confidence low – lack of explicit numbers ; inference based on industry patterns. * * question 11 how have recent changes in interest rates affected the valuation of wec energy group's long ‑ term debt and convertible notes? * * answer interest ‑ rate data is not directly reflected in the snapshot. however, the u. s. federal reserve has been raising rates throughout 2024 ‑ 2026, which generally lowers the market value of existing fixed ‑ rate debt. consequently, the fair value of wec ’ s long ‑ term debt likely declined, increasing its effective yield and potentially raising debt ‑ service costs if refinancing is needed",
+        "token_count": 480,
+        "positive_probability": 0.33080464601516724,
+        "negative_probability": 0.3416137993335724,
+        "neutral_probability": 0.32758161425590515,
+        "sentiment_score": -0.010809153318405151,
+        "confidence_score": 0.3416137993335724,
+        "combined_score": -0.0036925559326794755,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 6,
+        "text": "##6, which generally lowers the market value of existing fixed ‑ rate debt. consequently, the fair value of wec ’ s long ‑ term debt likely declined, increasing its effective yield and potentially raising debt ‑ service costs if refinancing is needed. convertible notes, if any, would also be priced lower due to higher discount rates. available evidence * no specific debt valuation data. * general market environment ( higher rates in 2026 ). analysis and inference higher rates reduce debt market values, modestly increasing wec ’ s weighted ‑ average cost of capital. stock - performance relevance negative – higher financing costs could pressure earnings, but the impact is buffered by regulated cash flows. confidence medium – inference based on macro interest ‑ rate trends. * * question 12 to what degree is wec energy group's revenue increasingly driven by the non ‑ utility energy infrastructure segment versus traditional regulated utilities? * * answer exact segment revenue shares are unavailable. the company ’ s overall revenue grew 8. 34 % yoy, and recent strategic commentary emphasizes expansion of non ‑ utility assets ( renewables, transmission ). historically, regulated utility revenue has comprised > 80 % of total. assuming a modest shift, the non ‑ utility share may have risen from ~ 15 % to ~ 18 % of total revenue, indicating a gradual but still secondary contribution. available evidence * overall revenue growth 8. 34 % yoy. * news highlighting renewable and transmission investments. analysis and inference the non ‑ utility segment is growing faster than the regulated base, but its absolute contribution remains limited. stock - performance relevance mixed – diversification is positive, yet the bulk of earnings still depends on regulated rates. confidence medium – based on typical segment mixes and growth narrative. * * question 13 what is the impact of current natural ‑ gas commodity price volatility on wec energy group's derivative instrument fair ‑ value measurements? * * answer finnhub does not provide fair ‑ value data for commodity derivatives. utilities commonly hedge natural ‑ gas exposure, and recent price spikes would increase the fair value of long ‑ position hedges ( protecting against cost rises ) while decreasing the value of short ‑ position hedges. given the earnings beat and stable operating margin, it is likely that wec ’ s hedging program mitigated most price impacts, resulting in a modest net gain or limited loss on derivative fair value. available evidence * no derivative fair",
+        "token_count": 480,
+        "positive_probability": 0.22259697318077087,
+        "negative_probability": 0.6193041205406189,
+        "neutral_probability": 0.15809890627861023,
+        "sentiment_score": -0.396707147359848,
+        "confidence_score": 0.6193041205406189,
+        "combined_score": -0.24568237100786838,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 7,
+        "text": "hedges. given the earnings beat and stable operating margin, it is likely that wec ’ s hedging program mitigated most price impacts, resulting in a modest net gain or limited loss on derivative fair value. available evidence * no derivative fair ‑ value figures. * stable operating margin despite volatile gas markets. analysis and inference effective hedging likely neutralized the bulk of price volatility, with derivative fair ‑ value changes having limited earnings impact. stock - performance relevance positive – hedging reduces earnings volatility, supporting investor confidence. confidence medium – inference from margin stability and common utility hedging practices. * * question 14 how has the total number of retail customers in the wisconsin segment changed in the most recent reporting period? * * answer the snapshot lacks retail ‑ customer counts. historically, wec ’ s wisconsin operations have shown modest organic growth ( ~ 1 ‑ 2 % annually ). assuming a similar trend, the customer base probably increased slightly, consistent with the overall revenue growth of 8. 34 % yoy, which reflects both rate ‑ based growth and modest customer additions. available evidence * no direct customer ‑ count data. * revenue growth figures. analysis and inference small positive change in wisconsin retail customers, likely reflecting modest demand growth. stock - performance relevance neutral – incremental customer growth modestly supports revenue but is not a major driver. confidence low – no concrete data ; inference based on typical utility growth patterns. * * question 15 what is the current ratio of wec energy group's regulated operating income to its unregulated operating income? * * answer segment ‑ level operating income figures are not disclosed. historically, regulated operating income forms the majority ( > 80 % ) of total operating income for wec. given the ongoing emphasis on non ‑ utility expansion, the proportion of unregulated income may be creeping upward, perhaps moving from 20 % to ~ 22 % of total. thus the ratio of regulated to unregulated operating income likely remains around 4 : 1. available evidence * no segment operating income data. * overall operating margin stable. analysis and inference regulated income still dominates ; the ratio is roughly 4 : 1, with a slight trend toward more unregulated contribution. stock - performance relevance mixed – dominant regulated income ensures stability, while unregulated growth adds upside potential. confidence medium – inference based on historical segment",
+        "token_count": 480,
+        "positive_probability": 0.32064545154571533,
+        "negative_probability": 0.042578428983688354,
+        "neutral_probability": 0.6367760896682739,
+        "sentiment_score": 0.278067022562027,
+        "confidence_score": 0.6367760896682739,
+        "combined_score": 0.17706643129274724,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 8,
+        "text": "the ratio is roughly 4 : 1, with a slight trend toward more unregulated contribution. stock - performance relevance mixed – dominant regulated income ensures stability, while unregulated growth adds upside potential. confidence medium – inference based on historical segment mix. * * question 16 how have recent decisions by the public service commission of wisconsin affected wec energy group's projected revenue requirements? * * answer no specific psc decision details appear in the snapshot or news feed. generally, rate cases in wisconsin have approved modest revenue increases to fund infrastructure upgrades. if recent decisions followed this pattern, projected revenue requirements likely rose modestly ( ≈ 1 ‑ 2 % yoy ) to support capital projects, aligning with the company ’ s overall revenue growth. available evidence * no psc decision data. * revenue growth 8. 34 % yoy. analysis and inference psc approvals probably added a small upward adjustment to revenue requirements, consistent with capital ‑ investment needs. stock - performance relevance positive – approved revenue increases support cash ‑ flow and dividend coverage. confidence low – absence of explicit decision data ; inference from typical regulatory outcomes. * * question 17 what is the trajectory of wec energy group's pension and post ‑ retirement benefit plan costs relative to its total operating expenses? * * answer pension and post ‑ retirement cost data are not shown. utilities often see these costs amount to 4 ‑ 6 % of operating expenses. given stable operating margins ( 23. 6 % annual ) and no reported spikes, it is reasonable to assume costs are flat or rising modestly in line with wage inflation, keeping the expense ratio roughly constant. available evidence * operating margin stable. * no specific pension expense data. analysis and inference pension costs likely remain a stable component of operating expenses, with no material deviation. stock - performance relevance neutral – predictable pension costs support earnings visibility. confidence low – lack of precise figures. * * question 18 how does the current level of wec energy group's deferred income tax charges compare to historical levels, and what are the primary drivers? * * answer deferred income tax figures are absent. historically, utilities experience modest deferred tax balances reflecting timing differences between book and tax depreciation. the recent earnings beat and stable margins suggest no large tax ‑ rate changes ; thus deferred tax charges are probably comparable to past years, primarily driven by",
+        "token_count": 480,
+        "positive_probability": 0.18004392087459564,
+        "negative_probability": 0.08544474095106125,
+        "neutral_probability": 0.7345112562179565,
+        "sentiment_score": 0.0945991799235344,
+        "confidence_score": 0.7345112562179565,
+        "combined_score": 0.06948416248282374,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 9,
+        "text": "experience modest deferred tax balances reflecting timing differences between book and tax depreciation. the recent earnings beat and stable margins suggest no large tax ‑ rate changes ; thus deferred tax charges are probably comparable to past years, primarily driven by depreciation timing and regulatory asset amortization. available evidence * no deferred tax data. * stable earnings and margin. analysis and inference deferred tax charges likely unchanged, driven by standard depreciation and regulatory asset timing. stock - performance relevance neutral – no material tax ‑ impact shift. confidence low – inference only. * * question 19 what is the impact of recent renewable energy infrastructure investments on wec energy group's overall generation mix and cost structure? * * answer specific mix percentages are unavailable, but wec ’ s recent capital projects in wind and solar ( highlighted in earnings preview ) indicate an expanding renewable share. renewables typically lower marginal generation cost and provide tax credits, improving overall cost structure. the continued strong operating margin ( 23. 6 % ) despite higher capex suggests that the incremental renewable capacity is already contributing to a more efficient mix, reducing reliance on higher ‑ cost fossil fuel generation. available evidence * news emphasizing renewable investments. * operating margin steady. analysis and inference renewable additions are shifting the generation mix toward cleaner, lower ‑ cost assets, enhancing margins over the longer term. stock - performance relevance positive – lower generation costs and esg positioning can boost earnings and attract capital. confidence medium – based on strategic announcements and margin stability. * * question 20 how has the volume of wec energy group's energy ‑ efficiency programs changed, and what effect does this have on projected demand? * * answer program volume data is not disclosed. utilities typically expand efficiency programs to curtail demand growth. assuming wec follows this trend, program participation likely grew modestly, tempering demand growth and supporting the modest revenue increase ( 8. 34 % yoy ) despite potential load ‑ growth headwinds. available evidence * no program volume data. * revenue growth figure. analysis and inference increased efficiency initiatives likely offset a portion of load growth, contributing to stable demand forecasts. stock - performance relevance mixed – demand moderation can limit revenue but reduces cost of capacity expansion. confidence low – no direct evidence. * * question 21 what is the current level of customer concentration risk within wec energy group '",
+        "token_count": 480,
+        "positive_probability": 0.7585686445236206,
+        "negative_probability": 0.02210712805390358,
+        "neutral_probability": 0.21932420134544373,
+        "sentiment_score": 0.736461516469717,
+        "confidence_score": 0.7585686445236206,
+        "combined_score": 0.5586566142922433,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 10,
+        "text": "stable demand forecasts. stock - performance relevance mixed – demand moderation can limit revenue but reduces cost of capacity expansion. confidence low – no direct evidence. * * question 21 what is the current level of customer concentration risk within wec energy group's wholesale operations segment? * * answer the snapshot does not show wholesale revenue or customer breakdown. historically, wec ’ s wholesale activities are a small fraction ( < 10 % ) of total revenue, limiting concentration risk. given the continued focus on regulated retail utilities, wholesale exposure remains limited, and no new large contracts have been announced. available evidence * no wholesale segment data. analysis and inference customer concentration risk in wholesale is low, as the segment is minor and diversified. stock - performance relevance neutral – limited impact on overall risk profile. confidence medium – based on historical segment size. * * question 22 how has wec energy group's dividend payout capability changed in relation to its free cash flow from operations? * * answer dividend per share annual = $ 3. 5693 ; payout ratio = 73. 64 % ( annual ). free cash flow per share ( fcf ) is negative ( ‑ $ 3. 13 per share annual ). despite negative fcf, the company maintains a high dividend payout, suggesting reliance on cash ‑ flow from financing activities ( debt issuance ) or cash reserves. the slight decline in cash ‑ flow ‑ per ‑ share ( ‑ 0. 7 % yoy ) may pressure payout capacity if sustained, but the current high payout ratio indicates that the dividend remains well ‑ covered by net income rather than free cash flow. available evidence * dividend per share = $ 3. 5693 ; payout ratio = 73. 64 % ( finnhub ). * cash ‑ flow per share = ‑ $ 3. 13 ( annual ). analysis and inference dividend coverage is leaning on earnings rather than free cash flow, and a modest deterioration in cash ‑ flow may constrain future raises. stock - performance relevance mixed – reliable dividend supports income investors, but negative fcf raises sustainability concerns. confidence medium – based on disclosed dividend and cash ‑ flow metrics. * * question 23 to what extent are wec energy group's electric transmission segment revenues growing compared to its utility energy operations? * * answer segment revenue figures are absent. however,",
+        "token_count": 480,
+        "positive_probability": 0.04724499210715294,
+        "negative_probability": 0.8324588537216187,
+        "neutral_probability": 0.1202961727976799,
+        "sentiment_score": -0.7852138616144657,
+        "confidence_score": 0.8324588537216187,
+        "combined_score": -0.6536582311659038,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 11,
+        "text": "– based on disclosed dividend and cash ‑ flow metrics. * * question 23 to what extent are wec energy group's electric transmission segment revenues growing compared to its utility energy operations? * * answer segment revenue figures are absent. however, the company ’ s strategic focus on transmission upgrades ( see news ) suggests transmission revenue is growing faster than the larger utility segment, albeit from a smaller base. if transmission revenue previously represented ≈ 5 % of total, a 10 ‑ 15 % annual growth could raise its share modestly, while utility revenue likely grew in line with overall revenue ( ≈ 8 % ). available evidence * no segment revenue data. * news on transmission investments. analysis and inference transmission revenue likely outpaces utility revenue in growth rate, contributing modestly to total revenue expansion. stock - performance relevance positive – higher ‑ margin transmission can boost earnings diversification. confidence low – inference from strategic activity, lacking numbers. * * question 24 how do recent environmental compliance and restoration costs compare to the company's historical budget for such items? * * answer environmental cost details are not provided. utilities typically allocate a few percentage points of operating expenses to compliance. the stable operating margin ( 23. 6 % ) suggests that recent compliance costs have not surged. assuming no major regulatory penalties, recent costs are likely in line with historical budgets. available evidence * no specific cost data. * operating margin stable. analysis and inference compliance costs are probably consistent with past budgets, with no material variance. stock - performance relevance neutral – cost stability supports predictable earnings. confidence low – lack of explicit figures. * * question 25 what is the current maturity profile of wec energy group's senior notes, and how much debt is due within the next 24 months? * * answer the snapshot does not list debt maturities. historically, wec ’ s senior notes are staggered over 5 ‑ 15 years. given recent capital ‑ raising activity to fund renewables, some notes may be due in 2027 ‑ 2028. it is reasonable to estimate that less than 15 % of total senior debt matures within the next two years, keeping refinancing risk manageable. available evidence * no maturity schedule. analysis and inference maturity profile likely well ‑ distributed, with limited near ‑ term refinancing pressure. stock - performance relevance neutral – manageable debt schedule supports financial stability. confidence low –",
+        "token_count": 480,
+        "positive_probability": 0.364957332611084,
+        "negative_probability": 0.029114974662661552,
+        "neutral_probability": 0.6059276461601257,
+        "sentiment_score": 0.33584235794842243,
+        "confidence_score": 0.6059276461601257,
+        "combined_score": 0.203496169432554,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 12,
+        "text": "##ing risk manageable. available evidence * no maturity schedule. analysis and inference maturity profile likely well ‑ distributed, with limited near ‑ term refinancing pressure. stock - performance relevance neutral – manageable debt schedule supports financial stability. confidence low – no concrete data. * * question 26 how has the fair value of wec energy group's commodity contracts for natural gas changed in the most recent quarter? * * answer fair ‑ value figures for natural ‑ gas contracts are not disclosed. given higher natural ‑ gas spot prices in 2026, long ‑ hedge contracts would increase in value, while short ‑ hedges would decline. the stable operating margin implies net hedge gains, so the aggregate fair value of natural ‑ gas positions likely rose modestly. available evidence * no fair ‑ value data. * operating margin stable despite gas price volatility. analysis and inference net increase in fair value of hedges, contributing positively to earnings. stock - performance relevance positive – hedge gains reduce cost pressure. confidence medium – based on margin stability and typical hedge behavior. * * question 27 what is the trend in wec energy group's software and software development costs as it invests in utility digitalization? * * answer software expense details are absent. the company ’ s recent focus on digital transformation ( common across utilities ) suggests incremental growth in software spending. given overall expense ratios have remained stable, software costs are likely a small but growing portion of sg & a, perhaps increasing 5 ‑ 10 % yoy. available evidence * no specific sg & a breakdown. analysis and inference gradual increase in software costs aligns with industry digitalization trends. stock - performance relevance mixed – higher expense now, but potential efficiency gains later. confidence low – inference based on industry trends. * * question 28 how have changes in the regulatory environment in illinois specifically impacted the performance of the peoples gas light and coke company? * * answer the snapshot does not isolate illinois ‑ specific regulatory outcomes. illinois has recently approved modest rate increases for natural ‑ gas service, which would support peoples gas ’ s revenue and margin. absent any adverse rulings, the regulatory environment likely had a neutral ‑ to ‑ positive effect on the subsidiary ’ s performance, consistent with overall company earnings beat. available evidence * no illinois ‑ specific data. * overall eps beat. analysis and inference regulatory approvals for rate adjustments probably helped maintain or modestly improve profit",
+        "token_count": 480,
+        "positive_probability": 0.7514371871948242,
+        "negative_probability": 0.08535224199295044,
+        "neutral_probability": 0.16321058571338654,
+        "sentiment_score": 0.6660849452018738,
+        "confidence_score": 0.7514371871948242,
+        "combined_score": 0.5005209976553147,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 13,
+        "text": "‑ to ‑ positive effect on the subsidiary ’ s performance, consistent with overall company earnings beat. available evidence * no illinois ‑ specific data. * overall eps beat. analysis and inference regulatory approvals for rate adjustments probably helped maintain or modestly improve profitability for peoples gas. stock - performance relevance positive – favorable regulation supports earnings of the illinois segment. confidence low – no direct regulatory outcome data. * * question 29 what is the magnitude of change in wec energy group's property, plant, and equipment net value attributable to new infrastructure additions versus depreciation? * * answer exact pp & e net ‑ value change is not disclosed. tangible book value rose from $ 11. 73 bn ( 2023 ‑ 12 ‑ 31 ) to $ 12. 19 bn ( 2024 ‑ 03 ‑ 31 ), a ≈ 4 % increase over a quarter, suggesting that new infrastructure additions outpace depreciation. assuming a similar pace annually, net pp & e likely increased by 5 ‑ 7 % yoy, driven primarily by capital projects. available evidence * tangible book value : $ 11. 73 bn → $ 12. 19 bn ( quarterly ). analysis and inference infrastructure additions exceed depreciation, expanding the asset base. stock - performance relevance positive – growing asset base underpins future revenue and earnings. confidence medium – based on observed quarterly asset growth. * * question 30 how does wec energy group's current valuation, relative to its earnings per share, compare to its historical sector benchmarks? * * answer current pe = 24. 13 ( annual ) and pe = 22. 94 ( ttm excl. extra ) vs. historical sector average pe for u. s. utilities ( roughly 18 ‑ 20 ). this indicates wec trades at a premium, reflecting its growth narrative, strong dividend yield ( 3. 27 % ), and renewable ‑ focused strategy. the slightly higher valuation suggests investors price in higher growth potential relative to traditional utilities. available evidence * pe annual = 24. 1255 ; pe basic excl extra = 22. 9449 ( finnhub ). * sector pe average ≈ 18 ‑ 20 ( stable ‑ utility benchmark ). analysis and inference wec ’ s premium valuation signals market confidence in its growth and dividend profile, but also introduces valuation risk if growth stalls. stock - performance relevance mixed – premium valuation can amplify",
+        "token_count": 480,
+        "positive_probability": 0.9305744767189026,
+        "negative_probability": 0.01198230404406786,
+        "neutral_probability": 0.05744316801428795,
+        "sentiment_score": 0.9185921726748347,
+        "confidence_score": 0.9305744767189026,
+        "combined_score": 0.8548184304049642,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 14,
+        "text": "20 ( stable ‑ utility benchmark ). analysis and inference wec ’ s premium valuation signals market confidence in its growth and dividend profile, but also introduces valuation risk if growth stalls. stock - performance relevance mixed – premium valuation can amplify upside but also downside if expectations aren ’ t met. confidence medium – based on current pe vs. typical sector ranges.",
+        "token_count": 75,
+        "positive_probability": 0.2934757173061371,
+        "negative_probability": 0.04798462614417076,
+        "neutral_probability": 0.6585395932197571,
+        "sentiment_score": 0.24549109116196632,
+        "confidence_score": 0.6585395932197571,
+        "combined_score": 0.1616656033128756,
+        "predicted_label": "neutral"
+      }
+    ],
+    "answer_path": "/mnt/primary/answers/2026-07-16/WEC Energy Group_answer_2026-07-16.txt"
+  },
+  "snapshot_path": "/mnt/primary/finnhub_snapshots_filtered/2026-07-16/WEC Energy Group_WEC_snapshot.json",
+  "answer_path": "/mnt/primary/answers/2026-07-16/WEC Energy Group_answer_2026-07-16.txt"
+}

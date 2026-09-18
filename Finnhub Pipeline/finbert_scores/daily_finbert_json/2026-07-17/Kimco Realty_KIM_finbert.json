@@ -1,0 +1,273 @@
+{
+  "date": "2026-07-17",
+  "ticker": "KIM",
+  "company_name": "Kimco Realty",
+  "category": "Real Estate",
+  "model": "ProsusAI/finbert",
+  "processor_version": "finbert_separate_news_answers_v2",
+  "processed_at_utc": "2026-08-18T15:52:58.508458+00:00",
+  "processing_reason": "score_missing",
+  "scoring_definition": {
+    "sentiment_score": "positive_probability - negative_probability",
+    "confidence_score": "maximum class probability",
+    "combined_score_per_source": "sentiment_score * confidence_score",
+    "source_fusion": "None. News and LLM-answer scores are stored separately."
+  },
+  "input_files": {
+    "snapshot": {
+      "path": "/mnt/primary/finnhub_snapshots_filtered/2026-07-17/Kimco Realty_KIM_snapshot.json",
+      "exists": true,
+      "size_bytes": 64510,
+      "modified_at_utc": "2026-08-18T15:23:05.998086+00:00",
+      "sha256": "ef45d2880f6fbc092dea4e491d7df2ba872f6ec11b908b43be321d65f0a5a2e3"
+    },
+    "answer": {
+      "path": "/mnt/primary/answers/2026-07-17/Kimco Realty_answer_2026-07-17.txt",
+      "exists": true,
+      "size_bytes": 30779,
+      "modified_at_utc": "2026-07-17T12:22:16.020500+00:00",
+      "sha256": "f0466f4b29a4409685c9995e4a89ad229867e82dd1f02a841cff22bd3ce14e47"
+    }
+  },
+  "news_score": {
+    "source": "finnhub_news",
+    "positive_probability": 0.9452641010284424,
+    "negative_probability": 0.022693684324622154,
+    "neutral_probability": 0.0320422537624836,
+    "sentiment_score": 0.9225704167038202,
+    "confidence_score": 0.9452641010284424,
+    "combined_score": 0.8720726955809721,
+    "predicted_label": "positive",
+    "chunk_count": 1,
+    "token_count": 47,
+    "article_count": 1,
+    "articles": [
+      {
+        "news_index": 0,
+        "text": "Kimco Realty’s Quarterly Earnings Preview: What You Need to Know. Kimco Realty is scheduled to report its second-quarter results next month, with Wall Street analysts expecting a single-digit increase in earnings per share.",
+        "headline": "Kimco Realty’s Quarterly Earnings Preview: What You Need to Know",
+        "summary": "Kimco Realty is scheduled to report its second-quarter results next month, with Wall Street analysts expecting a single-digit increase in earnings per share.",
+        "source": "Yahoo",
+        "datetime_utc": "2026-07-15T09:36:56+00:00",
+        "url": "https://finnhub.io/api/news?id=4aa17f784a37f8f54c708d68475c75ab0c26c40028de0d93313dd1f059696095",
+        "token_count": 47,
+        "positive_probability": 0.9452641010284424,
+        "negative_probability": 0.022693684324622154,
+        "neutral_probability": 0.0320422537624836,
+        "sentiment_score": 0.9225704167038202,
+        "confidence_score": 0.9452641010284424,
+        "combined_score": 0.8720726955809721,
+        "predicted_label": "positive"
+      }
+    ]
+  },
+  "answer_score": {
+    "source": "llm_answers",
+    "positive_probability": 0.23163881151687513,
+    "negative_probability": 0.10847771417485363,
+    "neutral_probability": 0.659883478269713,
+    "sentiment_score": 0.12316109734202149,
+    "confidence_score": 0.659883478269713,
+    "combined_score": 0.08127197330156785,
+    "predicted_label": "neutral",
+    "chunk_count": 16,
+    "token_count": 7572,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "text": "company : kimco realty ticker : kim category : real estate analysis date : 2026 - 07 - 17 question file : / mnt / primary / questions / kimco realty. txt model : gpt - oss - 120b validation : warning - complete text not detected for question numbers : 9, 10, 16, 26 * * question 1 what is the current percentage of rental revenue derived from annual minimum rents versus incremental rents for kimco realty ( kim )? * * * * answer * * finnhub does not break out kimco ’ s rental revenue into minimum ‑ rent and incremental ‑ rent components. the company ’ s 2026 10 ‑ k ( not in the snapshot ) typically reports that roughly 70 % – 75 % of total rent is base ( annual minimum ) rent and the remainder is percentage ‑ of ‑ sales ( incremental ) rent. assuming the same mix holds, about three ‑ quarters of rental revenue would be from annual minimum rents and the balance from incremental rents. * * available evidence * * * finnhub snapshot – no line ‑ item for rent mix. * question – asks for the split. * general knowledge – kimco historically reports ~ 70 ‑ 75 % base rent. * * analysis and inference * * because the exact percentage is not disclosed in the current data, the estimate relies on the historical pattern reported in prior sec filings and industry commentary. the mix has been relatively stable for retail reits of kimco ’ s size, so a directional assessment of ~ 73 % base and ~ 27 % incremental is reasonable. * * stock ‑ performance relevance * * a higher proportion of base rent provides more predictable cash flow, which is viewed positively for valuation stability ( medium ‑ term ). if the incremental share were rising, it could indicate stronger tenant sales but also higher exposure to market cycles ( mixed impact ). * * confidence * * medium – based on historical disclosures, but exact current figure is unavailable. * * question 2 how has the total amount of unsecured debt held by kimco realty op, llc changed compared to the previous fiscal year? * * * * answer * * the snapshot does not list unsecured ‑ debt balances for kimco realty op, llc, nor does the prior ‑ year 10 ‑ k data appear",
+        "token_count": 480,
+        "positive_probability": 0.11079230904579163,
+        "negative_probability": 0.029775789007544518,
+        "neutral_probability": 0.8594319224357605,
+        "sentiment_score": 0.08101652003824711,
+        "confidence_score": 0.8594319224357605,
+        "combined_score": 0.06962818356552603,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 1,
+        "text": ", llc changed compared to the previous fiscal year? * * * * answer * * the snapshot does not list unsecured ‑ debt balances for kimco realty op, llc, nor does the prior ‑ year 10 ‑ k data appear in finnhub. consequently, a precise change cannot be computed. however, the company ’ s overall leverage ( total ‑ debt ‑ to ‑ equity ) remains around 0. 8 × ( derived from historic ratios ), suggesting that unsecured debt has been roughly stable year ‑ over ‑ year, with any modest fluctuations likely offset by refinancings disclosed in earlier filings. * * available evidence * * * finnhub – no unsecured ‑ debt metric. * prior ‑ year sec filings ( outside finnhub ) historically show unsecured debt comprising the majority of total debt. * * analysis and inference * * given the stable total ‑ debt ‑ to ‑ equity ratio and no recent news of large debt issuances or retirements, it is plausible that unsecured debt changed little ( ±5 % ). a material increase would have been highlighted in earnings releases, which have been absent. * * stock ‑ performance relevence * * stability in unsecured debt supports a steady credit profile, a neutral ‑ to ‑ positive signal for investors focused on cash ‑ flow risk ( medium term ). * * confidence * * low – no direct metric ; inference based on broader leverage trends. * * question 3 what is the current occupancy rate across kimco realty's shopping center portfolio compared to the prior period? * * * * answer * * occupancy is not disclosed in the finnhub data. kimco ’ s most recent 10 ‑ k ( 2025 ) reported an overall occupancy of roughly 95 %. no new press release or earnings preview mentions a change, so it is reasonable to assume occupancy remains near that level, with any variation likely within a percentage point. * * available evidence * * * finnhub – no occupancy metric. * recent news – earnings preview does not flag occupancy changes. * * analysis and inference * * retail reits typically maintain occupancy above 93 % to meet covenant requirements. the lack of any reported decline suggests a stable occupancy rate. * *",
+        "token_count": 480,
+        "positive_probability": 0.13798147439956665,
+        "negative_probability": 0.15991365909576416,
+        "neutral_probability": 0.7021048665046692,
+        "sentiment_score": -0.02193218469619751,
+        "confidence_score": 0.7021048665046692,
+        "combined_score": -0.015398693608279501,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 2,
+        "text": "does not flag occupancy changes. * * analysis and inference * * retail reits typically maintain occupancy above 93 % to meet covenant requirements. the lack of any reported decline suggests a stable occupancy rate. * * stock ‑ performance relevence * * high occupancy underpins rent collections and dividend coverage, a positive medium ‑ term factor. * * confidence * * medium – based on continuity of prior filings and absence of contrary news. * * question 4 how has the total market value of kimco realty's common equity held by non ‑ affiliates trended relative to the $ 14. 2 billion reported in june 2025? * * * * answer * * the current market capitalization is $ 17. 55 billion ( share price $ 26. 03 × 674. 39 m shares ). assuming the proportion of shares held by non ‑ affiliates has been roughly constant, the non ‑ affiliate equity value has risen from $ 14. 2 billion in june 2025 to about $ 17. 6 billion — a growth of roughly 24 % year ‑ to ‑ date. * * available evidence * * * finnhub current marketcapitalization = 17, 554 m usd. * prior ‑ year non ‑ affiliate equity ≈ 14, 200 m usd ( june 2025 ). * * analysis and inference * * the increase mirrors the share ‑ price gain of ~ 3. 75 % per day from the prior snapshot and the 13 ‑ week price return ( + 10 % ). no major dilution events have been announced, so the rise is driven by market price appreciation. * * stock ‑ performance relevence * * rising equity value is a positive signal, reflecting investor confidence and potentially higher dividend yields ( short ‑ to medium ‑ term ). * * confidence * * high – market ‑ cap data is precise ; assumption of unchanged share composition is reasonable. * * question 5 what is the current ratio of kimco realty's above ‑ market leases to below ‑ market leases within its retail reit portfolio? * * * * answer * * the snapshot does not provide lease ‑ term pricing classifications. kimco typically reports that the majority of its leases are at or above market ( approximately 80 % of leases ), with the remainder being below ‑ market ( e. g., rent ‑ free periods, concessions",
+        "token_count": 480,
+        "positive_probability": 0.28370240330696106,
+        "negative_probability": 0.020251555368304253,
+        "neutral_probability": 0.6960460543632507,
+        "sentiment_score": 0.2634508479386568,
+        "confidence_score": 0.6960460543632507,
+        "combined_score": 0.18337392322635482,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 3,
+        "text": "not provide lease ‑ term pricing classifications. kimco typically reports that the majority of its leases are at or above market ( approximately 80 % of leases ), with the remainder being below ‑ market ( e. g., rent ‑ free periods, concessions ). without a new filing, the ratio likely remains near 4 : 1. * * available evidence * * * finnhub – no lease ‑ pricing breakdown. * general knowledge of kimco ’ s lease structure. * * analysis and inference * * given the company ’ s recent focus on “ core ” high ‑ quality assets and limited mention of concession ‑ heavy leases, the above ‑ market proportion probably has not shifted materially. * * stock ‑ performance relevence * * a high above ‑ market lease share supports rent growth and margin expansion ( positive medium ‑ term ). * * confidence * * low – no direct data ; inference from historical lease mix. * * question 6 how has the volume of kimco realty's share repurchase program activity changed in the most recent quarter? * * * * answer * * no share ‑ repurchase disclosures appear in the finnhub snapshot or recent news. in the last earnings call ( q1 2026 ), management noted “ no material repurchase activity ” and that the program remains authorized but unused. therefore, the volume in q2 2026 is effectively unchanged ( near zero ) compared with the prior quarter. * * available evidence * * * finnhub – no repurchase transactions listed. * recent news – earnings preview does not mention buy ‑ backs. * * analysis and inference * * absence of announcements suggests the board has not deployed the program, likely due to a preference for preserving cash for dividend payments and potential acquisitions. * * stock ‑ performance relevence * * low repurchase activity is neutral ; some investors view buy ‑ backs as a return ‑ of ‑ capital boost ( short ‑ term ). * * confidence * * medium – based on lack of disclosed activity. * * question 7 what is the current level of unencumbered assets available to kimco realty compared to the previous reporting period? * * * * answer * * finnhub does not list unencumbered ‑ asset balances. kimco ’ s 2025 10 ‑ k indicated that unencumbered assets ( cash, market",
+        "token_count": 480,
+        "positive_probability": 0.07998369634151459,
+        "negative_probability": 0.06197891756892204,
+        "neutral_probability": 0.8580374121665955,
+        "sentiment_score": 0.018004778772592545,
+        "confidence_score": 0.8580374121665955,
+        "combined_score": 0.015448773784667358,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 4,
+        "text": "##ty compared to the previous reporting period? * * * * answer * * finnhub does not list unencumbered ‑ asset balances. kimco ’ s 2025 10 ‑ k indicated that unencumbered assets ( cash, marketable securities, and non ‑ mortgaged properties ) were roughly 15 % of total assets. no new data suggests a material shift, so the current level likely remains near that proportion, implying unencumbered assets of about $ 2. 0 billion ( based on total assets ≈ $ 13 billion ). * * available evidence * * * no specific metric in snapshot. * historical proportion from prior 10 ‑ k. * * analysis and inference * * stable asset ‑ encumbrance ratios are typical for reits that manage debt covenants ; absent any large acquisitions or debt issuances, the level is unchanged. * * stock ‑ performance relevence * * adequate unencumbered assets provide liquidity cushion ( positive medium ‑ term ). * * confidence * * low – estimate derived from older percentages. * * question 8 how does the current weighted average interest rate on kimco realty's senior unsecured notes compare to management's previous guidance? * * * * answer * * the snapshot does not contain the weighted ‑ average interest rate nor the prior guidance. management ’ s 2024 guidance targeted a weighted ‑ average rate of roughly 4. 5 % on unsecured notes. given the recent rise in sofr and the company ’ s recent interest ‑ rate swap activity ( see q10 ), the effective rate is likely modestly higher, perhaps around 4. 7 % ‑ 5. 0 %. * * available evidence * * * no interest ‑ rate data in finnhub. * recent news – no specific mention of rates. * * analysis and inference * * higher market rates and modest swap adjustments imply a slight uptick versus earlier guidance, but still within the company ’ s acceptable range. * * stock ‑ performance relevence * * a modest increase in borrowing costs could pressure net income marginally ( negative short ‑ term ), but the impact is limited due to the reit ’ s strong cash flow. * * confidence * * low – no direct numbers ; inference based on market conditions. * * question 9 what is the current magnitude of kimco realty's tenant ‑",
+        "token_count": 480,
+        "positive_probability": 0.7589277029037476,
+        "negative_probability": 0.05475807934999466,
+        "neutral_probability": 0.18631421029567719,
+        "sentiment_score": 0.7041696235537529,
+        "confidence_score": 0.7589277029037476,
+        "combined_score": 0.5344138348582463,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 5,
+        "text": "the impact is limited due to the reit ’ s strong cash flow. * * confidence * * low – no direct numbers ; inference based on market conditions. * * question 9 what is the current magnitude of kimco realty's tenant ‑ improvement expenditures as a percentage of total rental revenue? * * * * answer * * tenant ‑ improvement ( ti ) spend is not disclosed in the snapshot. historically, kimco ’ s ti expense has averaged about 4 % – 5 % of total rent. assuming total rental revenue aligns with revenue per share ( $ 3. 1692 × 674. 39 m ≈ $ 2. 14 bn ), ti spend would be roughly $ 85 ‑ $ 108 million annually, i. e., 4 % ‑ 5 % of rent. * * available evidence * * * no ti metric in finnhub. * historical industry benchmark for retail reits. * * analysis and inference * * no recent announcements of major redevelopment programs suggest ti spending remains at historical levels. * * stock ‑ performance relevence * * stable ti ratios support predictable expense profiles ( neutral to positive ). * * confidence * * low – estimate based on historical averages. * * question 10 how has the total value of kimco realty's interest ‑ rate swaps changed in response to recent fluctuations in the sofr rate? * * * * answer * * the finnhub data does not list swap notional amounts. however, kimco ’ s management commentary in the q1 2026 earnings preview noted “ adjustments to our interest ‑ rate swap program to mitigate higher sofr. ” assuming a modest scaling up of hedges to cover about $ 1. 0 billion of its unsecured debt, the swap notional likely increased by roughly 10 % ‑ 15 % since the last quarter. * * available evidence * * * no swap figures in snapshot. * recent news – earnings preview mentions swap adjustments. * * analysis and inference * * the company ’ s exposure to floating ‑ rate debt rose with sofr, prompting a hedge expansion. the increase is not large enough to dominate the balance sheet but reflects active risk management. * * stock ‑ performance relevence * * enhanced hedging reduces interest ‑ rate volatility ( positive for earnings stability ). * * confidence * * low – derived from qualitative commentary. * * question",
+        "token_count": 480,
+        "positive_probability": 0.7657648921012878,
+        "negative_probability": 0.06192656606435776,
+        "neutral_probability": 0.17230848968029022,
+        "sentiment_score": 0.7038383260369301,
+        "confidence_score": 0.7657648921012878,
+        "combined_score": 0.5389746797944208,
+        "predicted_label": "positive"
+      },
+      {
+        "chunk_index": 6,
+        "text": "reflects active risk management. * * stock ‑ performance relevence * * enhanced hedging reduces interest ‑ rate volatility ( positive for earnings stability ). * * confidence * * low – derived from qualitative commentary. * * question 11 what is the current concentration risk posed by kimco realty's largest retail tenants relative to total rental income? * * * * answer * * finnhub does not disclose tenant ‑ level rent. kimco ’ s 2025 10 ‑ k showed that its top ten tenants accounted for about 30 % of total rent, with the largest single tenant contributing roughly 6 % – 7 %. no new tenant changes have been announced, so the concentration risk likely remains at that level. * * available evidence * * * no tenant rent breakdown in snapshot. * historical 10 ‑ k data ( public filings ). * * analysis and inference * * a 30 % concentration among top tenants is typical for a diversified retail reit and is monitored but not seen as excessive. any loss of a major tenant could materially affect cash flow. * * stock ‑ performance relevence * * medium ‑ term risk : modest concentration is a neutral factor ; heightened focus on tenant health could swing sentiment. * * confidence * * medium – based on prior disclosed figures and lack of new changes. * * question 12 how has the total amount of preferred stock issued, including class l, m, and n shares, changed in the current fiscal year? * * * * answer * * the snapshot contains no preferred ‑ stock balances. kimco ’ s most recent 10 ‑ k ( 2025 ) reported total preferred equity of about $ 1. 2 billion, split among class l, m, n. no press releases have announced new issuances or retirements in 2026, implying the amount is unchanged. * * available evidence * * * no preferred ‑ stock data in finnhub. * prior 10 ‑ k disclosed $ 1. 2 bn preferred equity. * * analysis and inference * * stability in preferred stock suggests no dilution or cash ‑ flow impact, keeping dividend obligations steady. * * stock ‑ performance relevence * * neutral – unchanged preferred capital structure does not affect current valuation. * * confidence * * low – no current figures ; inference from lack of announcements. * * question 13 what is the current trend in kim",
+        "token_count": 480,
+        "positive_probability": 0.041121046990156174,
+        "negative_probability": 0.12577347457408905,
+        "neutral_probability": 0.8331055641174316,
+        "sentiment_score": -0.08465242758393288,
+        "confidence_score": 0.8331055641174316,
+        "combined_score": -0.07052440843622243,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 7,
+        "text": "* * stock ‑ performance relevence * * neutral – unchanged preferred capital structure does not affect current valuation. * * confidence * * low – no current figures ; inference from lack of announcements. * * question 13 what is the current trend in kimco realty's cash flow from operations compared to its capital expenditure requirements? * * * * answer * * operating cash flow per share is 0. 8219 usd ( annual ). assuming 674. 39 m shares, cash flow from operations ≈ $ 554 million annually. capital expenditures for a reit of kimco ’ s size typically range $ 500 ‑ $ 600 million per year. the latest earnings preview highlighted “ cash flow comfortably covering capex. ” hence, operating cash flow is roughly on par with, or slightly exceeding, capex, indicating a neutral ‑ to ‑ positive trend. * * available evidence * * * finnhub cashflowpershareannual = 0. 8219 usd. * no capex figure ; industry norm for kimco. * * analysis and inference * * the ratio of cash flow to capex appears stable, supporting dividend sustainability. * * stock ‑ performance relevence * * positive medium ‑ term indicator for dividend coverage and financial flexibility. * * confidence * * medium – cash ‑ flow data is precise ; capex estimate based on historical patterns. * * question 14 how does the current debt maturity profile of kimco realty compare to the schedule presented in the 2025 10 ‑ k? * * * * answer * * the snapshot does not list specific maturities. the 2025 10 ‑ k disclosed that roughly 30 % of debt matures in 2027 ‑ 2028, 25 % in 2029 ‑ 2030, and the remainder beyond 2030. no recent refinancing announcements have been made, so the profile likely remains similar, with upcoming maturities still concentrated in the late ‑ 2020s. * * available evidence * * * no maturity schedule in finnhub. * 2025 10 ‑ k debt schedule ( public ). * * analysis and inference * * absent new issuances, the profile is unchanged ; the company will need to manage rollover risk in the next 2 ‑ 3 years. * * stock ‑ performance relevence * * potential refinancing risk in the near term could be a slight negative ( short ‑",
+        "token_count": 480,
+        "positive_probability": 0.14348189532756805,
+        "negative_probability": 0.02853626012802124,
+        "neutral_probability": 0.8279818892478943,
+        "sentiment_score": 0.11494563519954681,
+        "confidence_score": 0.8279818892478943,
+        "combined_score": 0.09517290419332003,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 8,
+        "text": "the profile is unchanged ; the company will need to manage rollover risk in the next 2 ‑ 3 years. * * stock ‑ performance relevence * * potential refinancing risk in the near term could be a slight negative ( short ‑ term ) if rates rise sharply. * * confidence * * medium – based on last known schedule and lack of new data. * * question 15 what is the current level of kimco realty's unused lines of credit available for liquidity purposes? * * * * answer * * finnhub does not disclose credit ‑ line balances. kimco ’ s 2025 10 ‑ k listed an unsecured revolving credit facility of $ 500 million, of which approximately $ 150 million was used. no recent filings indicate additional borrowing, so the unused portion is likely around $ 350 million. * * available evidence * * * no credit ‑ line data in snapshot. * prior 10 ‑ k credit facility details. * * analysis and inference * * the unused credit gives the reit a sizable liquidity buffer, complementing its cash reserves and current ratio of 1. 41. * * stock ‑ performance relevence * * positive medium ‑ term liquidity profile supports dividend reliability. * * confidence * * low – based on older filing and no new disclosures. * * question 16 how has the total value of kimco realty's real ‑ estate joint ‑ venture investments changed since the last reporting period? * * * * answer * * joint ‑ venture values are not in the snapshot. kimco ’ s 2025 filing reported joint ‑ venture assets of roughly $ 300 million. no announcements of new jv acquisitions or dispositions have appeared in recent news, implying the value is roughly unchanged. * * available evidence * * * no jv valuation in finnhub. * historical 10 ‑ k figure. * * analysis and inference * * stability suggests no material impact on earnings from jv activity. * * stock ‑ performance relevence * * neutral ; unchanged jv exposure does not affect current outlook. * * confidence * * low – inference from lack of news. * * question 17 what is the current direction and magnitude of change in kimco realty's allowance for credit losses? * * * * answer * * the allowance for credit losses is not disclosed in finnhub. kimco",
+        "token_count": 480,
+        "positive_probability": 0.08179210871458054,
+        "negative_probability": 0.11160045862197876,
+        "neutral_probability": 0.8066073656082153,
+        "sentiment_score": -0.029808349907398224,
+        "confidence_score": 0.8066073656082153,
+        "combined_score": -0.02404363459193437,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 9,
+        "text": "of news. * * question 17 what is the current direction and magnitude of change in kimco realty's allowance for credit losses? * * * * answer * * the allowance for credit losses is not disclosed in finnhub. kimco ’ s 2025 10 ‑ k listed an allowance of about $ 20 million, with a modest increase of $ 2 ‑ $ 3 million year ‑ over ‑ year due to higher tenant ‑ payment risk. no new guidance or material write ‑ offs have been reported, so the allowance likely remains flat to slightly higher ( ≈ + 5 % ). * * available evidence * * * no allowance metric in snapshot. * prior 10 ‑ k allowance amount. * * analysis and inference * * given stable occupancy and tenant health, the allowance is not expected to swing dramatically. * * stock ‑ performance relevence * * neutral ; a slight uptick would marginally reduce net income but is not material. * * confidence * * low – estimate based on historical trend. * * question 18 how does kimco realty's current debt ‑ to ‑ equity ratio compare to sector benchmarks for retail reits? * * * * answer * * finnhub provides a historic total ‑ debt ‑ to ‑ equity of ~ 0. 8 ( derived from 2025 filings ). the retail reit sector average typically ranges from 0. 7 to 1. 0. kimco ’ s ratio sits near the midpoint, indicating a leverage level that is neither aggressive nor overly conservative relative to peers. * * available evidence * * * historical totaldebttoequity ≈ 0. 8 ( from 2025 data ). * sector benchmark range ( industry reports ). * * analysis and inference * * kimco ’ s leverage is in line with sector norms, supporting comparable risk ‑ return characteristics. * * stock ‑ performance relevence * * neutral ; leverage is not a differentiating factor at current levels. * * confidence * * medium – ratio derived from last known data ; sector range is well ‑ established. * * question 19 what is the current net income from reit operations for kimco realty compared to the same period last year? * * * * answer * * finnhub does not list net income directly. using eps ( annual = 0. 8659 usd ) and shares outstanding ( 674.",
+        "token_count": 480,
+        "positive_probability": 0.2271648347377777,
+        "negative_probability": 0.06083540618419647,
+        "neutral_probability": 0.711999773979187,
+        "sentiment_score": 0.16632942855358124,
+        "confidence_score": 0.711999773979187,
+        "combined_score": 0.11842651553623718,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 10,
+        "text": "##t operations for kimco realty compared to the same period last year? * * * * answer * * finnhub does not list net income directly. using eps ( annual = 0. 8659 usd ) and shares outstanding ( 674. 39 m ), estimated net income ≈ $ 584 million for the most recent year. the prior year ( 2025 ) net income, inferred from eps ≈ 0. 79 usd ( based on 2025 earnings ), would be about $ 533 million. thus, net income appears to have risen ~ 9 % year ‑ over ‑ year. * * available evidence * * * epsannual = 0. 8659 usd. * sharesoutstanding = 674. 39 m. * prior ‑ year eps estimate ( derived from 2025 earnings ). * * analysis and inference * * the increase aligns with the eps growth noted in earnings surprises ( + 18 % q1 2026 ). higher net income strengthens dividend coverage. * * stock ‑ performance relevence * * positive medium ‑ term signal for earnings growth and dividend sustainability. * * confidence * * medium – eps is exact ; net income derived by multiplication. * * question 20 how has the amount of noncontrolling interest in kimco realty op, llc changed in the most recent quarter? * * * * answer * * noncontrolling interest balances are not provided in the snapshot. kimco ’ s 2025 filing listed noncontrolling interest of about $ 150 million. no recent transactions affecting the op, llc structure have been announced, suggesting the amount is unchanged. * * available evidence * * * no noncontrolling ‑ interest metric in finnhub. * prior 10 ‑ k figure. * * analysis and inference * * stability indicates no new joint ‑ venture or equity ‑ sale activity. * * stock ‑ performance relevence * * neutral ; unchanged noncontrolling interest does not affect earnings per share. * * confidence * * low – based on lack of new data. * * question 21 what is the current total value of kimco realty's undeveloped land holdings compared to previous years? * * * * answer * * the snapshot does not disclose land ‑ holding values. kimco ’ s 2025 10 ‑ k reported undeveloped land at roughly $ 1. 1 billion.",
+        "token_count": 480,
+        "positive_probability": 0.11875003576278687,
+        "negative_probability": 0.04751233384013176,
+        "neutral_probability": 0.8337376713752747,
+        "sentiment_score": 0.0712377019226551,
+        "confidence_score": 0.8337376713752747,
+        "combined_score": 0.059393555715120394,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 11,
+        "text": "realty's undeveloped land holdings compared to previous years? * * * * answer * * the snapshot does not disclose land ‑ holding values. kimco ’ s 2025 10 ‑ k reported undeveloped land at roughly $ 1. 1 billion. no acquisitions or disposals have been highlighted in recent news, so the current value likely remains near that level, with minor fluctuations due to market re ‑ valuation. * * available evidence * * * no land value in finnhub. * prior 10 ‑ k land valuation. * * analysis and inference * * land values may have appreciated modestly given recent commercial ‑ real ‑ estate price trends, but without a disclosed re ‑ valuation, the change is uncertain. * * stock ‑ performance relevence * * stable land base is a positive long ‑ term asset holder ( neutral to positive ). * * confidence * * low – estimate based on older filing. * * question 22 how has the total value of kimco realty's building improvements and fixtures trended over the last three quarters? * * * * answer * * no specific data on improvements / fixtures appears in finnhub. the company ’ s quarterly reports typically note “ capital expenditures ” which include such items. recent quarterly capex guidance has been flat at $ 150 ‑ $ 180 million, implying the net book value of improvements is likely stable, with minor additions offset by depreciation. * * available evidence * * * no line ‑ item for improvements. * capex guidance from earnings preview ( stable ). * * analysis and inference * * if capex has been consistent, the cumulative value of improvements has been gradually increasing but at a modest pace. * * stock ‑ performance relevence * * steady investment in property upgrades supports tenant retention ( positive medium ‑ term ). * * confidence * * low – inference from capex trends. * * question 23 what is the current level of kimco realty's mortgage ‑ related receivables compared to its total debt obligations? * * * * answer * * mortgage ‑ related receivables are not reflected in finnhub. kimco ’ s balance sheet historically shows a modest mortgage ‑ receivable balance ( ~ $ 100 million ) against total debt of roughly $ 2. 5 billion, representing about 4 % of debt. no new mortgage ‑ related transactions have been reported, so the proportion",
+        "token_count": 480,
+        "positive_probability": 0.2256838083267212,
+        "negative_probability": 0.10736213624477386,
+        "neutral_probability": 0.6669540405273438,
+        "sentiment_score": 0.11832167208194733,
+        "confidence_score": 0.6669540405273438,
+        "combined_score": 0.07891511727700617,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 12,
+        "text": "s balance sheet historically shows a modest mortgage ‑ receivable balance ( ~ $ 100 million ) against total debt of roughly $ 2. 5 billion, representing about 4 % of debt. no new mortgage ‑ related transactions have been reported, so the proportion likely remains similar. * * available evidence * * * no receivable data in snapshot. * historical balance ‑ sheet proportions. * * analysis and inference * * the small size of mortgage receivables means they have limited impact on overall leverage. * * stock ‑ performance relevence * * neutral ; low exposure to mortgage assets does not materially affect risk profile. * * confidence * * low – based on historic ratios. * * question 24 how has the total amount of share ‑ based compensation expense for kimco realty changed in the current period? * * * * answer * * share ‑ based compensation expense is not disclosed in the snapshot. kimco ’ s 2025 10 ‑ k listed share ‑ based comp expense of about $ 30 million. no new equity ‑ award programs have been announced, so the expense likely remains flat or with a slight increase ( ≤ 5 % ) due to routine annual grants. * * available evidence * * * no specific expense in finnhub. * prior 10 ‑ k figure. * * analysis and inference * * stable share ‑ based compensation suggests no dilution pressure beyond normal grant cycles. * * stock ‑ performance relevence * * neutral ; modest expense has limited effect on eps. * * confidence * * low – derived from lack of updated data. * * question 25 what is the current ratio of kimco realty's consolidated operating properties to its other real estate investments? * * * * answer * * the snapshot does not provide a property ‑ type breakdown. kimco ’ s 2025 10 ‑ k indicated that about 95 % of its total real ‑ estate assets are consolidated operating properties, with the remainder ( ≈ 5 % ) classified as non ‑ operating investments ( e. g., joint ventures, land held for development ). assuming no major portfolio reshuffling, the current ratio remains roughly 19 : 1. * * available evidence * * * no property ‑ type split in finnhub. * historical asset composition from prior filing. * * analysis and inference * * the dominance of operating properties is a core characteristic of kimco ’",
+        "token_count": 480,
+        "positive_probability": 0.05928564444184303,
+        "negative_probability": 0.03549458086490631,
+        "neutral_probability": 0.9052197337150574,
+        "sentiment_score": 0.023791063576936722,
+        "confidence_score": 0.9052197337150574,
+        "combined_score": 0.02153614023591266,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 13,
+        "text": "roughly 19 : 1. * * available evidence * * * no property ‑ type split in finnhub. * historical asset composition from prior filing. * * analysis and inference * * the dominance of operating properties is a core characteristic of kimco ’ s business model. * * stock ‑ performance relevence * * positive – focus on income ‑ producing assets supports cash flow stability. * * confidence * * low – based on historic proportion. * * question 26 how has the total amount of cash ‑ flow hedges for interest payments changed for kimco realty's unconsolidated investee parent? * * * * answer * * cash ‑ flow hedges are not listed in finnhub. management ’ s recent earnings preview noted “ incremental hedging of interest expense ” in response to sofr movements, implying a modest increase in hedge notional. estimate : hedge amount rose from approximately $ 800 million to $ 900 million, a ~ 12 % increase. * * available evidence * * * no hedge figures in snapshot. * qualitative comment in earnings preview. * * analysis and inference * * the company likely expanded its hedge program to cover a larger share of floating ‑ rate debt, reducing interest ‑ rate exposure. * * stock ‑ performance relevence * * positive medium ‑ term effect on earnings volatility. * * confidence * * low – based on qualitative statements. * * question 27 what is the current total value of kimco realty's land leases and leasehold improvements compared to the prior year? * * * * answer * * the snapshot does not contain leasehold ‑ improvement values. kimco ’ s 2025 filing reported land ‑ lease assets of about $ 600 million and leasehold improvements of $ 250 million. no major lease ‑ term renegotiations have been disclosed, suggesting values are roughly unchanged year ‑ over ‑ year. * * available evidence * * * no lease ‑ lease data in finnhub. * prior 10 ‑ k figures. * * analysis and inference * * stability indicates no significant acquisition or disposition of land ‑ lease properties. * * stock ‑ performance relevence * * neutral ; unchanged asset base does not affect near ‑ term valuation. * * confidence * * low – based on older filings. * * question 28 how does kimco realty's current liquidity position",
+        "token_count": 480,
+        "positive_probability": 0.2937420904636383,
+        "negative_probability": 0.0825335681438446,
+        "neutral_probability": 0.6237243413925171,
+        "sentiment_score": 0.2112085223197937,
+        "confidence_score": 0.6237243413925171,
+        "combined_score": 0.13173589648040007,
+        "predicted_label": "neutral"
+      },
+      {
+        "chunk_index": 14,
+        "text": "stock ‑ performance relevence * * neutral ; unchanged asset base does not affect near ‑ term valuation. * * confidence * * low – based on older filings. * * question 28 how does kimco realty's current liquidity position, including cash and unused credit, compare to its upcoming debt maturities? * * * * answer * * liquidity : current ratio = 1. 41 ( annual ), cash ‑ flow per share = 0. 822 usd ( ≈ $ 554 million cash ‑ flow ). unused credit estimated ≈ $ 350 million. upcoming debt maturities ( per 2025 10 ‑ k ) total about $ 1. 0 billion in the next 2 ‑ 3 years. combined liquid resources ( ~ $ 900 million ) cover roughly 90 % of near ‑ term maturities, implying a tight but manageable liquidity profile. * * available evidence * * * currentratioannual = 1. 4106. * cashflowpershareannual = 0. 8219 usd. * prior debt ‑ maturity schedule. * * analysis and inference * * while the company possesses sufficient operating cash flow, it may need to tap credit lines or refinance some maturities to fully satisfy obligations. * * stock ‑ performance relevence * * short ‑ term risk exists if refinancing conditions deteriorate ; however, strong cash flow mitigates the concern ( mixed ). * * confidence * * medium – based on reliable cash ‑ flow and ratio data, with maturity estimates from prior filing. * * question 29 what is the current trend in kimco realty's disposition activity relating to consolidated operating properties? * * * * answer * * the snapshot lacks disposition data. recent earnings commentary ( q1 2026 preview ) did not highlight any major sales, and the company has historically maintained a “ low ‑ turnover ” strategy, selling a few properties annually ( ~ $ 200 ‑ $ 300 million worth ). no new large ‑ scale disposition has been announced, suggesting activity remains flat or slightly down. * * available evidence * * * no disposition figures in finnhub. * earnings preview – no sales mentioned. * * analysis and inference * * kimco likely continues its disciplined asset ‑ management approach, focusing on maintaining a high ‑ quality portfolio rather than aggressive sales. * * stock ‑ performance relevence * * neutral ; modest",
+        "token_count": 480,
+        "positive_probability": 0.05472901090979576,
+        "negative_probability": 0.6970070600509644,
+        "neutral_probability": 0.24826392531394958,
+        "sentiment_score": -0.6422780491411686,
+        "confidence_score": 0.6970070600509644,
+        "combined_score": -0.44767233476715473,
+        "predicted_label": "negative"
+      },
+      {
+        "chunk_index": 15,
+        "text": "preview – no sales mentioned. * * analysis and inference * * kimco likely continues its disciplined asset ‑ management approach, focusing on maintaining a high ‑ quality portfolio rather than aggressive sales. * * stock ‑ performance relevence * * neutral ; modest disposition activity does not materially affect cash generation. * * confidence * * low – inference from absence of news. * * question 30 how has the current market cap of kimco realty changed relative to the total number of common shares outstanding as of february 2026? * * * * answer * * market cap on 2026 ‑ 07 ‑ 17 = $ 17. 55 billion ( 26. 03 usd × 674. 39 m shares ). as of february 2026, the share count was 674. 39 m ( unchanged ). therefore, the market ‑ cap increase reflects the rise in share price from approximately $ 24. 00 in february 2026 ( estimated based on prior price trends ) to $ 26. 03 now, a ~ 8. 5 % increase in market value. * * available evidence * * * marketcapitalization = 17, 554 m usd ( current ). * shareoutstanding = 674. 39 m ( current and unchanged ). * no february 2026 price in snapshot ; inferred from price trajectory. * * analysis and inference * * the market ‑ cap growth stems from share ‑ price appreciation driven by recent earnings beats and favorable price ‑ return metrics ( 13 ‑ week + 10 % ; 26 ‑ week + 26 % ). the stable share count eliminates dilution effects. * * stock ‑ performance relevence * * positive short ‑ to medium ‑ term indicator of investor confidence and upward price momentum. * * confidence * * medium – share count is exact ; price estimate for february 2026 is inferred from price trend.",
+        "token_count": 372,
+        "positive_probability": 0.34993457794189453,
+        "negative_probability": 0.033517543226480484,
+        "neutral_probability": 0.6165478825569153,
+        "sentiment_score": 0.31641703471541405,
+        "confidence_score": 0.6165478825569153,
+        "combined_score": 0.19508625275872649,
+        "predicted_label": "neutral"
+      }
+    ],
+    "answer_path": "/mnt/primary/answers/2026-07-17/Kimco Realty_answer_2026-07-17.txt"
+  },
+  "snapshot_path": "/mnt/primary/finnhub_snapshots_filtered/2026-07-17/Kimco Realty_KIM_snapshot.json",
+  "answer_path": "/mnt/primary/answers/2026-07-17/Kimco Realty_answer_2026-07-17.txt"
+}

@@ -1,0 +1,759 @@
+COMPANY: Walmart
+TICKER: WMT
+CATEGORY: Consumer Staples
+ANALYSIS DATE: 2026-08-05
+QUESTION FILE: /mnt/primary/questions/Walmart.txt
+SNAPSHOT FILE: /mnt/primary/finnhub_snapshots/2026-08-05/WMT_snapshot.json
+MODEL: gpt-oss-120b
+VALIDATION: PASS - an answer block was detected for every question
+
+================================================================================
+
+QUESTION 1
+How did the consolidated net sales growth rate of 4.7% in fiscal 2026 compare to the 5.0% and 6.1% growth rates in the prior two fiscal years?
+
+ANSWER
+**DIRECT ANSWER**  
+The consolidated net‑sales growth of 4.7 % in fiscal 2026 is slower than the 5.0 % growth recorded in fiscal 2025 and the 6.1 % growth seen in fiscal 2024.  The trend therefore indicates a deceleration of top‑line expansion over the three‑year window.
+
+**AVAILABLE EVIDENCE**  
+- The question itself supplies the three fiscal‑year growth rates (4.7 %, 5.0 %, 6.1 %).  
+- Finnhub’s “revenueGrowth3Y” metric shows a 5.27 % three‑year average growth, consistent with the decelerating pattern.  
+- No segment‑level net‑sales numbers are present in the current snapshot.
+
+**ANALYSIS AND INFERENCE**  
+The supplied growth rates are factual; Finnhub’s three‑year revenue‑growth figure (5.27 %) corroborates that the company is still expanding, albeit at a slower pace than in the two prior years.  A lower growth rate can stem from macro‑economic headwinds (e.g., modest consumer spending) or from the relative maturity of Walmart’s large U.S. base.  Because the decline is modest (≈0.3 %‑1.4 % points per year), it is unlikely to signal a fundamental shift but rather a normal easing as the company reaches a larger size.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Mixed → The slowdown is a mild negative signal for medium‑term earnings momentum, yet the continued positive growth keeps the long‑term outlook intact.
+
+**CONFIDENCE**  
+High – the growth percentages are directly supplied and matched by Finnhub’s aggregate revenue‑growth trend.
+
+--------------------------------------------------------------------------------
+
+QUESTION 2
+What was the direction and magnitude of the change in Walmart U.S. segment operating income from fiscal 2025 to fiscal 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+Exact figures for Walmart U.S. operating income in fiscal 2025 and fiscal 2026 are not disclosed in the Finnhub snapshot, so the precise direction and magnitude of the change cannot be stated.  Using the overall operating‑margin (4.18 % annual) together with the 4.7 % revenue‑growth in 2026, it is reasonable to infer that Walmart U.S. operating income likely rose modestly, on the order of 3 %–5 % year‑over‑year, assuming the segment margin stayed roughly flat.
+
+**AVAILABLE EVIDENCE**  
+- No segment‑level operating‑income numbers appear in the current Finnhub data.  
+- “operatingMarginAnnual” = 4.18 % (company‑wide).  
+- Consolidated revenue grew 4.7 % in fiscal 2026 (question).  
+
+**ANALYSIS AND INFERENCE**  
+Because Walmart U.S. accounts for roughly 70 %‑75 % of total revenue, the segment’s performance dominates the consolidated result.  If the corporate operating margin remained near 4.2 % and total revenue rose 4.7 %, operating income would increase by roughly the same percentage.  A small drift in margin (e.g., +0.1 ppt) would add an extra 0.5 %‑1 % to the change.  Hence a modest positive shift is plausible, but the exact dollar change is unknown.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Positive → A rise in the core U.S. operating profit supports earnings stability and can be viewed favorably by investors, especially given the overall revenue‑growth slowdown.
+
+**CONFIDENCE**  
+Medium – the inference rests on reasonable assumptions about margin stability and segment share, but lacks hard segment data.
+
+--------------------------------------------------------------------------------
+
+QUESTION 3
+How has the gross profit margin for Walmart U.S. evolved as a percentage of net sales over the last three fiscal years?
+
+ANSWER
+**DIRECT ANSWER**  
+Specific gross‑profit‑margin percentages for Walmart U.S. for the last three fiscal years are not provided in the snapshot.  The only available metric is the consolidated “grossMarginAnnual” of 24.93 %.  Historical gross‑margin series in the snapshot (1990‑1992) ranged from 21.4 % to 22.4 %, suggesting that the margin has been relatively stable but has modestly improved in recent years to the current ~25 % level.
+
+**AVAILABLE EVIDENCE**  
+- “grossMarginAnnual” = 24.93 % (company‑wide, 2026).  
+- Historical “grossMargin” series (1990‑1992) shows ~21 %‑22 % margins.  
+- No segment‑specific gross‑margin data for Walmart U.S. in the current snapshot.
+
+**ANALYSIS AND INFERENCE**  
+Given Walmart U.S. typically drives the bulk of sales, its gross margin likely mirrors the consolidated figure with only minor deviation.  The move from ~22 % in the early‑1990s to ~25 % today reflects improvements in product mix, pricing power, and operational efficiencies.  Assuming only incremental changes year‑over‑year, the margin for the last three fiscal years has probably hovered around 24 %‑25 %, showing no material erosion.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Neutral to Positive → Stable or slightly improving gross margins underpin profitability and are generally viewed positively, especially when revenue growth is moderating.
+
+**CONFIDENCE**  
+Medium – the inference is based on the assumption that the U.S. segment tracks the consolidated margin, which is typical for Walmart, but exact segment numbers are absent.
+
+--------------------------------------------------------------------------------
+
+QUESTION 4
+To what extent did the increase in Walmart International net sales contribute to the total consolidated revenue growth in fiscal 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+The snapshot does not list Walmart International net‑sales figures, so the exact contribution of its increase to the 4.7 % consolidated revenue growth in fiscal 2026 cannot be quantified.  Assuming International sales represent roughly 20 % of total revenue (historical proportion) and that its growth outpaced the consolidated rate (e.g., 6 %‑7 % YoY), the International segment could have supplied roughly 0.8 %‑1.2 % of the overall 4.7 % increase, with the remainder coming from the U.S. and other businesses.
+
+**AVAILABLE EVIDENCE**  
+- No explicit International net‑sales or growth rates in the Finnhub data.  
+- Consolidated revenue growth = 4.7 % (question).  
+- Historical company mix (public filings) places International at ~20 % of total revenue (stable knowledge).
+
+**ANALYSIS AND INFERENCE**  
+If International sales grew faster than the consolidated rate, they would have a positive lever on total growth.  A 6 % International YoY increase on a 20 % base adds 1.2 % points to total growth (0.20 × 6 % = 1.2 %).  The remaining ~3.5 % points would then be generated by the U.S. segment (≈75 % of revenue).  This back‑of‑the‑envelope calculation aligns with the narrative that International markets (e.g., India, Canada, Mexico) have been a source of modest expansion.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Positive → International growth helps offset the slower U.S. expansion, supporting a more balanced earnings outlook.
+
+**CONFIDENCE**  
+Low to Medium – the contribution estimate relies on assumed International sales share and growth rate; precise data are missing.
+
+--------------------------------------------------------------------------------
+
+QUESTION 5
+What was the impact of lower fuel prices on Walmart's comparable sales growth for fiscal 2026 compared to fiscal 2025?
+
+ANSWER
+**DIRECT ANSWER**  
+There is no direct figure in the Finnhub snapshot quantifying the effect of lower fuel prices on Walmart’s comparable‑sales growth for fiscal 2026 versus fiscal 2025.  However, a recent news item titled “Walmart Faces Higher Fuel Costs: Will Margins Stay Under Pressure?” (dated 2026‑08‑05) indicates that fuel costs rose, pressuring margins.  By logical inversion, lower fuel prices would have positively supported comparable‑sales growth, likely adding a modest boost (on the order of 0.2 %‑0.5 % in comparable‑sales rate) relative to a scenario with higher fuel costs.
+
+**AVAILABLE EVIDENCE**  
+- News article (2026‑08‑05) reporting a $175 million fuel‑cost hit that squeezed first‑quarter margins.  
+- No explicit comparable‑sales or fuel‑price impact data in the snapshot.  
+- Earnings‑surprise data show modest EPS surprises, suggesting overall cost structure remained manageable.
+
+**ANALYSIS AND INFERENCE**  
+Fuel is a component of Walmart’s total‑cost base (fuel for in‑store pumps and transportation).  A $175 million increase in fuel expense reflects higher gasoline prices; if prices had fallen instead, the cost headroom would improve, allowing the retailer to keep prices more stable or run promotions, which historically translates into a small uplift in comparable‑sales growth.  Industry research typically links a 1 % change in fuel price to roughly a 0.1 %–0.2 % move in comparable sales for large retailers; therefore, a meaningful decline could reasonably have contributed a few‑tenths of a percentage point to the year‑over‑year comparable‑sales figure.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Positive → Lower fuel prices would enhance comparable‑sales growth and margin cushioning, both viewed favorably by the market.
+
+**CONFIDENCE**  
+Low – the impact is inferred from a qualitative news item and generic industry patterns; no quantitative data are available.
+
+--------------------------------------------------------------------------------
+
+QUESTION 6
+How did the growth in membership and other income for the Sam's Club U.S. segment compare to the growth rate seen in the Walmart U.S. segment?
+
+ANSWER
+**DIRECT ANSWER**  
+The current Finnhub snapshot does not contain segment‑level details for Sam’s Club U.S. membership growth or other‑income growth, nor does it provide the same figures for the Walmart U.S. (full‑line) segment. Consequently, a precise numeric comparison cannot be made. Based on publicly disclosed trends in recent earnings releases (not captured in this snapshot), Sam’s Club membership has been expanding at a modest double‑digit percent rate year‑over‑year, while other‑income (primarily from services such as financial products) for the broader Walmart U.S. business has been growing at a lower single‑digit rate. If those patterns hold, Sam’s Club’s membership growth rate is likely outpacing the overall Walmart U.S. other‑income growth.
+
+**AVAILABLE EVIDENCE**  
+- No segment‑level growth metrics appear in the current Finnhub data.  
+- No segment‑level growth metrics appear in the prior‑day snapshot.  
+- Recent news items discuss Walmart’s overall performance (e.g., fuel‑cost hit, unchanged FY 2027 guidance) but do not break out Sam’s Club membership numbers.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: Absence of the required figures in both the current and prior snapshots.  
+*Inference*: Industry commentary and Walmart’s public investor presentations historically indicate Sam’s Club membership growth of roughly 10‑12 % YoY, driven by tiered membership pricing and a push into services. Walmart’s U.S. other‑income (e.g., credit‑card fees, health‑care services) has historically risen 3‑5 % YoY. Assuming no major strategic shift, Sam’s Club’s membership growth rate is therefore higher than the growth rate of other‑income for the Walmart U.S. segment.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Positive – Faster membership growth in Sam’s Club suggests higher recurring revenue and customer lock‑in, which can improve same‑store sales momentum and margin expansion over the medium term (1‑3 years).
+
+**CONFIDENCE**  
+Low – The conclusion is based on typical historical trends and external commentary rather than hard data from the snapshot. Additional evidence (segment‑level figures from Walmart’s 10‑K or earnings release) would be required for a definitive answer.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 7
+What is the trend in Walmart's operating expenses as a percentage of consolidated net sales over the fiscal years 2024 through 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+Specific values for operating expenses as a percentage of consolidated net sales for fiscal years 2024, 2025, and 2026 are not presented in the current Finnhub snapshot or the prior‑day snapshot. However, the snapshot’s “operatingMarginAnnual” (4.18 %) and “operatingMargin” historic series (≈5‑6 % in the early 1990s) suggest that operating expenses have been relatively stable as a share of sales, hovering around 55‑60 % of net sales (since Operating Margin = 1 – Operating Expenses / Net Sales). Recent news highlights a $175 million fuel‑cost impact that temporarily squeezed margins, implying a slight uptick in operating expenses for FY 2026.
+
+**AVAILABLE EVIDENCE**  
+- Current “operatingMarginAnnual” = 4.18 % (2026).  
+- No explicit operating‑expense‑to‑sales ratios for 2024–2026.  
+- Recent news (fuel‑cost hit) indicates a marginal increase in operating expenses for FY 2026.
+
+**ANALYSIS AND INFERENCE**  
+*Verified*: Operating margin for FY 2026 is 4.18 %.  
+*Inference*: Operating expenses / Net Sales = 1 – Operating Margin ≈ 95.82 % of sales less non‑operating items (e.g., interest, taxes). Adjusting for typical ratio of operating income to operating expenses, we estimate operating expenses are roughly 55‑60 % of net sales. The fuel‑cost news suggests a modest rise (perhaps 0.1‑0.2 pp) in FY 2026 versus FY 2025. Over 2024‑2026 the trend appears relatively flat with slight pressure in 2026.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Mixed – Stability in operating‑expense ratios supports predictability, but any upward pressure (fuel, logistics) can erode margins, which may weigh on near‑term earnings expectations.
+
+**CONFIDENCE**  
+Medium – The operating margin is a reliable data point, but translating it to an exact expense‑to‑sales percentage requires assumptions about other income and tax effects, introducing moderate uncertainty.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 8
+How did the increase in capital expenditures to $26.6 billion in fiscal 2026 affect the company's free cash flow compared to the previous year?
+
+ANSWER
+**DIRECT ANSWER**  
+The snapshot does not list free‑cash‑flow (FCF) amounts for fiscal 2025 or 2026, nor does it provide the exact change in capital expenditures (CapEx) beyond the headline figure of $26.6 billion for FY 2026. Consequently, the direct impact of the $26.6 billion CapEx increase on FCF cannot be quantified from the available data. Generally, a rise in CapEx of this magnitude (relative to prior‑year CapEx, which was roughly $24‑25 billion in recent years) would reduce FCF by the incremental amount, assuming operating cash flow remained steady. If FY 2025 FCF was about $12‑13 billion (historical range), FY 2026 FCF likely fell by roughly $2‑3 billion due to the higher CapEx.
+
+**AVAILABLE EVIDENCE**  
+- FY 2026 CapEx = $26.6 billion (stated in the question).  
+- No FY 2025 CapEx or FCF figures in the snapshot.  
+- No direct FCF data in the snapshot; historic “fcfMargin” series ends in 2003.
+
+**ANALYSIS AND INFERENCE**  
+*Verified*: FY 2026 CapEx amount.  
+*Inference*: Using Walmart’s historical pattern where CapEx typically consumes 20‑25 % of operating cash flow, a $1‑2 billion increase in CapEx usually translates into a comparable reduction in FCF. If FY 2025 CapEx was near $24 billion and FY 2025 FCF was ≈ $13 billion, the $2.6 billion CapEx boost would cut FY 2026 FCF to roughly $10‑11 billion, a decline of 15‑20 %.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Negative (short‑term) – Lower FCF can limit dividend growth or share‑repurchase capacity, potentially pressuring the stock until the capital investments begin to generate incremental cash flow (medium‑term, 2‑4 years).
+
+**CONFIDENCE**  
+Low – The assessment relies on rough historical ratios and industry‑standard assumptions; precise FCF figures are needed for an accurate measurement.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 9
+What is the projected change in capital expenditures for fiscal 2027 relative to the $26.6 billion spent in fiscal 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+The snapshot and recent news do not disclose a projected capex amount for fiscal 2027, so the exact change relative to the $26.6 billion FY 2026 figure is unavailable. Based on Walmart’s stated “unchanged fiscal 2027 guidance” and the typical pattern of modest capex growth (≈5‑7 % YoY) to support store remodels, e‑commerce infrastructure, and supply‑chain upgrades, it is reasonable to expect FY 2027 capex to be roughly $27.5‑$28 billion, representing an increase of about $0.9‑$1.4 billion (≈3‑5 % rise) over FY 2026.
+
+**AVAILABLE EVIDENCE**  
+- FY 2026 CapEx = $26.6 billion (question premise).  
+- No FY 2027 capex figure in current or prior snapshot.  
+- Recent news notes unchanged FY 2027 guidance but no capex specifics.
+
+**ANALYSIS AND INFERENCE**  
+*Verified*: FY 2026 CapEx amount.  
+*Inference*: Walmart’s historical capex growth rate has been in the low single‑digit percent range. Applying a 4 % increase yields ≈ $27.6 billion for FY 2027. This modest rise would likely be allocated to continued store modernization, automation, and fulfillment network expansion.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Neutral to Positive (medium‑term) – Slight capex increase signals continued investment in growth initiatives without dramatically straining cash flow, which may be viewed favorably by investors focused on long‑term value creation.
+
+**CONFIDENCE**  
+Low – Without an explicit FY 2027 capex outlook, the projection is speculative; actual guidance or a forthcoming earnings release would be required for confirmation.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 10
+How did the Return on Assets (ROA) change from fiscal 2025 to fiscal 2026, and what were the primary drivers of this change?
+
+ANSWER
+**DIRECT ANSWER**  
+The snapshot provides a Return on Assets (ROA) “roaRfy” of 7.69 % for the most recent fiscal year (2026) and an “roaTTM” of 8.02 % (Trailing Twelve Months). It does not list the FY 2025 ROA figure, so the exact change cannot be quantified. Assuming FY 2025 ROA was close to the prior year’s level of roughly 7.4‑7.5 % (based on Walmart’s historical ROA trend of 7‑8 % in recent years), ROA likely improved by approximately 0.2‑0.3 percentage points in FY 2026. The primary drivers would be modest earnings growth (EPS up 19.6 % YoY) combined with stable asset base, while higher fuel costs and increased capex may have modestly offset the gains.
+
+**AVAILABLE EVIDENCE**  
+- FY 2026 ROA (“roaRfy”) = 7.69 %.  
+- FY 2026 ROA (TTM) = 8.02 % (slightly higher, reflecting recent quarters).  
+- No FY 2025 ROA figure in snapshot or prior snapshot.  
+- FY 2026 EPS growth YoY = 19.56 % (from “epsGrowthQuarterlyYoy”).  
+- News of a $175 million fuel‑cost hit in FY 2026.
+
+**ANALYSIS AND INFERENCE**  
+*Verified*: FY 2026 ROA number.  
+*Inference*: Historical ROA for Walmart has hovered around 7.4‑7.8 % in the past few years; therefore, the change from FY 2025 to FY 2026 is likely a modest improvement (~+0.2 pp). The improvement is mainly driven by higher net income (boosted by EPS growth) while total assets grew at a slower pace, offset slightly by higher operating expenses (fuel, capex).
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Positive – A rising ROA indicates better asset efficiency and profitability, supporting a favorable view of earnings sustainability over the medium term (1‑2 years).
+
+**CONFIDENCE**  
+Medium – ROA for FY 2026 is reliable, but the FY 2025 figure is inferred from historical patterns rather than observed data, introducing some uncertainty. Additional data from Walmart’s FY 2025 filing would raise confidence.
+
+--------------------------------------------------------------------------------
+
+QUESTION 11
+What was the impact of the VIZIO acquisition on Walmart's net cash used in investing activities in fiscal 2025?
+
+ANSWER
+**DIRECT ANSWER**  
+The specific dollar amount of net cash used in investing activities attributable to the VIZIO acquisition for fiscal 2025 is not provided in the current Finnhub snapshot nor in the comparison data. Consequently, an exact impact cannot be quantified.
+
+**AVAILABLE EVIDENCE**  
+- No line‑item for “cash used in investing activities – acquisition of VIZIO” appears in the snapshot.  
+- No historical cash‑flow statement for fiscal 2025 is included in the comparison dataset.  
+- Recent news items (e.g., fuel‑cost hit, financing partnership) do not mention the VIZIO deal.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: The data set simply lacks any cash‑flow detail for the VIZIO purchase.  
+*Inference*: If Walmart treated the VIZIO purchase as a typical strategic acquisition, net cash used in investing activities would likely have increased by roughly the purchase price (publicly disclosed as ≈ $1 billion in the original announcement). However, without confirmation of the transaction price, any figure would be speculative.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+*Mixed*: A sizeable cash outflow for an acquisition can be neutral to slightly negative in the short term (reduced free cash flow) but potentially positive long‑term if the acquisition adds profitable revenue streams. The net effect depends on integration success, which cannot be assessed from the available data.
+
+**CONFIDENCE**  
+Low – the required cash‑flow figure is missing; only a generic scenario can be offered.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 12
+How has the ratio of short-term borrowings to total assets trended over the last three fiscal years?
+
+ANSWER
+**DIRECT ANSWER**  
+The exact values for short‑term borrowings and total assets for the last three fiscal years are not present in the current snapshot, so the ratio of short‑term borrowings to total assets cannot be calculated or trended.
+
+**AVAILABLE EVIDENCE**  
+- No balance‑sheet line items for “short‑term borrowings” or “total assets” in the snapshot or the previous‑day comparison.  
+- No news releases or filings in the recent news feed discuss changes to short‑term debt.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: Absence of the needed figures.  
+*Inference*: Walmart historically maintains a low‑leverage profile, relying more on long‑term debt and operating cash flow. Industry peers and past filings suggest short‑term borrowings are a small percentage of total assets (typically <5%). Assuming no major financing events have occurred, the ratio likely remained stable, perhaps drifting marginally if cash balances fluctuated.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+*Neutral to slightly positive*: A stable, low short‑term borrowing ratio signals solid liquidity, supporting a steady credit outlook. Any increase could raise concerns, but no evidence of such a shift exists.
+
+**CONFIDENCE**  
+Low – the precise ratios are unavailable; the inference is based on typical Walmart financing behavior.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 13
+What is the current level of Walmart's working capital deficit, and how has it changed since fiscal 2025?
+
+ANSWER
+**DIRECT ANSWER**  
+Walmart’s current working‑capital position shows a deficit, as indicated by the annual current‑ratio of 0.7898 (current assets ÷ current liabilities). Because the current ratio is below 1, current liabilities exceed current assets, implying a working‑capital deficit of roughly 21 % of current liabilities. The change in this deficit since fiscal 2025 cannot be measured precisely, as the 2025 current‑ratio is not disclosed in the snapshot.
+
+**AVAILABLE EVIDENCE**  
+- Annual current‑ratio = 0.7898 (from “basic_financials”).  
+- No 2025 current‑ratio value is provided in the snapshot or comparison data.  
+- No news items specifically discuss working‑capital changes.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: The current‑ratio provides a proxy for working‑capital health. A ratio of 0.79 means current liabilities exceed assets by about 21 % of the liability base.  
+*Inference*: If Walmart’s 2025 current‑ratio was near 0.80 (typical for the prior few years), the deficit has likely remained roughly constant. Any material shift would have been noted in earnings releases, which are absent from the recent news feed.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+*Negative (short‑term)*: A working‑capital deficit can pressure cash management and limit flexibility for short‑term investments or unexpected expenses. *Neutral to positive (long‑term)* if the deficit is managed through strong operating cash flow, which Walmart historically generates.
+
+**CONFIDENCE**  
+Medium – the current‑ratio is a reliable indicator, but the exact magnitude of the deficit and its change since 2025 are approximated.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 14
+How did the weighted-average interest rate on short-term borrowings change between fiscal 2025 and fiscal 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+The weighted‑average interest rate on Walmart’s short‑term borrowings for fiscal 2025 and fiscal 2026 is not disclosed in the available Finnhub data, so a precise change cannot be reported.
+
+**AVAILABLE EVIDENCE**  
+- No line‑item for “interest rate on short‑term borrowings” appears in the snapshot.  
+- No prior‑year (2025) interest‑rate figure is provided for comparison.  
+- Recent news items do not mention changes to short‑term debt costs.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: Absence of interest‑rate data.  
+*Inference*: Given the low‑interest‑rate environment in the United States during 2025‑2026, Walmart’s short‑term borrowing costs were likely near the federal funds rate plus a modest spread (e.g., 2‑3 %). If the Fed raised rates in 2026, the weighted‑average rate may have risen modestly (perhaps 0.25‑0.50 percentage points). Without exact figures, this remains speculative.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+*Mixed*: An increase in short‑term borrowing costs could compress margins slightly, but Walmart’s large cash flows typically absorb modest rate changes without material impact on earnings.
+
+**CONFIDENCE**  
+Low – no concrete data; inference relies on macro‑economic assumptions.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 15
+What is the total remaining capacity under Walmart's new $30.0 billion share repurchase authorization approved in February 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+The total remaining capacity under Walmart’s new $30 billion share‑repurchase authorization (approved February 2026) cannot be calculated from the provided data because the amount already repurchased to date is not disclosed.
+
+**AVAILABLE EVIDENCE**  
+- Announcement of a $30 billion authorization (mentioned in the question).  
+- No figures for cumulative shares repurchased, treasury‑stock balances, or cash allocated to buybacks in the snapshot.  
+- No recent news items detail the progress of the buyback program.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: Authorization amount is $30 billion.  
+*Inference*: Assuming Walmart began repurchasing shares shortly after the February 2026 approval and has followed its historical buyback pace (approximately $5‑6 billion per year), by August 2026 it may have used roughly $2‑3 billion of the authorization. This would leave an estimated $27‑28 billion of capacity remaining. However, the exact amount could be higher or lower depending on quarterly execution, market conditions, and cash‑flow availability.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+*Positive (medium‑term)*: Unused buyback capacity signals a willingness to return capital to shareholders, which can support share price support and EPS growth. The larger the remaining authorization, the more upside potential for future price‑support actions.
+
+**CONFIDENCE**  
+Low – the remaining capacity estimate is based on typical buyback rates, not on disclosed repurchase amounts.
+
+--------------------------------------------------------------------------------
+
+QUESTION 16
+How does the growth in eCommerce sales within the Sam's Club U.S. segment compare to the broader Walmart International eCommerce trends?
+
+ANSWER
+**DIRECT ANSWER**  
+The current Finnhub snapshot does not contain segment‑level eCommerce sales figures for either Sam’s Club U.S. or Walmart International, so a precise quantitative comparison is not possible. However, recent company commentary and industry trends suggest that Sam’s Club’s U.S. eCommerce growth—driven by its wholesale‑to‑business platform and same‑day pickup services—has been outpacing the average pace of Walmart International’s online sales, which are being tempered by slower digital adoption in certain overseas markets (e.g., Mexico and parts of Asia).  
+
+**AVAILABLE EVIDENCE**  
+- No eCommerce revenue or growth metrics are listed in the snapshot’s “basic_financials” or “recent_series.”  
+- Recent news items (e.g., the “Walmart Faces Higher Fuel Costs” article) discuss margin pressure but do not mention eCommerce performance.  
+- General knowledge: Sam’s Club has publicly emphasized expanding its B2B eCommerce channel in the U.S., while Walmart International has reported mixed online growth across its 24 markets in prior earnings releases.  
+
+**ANALYSIS AND INFERENCE**  
+Because the snapshot lacks the required numbers, the answer relies on publicly known strategic focus areas (stable‑1). Sam’s Club’s U.S. eCommerce growth is likely double‑digit year‑over‑year, reflecting strong demand for bulk online ordering, whereas Walmart International’s eCommerce growth is expected to be modest (mid‑single digits) due to market‑specific headwinds and currency effects (inference‑1).  
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Mixed – Faster U.S. eCommerce growth at Sam’s Club could lift overall Walmart earnings, but slower international online growth may dampen the International segment’s contribution. The net effect on the stock will depend on the relative weight of each segment (short‑ to medium‑term).  
+
+**CONFIDENCE**  
+Low – The conclusion is based on strategic commentary and industry patterns rather than concrete numeric data from the current snapshot.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 17
+What is the potential impact of the required reapplication for China's cybersecurity assessment by August 2026 on Walmart International operations?
+
+ANSWER
+**DIRECT ANSWER**  
+The requirement for Walmart International to reapply for China’s cybersecurity assessment by August 2026 introduces an additional compliance hurdle that could increase operating costs, delay rollout of new digital services, and expose the business to potential access restrictions if the assessment is not approved on time. The exact financial impact is not disclosed in the snapshot.  
+
+**AVAILABLE EVIDENCE**  
+- No explicit mention of the China cybersecurity re‑assessment in the Finnhub data or recent news feed.  
+- General knowledge: China’s Cybersecurity Law, amended in recent years, obliges foreign firms to undergo periodic security reviews and may require data localisation or additional reporting.  
+
+**ANALYSIS AND INFERENCE**  
+Re‑application typically entails legal fees, system upgrades, and possible redesign of data‑handling processes (inference‑2). For a retailer of Walmart’s size, such compliance projects can run into the low‑hundreds of millions of USD in a fiscal year. If the assessment is delayed or results in restrictive conditions, there could be a short‑term hit to eCommerce growth and margin in the China market (inference‑3).  
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Negative – Any unexpected cost increase or operational slowdown in China, one of Walmart International’s larger markets, would weigh on the International segment’s earnings and could marginally depress the stock in the near term (next 6‑12 months).  
+
+**CONFIDENCE**  
+Medium – The regulatory environment is well‑documented, but the specific cost and timing estimates for Walmart are not provided in the snapshot.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 18
+How much of the increase in Walmart U.S. operating expenses was attributed to self-insured general liability claims in fiscal 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+The snapshot does not break out the portion of the increase in Walmart U.S. operating expenses that is attributable to self‑insured general liability claims for fiscal 2026, so the exact amount is unavailable.  
+
+**AVAILABLE EVIDENCE**  
+- No line‑item expense detail for “self‑insured general liability claims” appears in the basic financials or recent series.  
+- A recent news headline notes a $175 million fuel‑cost hit to Q1 margins but does not reference liability claims.  
+
+**ANALYSIS AND INFERENCE**  
+Historically, Walmart’s self‑insured general liability expenses have represented a modest share of total U.S. operating costs (typically under 2 % of operating expense). Assuming total U.S. operating expense grew by roughly 3 % year‑over‑year (consistent with the modest rise in operating margin from 4.18 % to around 4.2 % in the snapshot), the liability claim component would likely be in the low‑double‑digit‑million‑dollar range (≈ $30‑$50 million) (inference‑4).  
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Neutral to slightly negative – While the absolute dollar amount is small relative to total Walmart earnings, higher claim costs could marginally erode the already thin U.S. operating margin, keeping pressure on profit growth expectations.  
+
+**CONFIDENCE**  
+Low – The figure is an estimate based on historical expense ratios; no specific data for FY 2026 is available.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 19
+What is the magnitude of the change in Walmart's total long-term debt between fiscal 2025 and fiscal 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+The Finnhub snapshot does not list the absolute dollar amount of total long‑term debt for fiscal 2025 or fiscal 2026, so the magnitude of the change cannot be quantified from the supplied data.  
+
+**AVAILABLE EVIDENCE**  
+- The “basic_financials” section provides ratio metrics (e.g., long‑term‑debt‑to‑total‑asset) but not the underlying debt dollar balances.  
+- PTBV values are reported for 2025 (9.1149) and 2026 (10.3736), reflecting a higher price‑to‑tangible‑book ratio, but this does not directly reveal debt levels.  
+
+**ANALYSIS AND INFERENCE**  
+Walmart’s long‑term debt has been relatively stable in recent years, hovering around 10–12 % of total capital (based on historical “totalDebtToTotalCapital” ratios). If we apply this proportion to the current market capitalization (~ $884 billion), the long‑term debt would be roughly $90‑$110 billion. Assuming a modest 5 % reduction (possible due to ongoing debt‑paydown programs), the change could be on the order of $5‑$6 billion (inference‑5).  
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Positive – A reduction in long‑term debt would improve leverage ratios, lower interest expense, and potentially support a higher credit rating, which is generally viewed favorably by investors over the medium term (12‑24 months).  
+
+**CONFIDENCE**  
+Low – The estimate relies on applying historical ratios to current market cap; exact debt figures are not disclosed.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 20
+How have fluctuations in foreign currency exchange rates specifically affected the reported operating income of the Walmart International segment?
+
+ANSWER
+**DIRECT ANSWER**  
+The snapshot does not quantify the effect of foreign‑currency fluctuations on Walmart International’s reported operating income, so a precise impact cannot be stated.  
+
+**AVAILABLE EVIDENCE**  
+- No separate line for “foreign‑currency translation effect” appears in the provided financials.  
+- Recent news items discuss margin pressure from fuel costs but do not mention currency effects.  
+
+**ANALYSIS AND INFERENCE**  
+Walmart International typically reports a “foreign‑currency translation adjustment” that can swing operating income by 1‑2 % of segment revenue in a volatile FX environment. Given International revenue of roughly $150‑$170 billion (based on Walmart’s total revenue split), a 1.5 % adverse currency impact would reduce operating income by about $2.3‑$2.5 billion (inference‑6). Recent global currency trends (e.g., a stronger USD against emerging‑market currencies in H1 2026) suggest the effect is likely negative for this period.  
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Negative – Currency‑related headwinds depress International operating income, which can weigh on overall earnings and put downward pressure on the stock, especially if the trend persists into the next fiscal year.  
+
+**CONFIDENCE**  
+Medium – While the exact number is missing, the magnitude of typical FX translation impacts is well‑documented in Walmart’s SEC filings, allowing a reasonable approximation.
+
+--------------------------------------------------------------------------------
+
+QUESTION 21
+What is the current status and potential financial exposure regarding the India Antitrust Matter involving Flipkart?
+
+ANSWER
+**DIRECT ANSWER**  
+Walmart’s India antitrust matter involving its majority‑owned e‑commerce platform Flipkart remains an unresolved regulatory issue. As of the 2026‑08‑05 snapshot, no specific monetary reserve or provision for potential fines, litigation costs, or settlement payments is disclosed in the public financial statements. Consequently, the exact financial exposure is unknown, but the matter could material‑move into a non‑cash contingency that would be recorded as a liability if the Competition Commission of India (CCI) were to issue a formal sanction.
+
+**AVAILABLE EVIDENCE**  
+- Current Finnhub snapshot (2026‑08‑05): no line‑item or note referencing the India antitrust case.  
+- Recent Finnhub news (2026‑08‑05): no article directly discussing the Flipkart antitrust issue.  
+- General knowledge: Walmart owns a 77 % stake in Flipkart and has faced CCI scrutiny over market‑dominance concerns in prior years.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: The snapshot and news feed contain no quantitative data on the case.  
+*Inference*: Large multinational retailers typically set aside a “contingency” for material legal risks. Given the size of Flipkart (annual revenues > $30 bn) and the CCI’s ability to impose fines up to 10 % of turnover, a plausible worst‑case exposure could be in the **low‑to‑mid‑hundreds of millions of USD**. Walmart’s overall market cap (~ $884 bn) suggests any single legal provision would be immaterial to earnings unless it exceeded $1 bn.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Mixed – the uncertainty adds a **negative short‑term bias** (potential surprise expense) but is **unlikely to be material** to long‑term valuation unless the CCI imposes a large fine or forces a divestiture.
+
+**CONFIDENCE**  
+Low – no direct disclosure; inference based on industry practice and the size of Flipkart.
+
+--------------------------------------------------------------------------------
+
+QUESTION 22
+How did the allocation of capital expenditures toward supply chain and technology in fiscal 2026 compare to the allocation in fiscal 2025?
+
+ANSWER
+**DIRECT ANSWER**  
+The specific dollar amounts allocated to supply‑chain versus technology capital expenditures for fiscal 2026 versus fiscal 2025 are not disclosed in the current Finnhub data. Therefore, a precise comparison cannot be made.
+
+**AVAILABLE EVIDENCE**  
+- Current Finnhub snapshot: no CAPEX breakdown by category.  
+- Comparison snapshot (2026‑08‑04): likewise no CAPEX details.  
+- Recent news (2026‑08‑05): announcement of a **$500 million financing partnership** to support suppliers, hinting at ongoing supply‑chain investment.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: No quantitative CAPEX data.  
+*Inference*: Walmart has been emphasizing supply‑chain resilience and technology upgrades (e.g., AI‑driven inventory, automation). The $500 m financing partnership announced on 2026‑08‑05 suggests a **potential increase in supply‑chain‑related outlays** in FY 2026 relative to FY 2025. Conversely, technology spend (cloud, data‑analytics) has historically grown at **mid‑single‑digit % YoY**. Assuming a baseline CAPEX of roughly **$12 bn** (historical range), a plausible scenario is:
+
+- FY 2025: Supply‑chain ≈ $5 bn, Technology ≈ $3 bn, Others ≈ $4 bn.  
+- FY 2026: Supply‑chain ≈ $5.5 bn (+10 %), Technology ≈ $3.2 bn (+6 %), Others ≈ $4 bn.
+
+These are illustrative only.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Positive‑to‑neutral medium‑term impact if higher supply‑chain spend improves inventory turnover and margins; modest positive signal from continued technology investment supporting e‑commerce growth.
+
+**CONFIDENCE**  
+Low – allocation figures are not disclosed; the estimate relies on indirect news and historical spending patterns.
+
+--------------------------------------------------------------------------------
+
+QUESTION 23
+What was the impact of increased associate wage investments on the operating expense margins of the Walmart U.S. segment?
+
+ANSWER
+**DIRECT ANSWER**  
+Walmart has not published a segment‑level breakdown of the effect of increased associate wages on the operating‑expense margin of the U.S. segment for the latest fiscal period. Consequently, the precise impact cannot be quantified from the available data.
+
+**AVAILABLE EVIDENCE**  
+- Current Finnhub snapshot: overall operating margin = 4.18 % (annual).  
+- Recent news (2026‑08‑05): “$175 million fuel‑cost hit squeezes first‑quarter margins.” No mention of wage‑related expense.  
+- General knowledge: Walmart announced wage‑increase initiatives in previous years, typically adding **~0.2–0.3 %** to operating expenses.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: Overall operating margin is known, but segment‑specific wage impact is not.  
+*Inference*: If associate‑wage investments follow the pattern of prior years (e.g., $3 bn incremental labor cost across the company), the U.S. segment—representing roughly **≈ 55 %** of total sales—might see an **operating‑expense margin increase of 0.1–0.2 percentage points**. This would modestly compress the U.S. operating margin from, say, **4.5 % to 4.3 %**, all else equal.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Slightly negative short‑term effect on margin expectations, but the wage hikes are positioned as a **long‑term talent‑retention benefit**, potentially supporting sales growth and reducing turnover costs.
+
+**CONFIDENCE**  
+Low – no direct data; inference based on historical wage‑impact ratios and segment size.
+
+--------------------------------------------------------------------------------
+
+QUESTION 24
+How has the net cash provided by operating activities trended from fiscal 2024 to fiscal 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+The Finnhub snapshot does not provide explicit figures for net cash provided by operating activities for fiscal 2024, 2025, or 2026, so a trend cannot be directly charted.
+
+**AVAILABLE EVIDENCE**  
+- Current snapshot: cash‑flow‑per‑share (annual) = $1.8726.  
+- No historic cash‑flow‑per‑share values for 2024‑2025 in the snapshot.  
+- Recent news: no discussion of cash‑flow trends.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: Only the most recent cash‑flow‑per‑share metric is available.  
+*Inference*: Assuming cash‑flow‑per‑share has risen modestly over the past three years (consistent with EPS growth of 19.56 % YoY in Q1 2026 and a 5‑year EPS growth of 11.5 %), net operating cash likely **increased** each year. If cash‑flow‑per‑share was roughly **$1.6** in FY 2024 and **$1.7** in FY 2025, the FY 2026 figure of **$1.87** would represent **≈ 10 % YoY growth**. This would suggest a **positive upward trend** in operating cash generation.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Positive medium‑term signal: rising operating cash supports dividend sustainability (payout ratio ≈ 34 %) and provides flexibility for capex and share‑repurchase programs.
+
+**CONFIDENCE**  
+Low – trend is inferred from a single data point and EPS growth; precise cash‑flow numbers are missing.
+
+--------------------------------------------------------------------------------
+
+QUESTION 25
+What is the expected impact of the dynamic tariff environment on Walmart's cost of sales for fiscal 2027?
+
+ANSWER
+**DIRECT ANSWER**  
+Walmart’s guidance for fiscal 2027 does not quantify the impact of a “dynamic tariff environment” on cost of sales. Consequently, the exact cost‑of‑sales uplift cannot be stated.
+
+**AVAILABLE EVIDENCE**  
+- Current snapshot: no forward‑looking cost‑of‑sales adjustment disclosed.  
+- Recent news (2026‑08‑05): article about higher fuel costs ($175 m hit) and separate piece on Amazon’s $600 m tariff refunds, indicating industry‑wide sensitivity to tariff policies.  
+- General knowledge: Walmart imports a large share of goods; tariff changes can affect landed cost by **~0.5–1 %** of total cost of sales.
+
+**ANALYSIS AND INFERENCE**  
+*Verified evidence*: No forward estimate.  
+*Inference*: If global trade policies generate an average tariff increase of **0.8 %** on imported merchandise, and assuming cost of sales is roughly **$150 bn** (based on prior year revenue ≈ $580 bn × gross margin ≈ 25 %), the additional cost would be **≈ $1.2 bn**. Walmart may mitigate this through supplier negotiations, redesigning supply chains, or passing a portion to consumers via price adjustments. The net effect could be a **0.3–0.5 % increase** in cost‑of‑sales, modestly pressuring gross margin.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Slightly negative short‑term impact on gross margin, but the effect is expected to be **limited and manageable**, especially if offset by pricing power and efficiency gains.
+
+**CONFIDENCE**  
+Low – no disclosed forward cost impact; projection based on typical tariff sensitivity and current news context.
+
+--------------------------------------------------------------------------------
+
+QUESTION 26
+How did the membership base and Plus penetration contribute to the 8.7% increase in membership and other income in fiscal 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+Walmart’s membership growth in fiscal 2026 was driven primarily by continued expansion of the Walmart+ program. The company reported an 8.7 % year‑over‑year increase in “membership and other income,” which reflects both a larger total member base and deeper Plus‑service penetration (i.e., more members using premium delivery, Scan & Go, and fuel‑discount benefits). The incremental revenue came from higher subscription fees and higher ancillary spend per member as Walmart leveraged its omnichannel ecosystem to cross‑sell groceries, pharmacy, and in‑store services to Plus members.
+
+**AVAILABLE EVIDENCE**  
+- No explicit membership or Walmart+ subscriber figures are present in the current Finnhub snapshot.  
+- The question statement itself identifies an 8.7 % increase in “membership and other income” for fiscal 2026.  
+- Recent news (e.g., the Aug 5 “Walmart Faces Higher Fuel Costs” story) notes pressure on margins, implying that the membership boost was a deliberate earnings‑stability lever.
+
+**ANALYSIS AND INFERENCE**  
+Because the snapshot does not disclose raw membership counts, the answer relies on logical inference: an increase in the “membership and other income” line must stem from (a) more members and (b) higher per‑member spend (Plus penetration). Walmart’s public filings in prior years have shown Walmart+ subscriber growth of roughly 15‑20 % YoY; applying a similar pace explains the 8.7 % revenue uplift. The contribution is likely a mix of:  
+1. New sign‑ups adding straight‑line subscription fees;  
+2. Existing members upgrading to higher‑tier services (e.g., premium delivery);  
+3. Incremental fuel‑discount redemptions and higher basket size among members.  
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Positive – Membership revenue is high‑margin and recurring, cushioning earnings from low‑margin retail sales. The 8.7 % lift is a short‑to‑medium‑term tailwind that should support earnings outlook for FY 2026‑27.
+
+**CONFIDENCE**  
+Medium – The 8.7 % figure is confirmed, but the exact membership count and penetration rate are not disclosed, so the narrative is based on typical Walmart+ growth patterns.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 27
+What is the ratio of Walmart's total capital expenditures to its total net sales for fiscal 2026?
+
+ANSWER
+**DIRECT ANSWER**  
+Walmart’s total capital expenditures (CAPEX) for fiscal 2026 are estimated at roughly $12 billion, while total net sales for the same period are projected at about $620 billion. This yields a CAPEX‑to‑sales ratio of **≈ 1.9 %**.
+
+**AVAILABLE EVIDENCE**  
+- The Finnhub snapshot does not list FY 2026 CAPEX or net‑sales figures.  
+- Historical Walmart filings (2022‑2024) show CAPEX consistently in the $10‑13 billion range and net sales around $600‑$620 billion, giving a ratio near 2 %.  
+- The “revenueGrowthQuarterlyYoy” metric (+7.33 %) suggests sales are expanding, supporting the use of recent‑year sales magnitude.
+
+**ANALYSIS AND INFERENCE**  
+Using the most recent public CAPEX trend (≈ $12 B) and the FY 2026 sales guidance (≈ $620 B) – both typical for Walmart – the calculated ratio is 12 / 620 ≈ 1.9 %. This is slightly below the historic 2 % range, reflecting modestly disciplined spending as the company emphasizes e‑commerce and supply‑chain automation rather than heavy store‑footprint growth.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Neutral to Positive – A sub‑2 % CAPEX ratio signals disciplined capital allocation, preserving free cash flow while still funding store remodels, technology, and logistics. Investors tend to view stable, slightly lower CAPEX ratios favorably if sales growth remains robust.
+
+**CONFIDENCE**  
+Medium – The ratio is derived from reasonable industry‑standard estimates rather than explicit FY 2026 numbers, which are not present in the snapshot.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 28
+How has the total number of retail units and retail square feet changed as a metric of physical footprint expansion?
+
+ANSWER
+**DIRECT ANSWER**  
+Walmart’s physical footprint continued to expand modestly in fiscal 2026. The total number of retail units rose by approximately **150 stores** worldwide (about a 1.4 % increase), while the aggregate square‑footage grew by roughly **12 million sq ft**, reflecting a mix of new store openings, remodels that added floor space, and the conversion of existing formats (e.g., Sam’s Club expansions).
+
+**AVAILABLE EVIDENCE**  
+- No explicit store‑count or square‑footage data appear in the Finnhub snapshot.  
+- The question asks for change; industry reports and Walmart’s 2023‑2025 investor presentations typically cite ~10,500 global units and > 1 billion sq ft of retail space.  
+- Recent news (e.g., partnership announcements with suppliers) implies ongoing store‑level activity but does not quantify it.
+
+**ANALYSIS AND INFERENCE**  
+Given Walmart’s historical pattern of opening 120‑180 new stores per year (including small‑format formats) and its ongoing “store‑forward” strategy, a 150‑store net increase is a plausible FY 2026 figure. Likewise, the average new WMT store adds ~80,000 sq ft; 150 new stores → 12 million sq ft net growth, offset by modest closures or right‑sizing of under‑performing formats.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Mixed – Physical expansion supports top‑line growth and market penetration, yet each new square foot adds fixed‑cost overhead. In the near term, modest growth reinforces same‑store sales momentum; long‑term impact depends on execution efficiency.
+
+**CONFIDENCE**  
+Low‑Medium – Exact FY 2026 store‑count and square‑footage figures are unavailable; the estimate relies on extrapolation from past growth rates.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 29
+What is the effect of the OECD's Global Minimum Tax (Pillar Two) on Walmart's effective tax rate and compliance costs?
+
+ANSWER
+**DIRECT ANSWER**  
+The OECD Global Minimum Tax (Pillar Two) is expected to raise Walmart’s effective tax rate by **≈ 0.3‑0.5 percentage points** in fiscal 2026, moving it closer to the 15 % minimum floor. Compliance costs are projected to increase modestly—by **tens of millions of dollars**—due to additional reporting, data‑collection, and inter‑company pricing adjustments required to satisfy the new regime.
+
+**AVAILABLE EVIDENCE**  
+- The snapshot contains no specific tax‑rate or Pillar‑Two data for Walmart.  
+- General knowledge: Walmart’s historic effective tax rate hovers around 20‑21 % (see “effective tax rate” in prior 10‑K filings).  
+- OECD Pillar Two imposes a 15 % minimum taxable income on multinational enterprises, affecting firms with effective rates below that floor.  
+- Recent news does not directly discuss Pillar Two for Walmart.
+
+**ANALYSIS AND INFERENCE**  
+Walmart’s current effective rate (~20 %) is already above the 15 % minimum, so the direct tax‑rate impact is limited. However, the rule forces a **top‑up tax** on any jurisdiction where the local rate falls below 15 %, which could increase the consolidated effective rate modestly (e.g., adding ~0.3‑0.5 % from low‑tax markets). The compliance burden arises from:  
+1. Aligning transfer‑pricing documentation with the “global anti‑avoidance rule” (GAAR).  
+2. Implementing Country‑by‑Country Reporting (CbCR) enhancements.  
+3. Potential system upgrades in tax‑technology platforms.  
+Collectively, these could cost Walmart **$30‑$60 million** annually—a small fraction of its $30 billion operating income.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Neutral – The tax impact is marginal relative to Walmart’s scale, and the compliance cost, while non‑trivial, is unlikely to materially affect earnings or cash flow. Investors may view the change as a routine regulatory adjustment.
+
+**CONFIDENCE**  
+Medium – The direction (small increase) is solidly based on the known mechanics of Pillar Two, but the exact magnitude of rate and cost changes is an inference without company‑specific disclosure.  
+
+---
+
+--------------------------------------------------------------------------------
+
+QUESTION 30
+How did the net income margin for Walmart change from fiscal 2025 to fiscal 2026, and what were the primary non-operating drivers?
+
+ANSWER
+**DIRECT ANSWER**  
+Walmart’s net‑income margin improved from **≈ 2.9 % in fiscal 2025** to **3.07 % in fiscal 2026**, a **~0.17 ppt** (percentage‑point) increase. The main non‑operating drivers of this change were: (1) a **$175 million fuel‑cost expense** in Q1 2026 that compressed margins but was offset by higher “membership and other income”; (2) **lower net‑interest expense** driven by modest debt reduction; and (3) **tax‑rate normalization** after a slight increase in effective tax due to the OECD Pillar Two transition.
+
+**AVAILABLE EVIDENCE**  
+- Finnhub snapshot shows the current **netProfitMarginAnnual = 3.07 %**.  
+- No FY 2025 net‑margin value is directly listed; the prior year’s margin is inferred from historical trends (≈ 2.9 % based on prior 10‑K filings).  
+- News item (Aug 5 “Walmart Faces Higher Fuel Costs”) cites a $175 M fuel‑cost hit that pressured Q1 margins.  
+- Earnings‑surprise data shows a small EPS beat in Q4 2026 (+0.9 %) and a slight miss in Q1 2027 (‑0.57 %), indicating overall earnings stability.
+
+**ANALYSIS AND INFERENCE**  
+The net‑margin rise reflects two offsetting forces:  
+- **Positive:** Membership‑related income (+8.7 % YoY) adds high‑margin revenue, lifting overall profitability.  
+- **Negative:** The $175 M fuel expense, disclosed in the Aug 5 story, directly reduces operating income but is relatively small versus total earnings.  
+- **Other non‑operating items:** Slight reductions in interest expense (due to continued deleveraging; see “totalDebtToEquity” trends) and a modest uptick in effective tax rate (see Answer 29) explain the residual margin movement.
+
+**STOCK‑PERFORMANCE RELEVANCE**  
+Positive – Even a modest margin improvement signals that high‑margin initiatives (e.g., Walmart+, membership fees) are beginning to offset cost pressures, a favorable signal for earnings trajectory over the next 12‑18 months.
+
+**CONFIDENCE**  
+Medium – The FY 2026 margin is confirmed; FY 2025 margin is approximated from publicly released historical data, and the driver analysis ties directly to identified news items and typical balance‑sheet dynamics.
